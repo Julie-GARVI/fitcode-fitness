@@ -1,0 +1,305 @@
+@use "../utils/_variables.scss" as *;
+
+// Dans ce dossier mixins, sont stockés des morceaux de styles qui se répètent au minimum 2 fois sur le site
+// On y retrouve dans cet ordre :
+// 1. Icones = minin icons
+// 2. Boutons = mixin button
+// 3. Formulaires du CRUD (create et update) = mixin crudForm
+// 4. Exercice = mixin exercice
+// 5. Formulaires de connexion, inscription et contact = Form
+
+@mixin icons {
+    .select-block {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-row-gap: 20px;
+        width: 300px;
+        max-width: 300px;
+
+        .category-item {
+            text-align: center;
+            border: .5px solid rgba(0, 0, 0, .4);
+            border-radius: 10px;
+            width: 130px;
+            height: 100px;
+            padding: 10px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+        
+          .category-picture {
+            width: 35px;
+            margin: auto;
+          }
+          p {
+            font-size: 18px;
+          }
+        }
+    }
+}
+
+
+@mixin button {
+    width: 50%;
+    height: 32px;
+    font-weight: 800;
+    padding: 2px;
+	  border: inherit;
+}
+
+
+@mixin crudForm { 
+      width: 450px;
+      margin: auto;
+      padding: 26px;
+        
+        label {
+          margin-bottom: .2em;
+        }
+
+        i {
+            float: right;
+            cursor: pointer;
+        }
+
+        .categories {
+        @include icons;
+
+            .select-block {
+              width: 100%;
+              gap: 0.5em;
+              margin: 20px auto 0;
+    
+                .category-item {
+                width: 100%;
+        
+                    &:hover {
+                    background-color: $color-blue-light;
+                    }
+                    &.active {
+                    background-color: $color-blue-light;
+                    }
+                }
+            }
+        }
+        .value {
+            display: flex;
+            flex-direction: column;
+            margin: 20px 15px;
+
+            input {
+              height: 40px;
+            }
+            // .time {
+            //   height: 45px;
+            // }  
+        
+            textarea {
+              resize: none;
+              height: 150px;
+    
+            }
+          }
+
+            .btn-block {
+              text-align: center;
+                    
+                .btn-submit {
+                  @include button;
+                  border: $color-blue-light;
+                  border-radius: 10px;
+                  background-color: $color-blue-light;
+                  box-shadow: 0 0 15px 2px #c3d3e2, 0 0 5px 1px #c3d3e2;
+
+                    &:hover { 
+                      background-color: #c3d3e2;  
+                    }
+                    }
+                } 
+                @include formErrors;
+
+                .success {
+                  margin-bottom: 20px;
+                }
+            }
+    
+            
+@mixin exercice {
+// Disposition en grilles 
+        display: grid;
+        max-height: 100%;
+        padding: 2em 5vw;
+        gap: 2em;
+
+        .block-exercice {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-inline: 2vw;
+            padding-block: 2em;
+            box-sizing: border-box;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px 3px rgba(3, 25, 37, 0.120), 0 0 20px 5px rgba(4, 139, 250, 0.041);
+            background-color: rgb(255, 255, 255);
+
+            .exercice-name {
+                display: flex;
+                align-items: center;
+                height: 110px;
+                max-height: 110px;
+
+                h3 {
+                    margin: auto;
+                    font-size: 25px;
+                    text-align: center;
+                }
+            }
+
+            .img-block {
+        
+                .exercice-picture {
+                    padding: 1em 0;
+                    height: 420px;
+                    width: 100%;
+                    border-radius: 10px;
+                }
+            }
+
+            .exercice-category {
+              font-size: 20px;
+              text-align: center;
+            }
+
+            .exercice-content {
+
+                span {
+                text-transform: uppercase;
+                color: rgb(78, 78, 78);
+                }
+                max-height: 100%;
+                margin-bottom: auto;
+                text-align: center;
+
+                .exercice-instruction {
+                    p {
+                        height: 100px;
+                        text-align: left;
+                        line-height: 1.5m; 
+                        padding: .5em;
+
+                        @media (max-width: 1000px) {
+                         overflow: scroll;
+                          }
+                    }
+
+                }
+            }
+
+            .btn-submit {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-evenly;
+        
+                    .btn-link {
+
+                    @include button;
+              
+                    &:hover {  
+                    border-radius: 10px;
+                    }
+        
+                    a {
+                    text-decoration: none;
+                    color: black;
+                    padding: .5em 2em;
+                    cursor: pointer;
+                    }          
+                  }                          
+                }
+            }
+        }
+
+
+@mixin form {
+    .form-container {
+        padding: 20px;
+        text-align: center;
+        display: block;
+        width: 300px;
+        max-width: 500px;
+        text-align: start;
+        margin: 30px auto;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px 3px rgba(3, 25, 37, 0.120), 0 0 20px 5px rgba(4, 139, 250, 0.041);
+        
+        h2, p {
+            text-align: center;
+        }
+        }
+
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
+        
+        input {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            outline: 0;
+            border: 1px solid rgb(199, 198, 198);
+            border-radius: 5px;
+            margin-bottom: 20px;
+
+            &::placeholder {
+              color: rgb(153, 153, 153)
+            }
+        }
+        textarea {
+          border: 1px solid rgb(199, 198, 198);
+          border-radius: 5px;
+        }
+
+        @include formErrors;
+
+        button {
+            border: none;
+            color: #686565;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: $color-beige;
+            padding: 3px;
+            font-weight: 600;
+            height: 2em;
+
+            &:hover {
+              background-color: #e2d5c3;
+              }
+        }
+}
+
+@mixin formErrors {
+
+  .alert {
+    display: none;
+    font-size: 14px;
+    color: #ff0000; /* Couleur rouge pour l'erreur */
+    background-color: #fff0f0; /* Couleur de fond pour l'erreur */
+    border: 1px solid #ff0000;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+
+  .success {
+    display: none;
+    font-size: 14px;
+    color: #008000; 
+    background-color: #f0fff0; 
+    border: 1px solid #008000;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+
+}

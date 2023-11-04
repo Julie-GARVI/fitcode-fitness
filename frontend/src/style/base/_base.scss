@@ -1,0 +1,48 @@
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/font/Lato-Regular.ttf') format('truetype'); 
+}
+
+body, section {
+    background-color: white;
+    font-family: "Lato", sans-serif;
+    
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+main {
+  margin: 130px auto 15px auto;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  h2 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 25px;
+    text-align: center;
+  }

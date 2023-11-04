@@ -1,0 +1,96 @@
+@use "../utils/_variables.scss" as *;
+
+.teams-container {
+  gap: 2em;
+  height: 100%;
+  display: grid;
+  margin-inline: auto;
+  max-width: fit-content;
+  width: calc(100% - 10vw);
+
+        .teams-content {
+          box-sizing: border-box;
+          margin: auto;
+          text-align: center;
+          max-height: 800px;
+          height: 100%;
+          background-color: white;
+          border-radius: 20px;
+          padding: 2em;
+          box-shadow: 0 2px 5px 3px rgba(3, 25, 37, 0.120), 0 0 20px 5px rgba(3, 25, 37, 0.120);
+        }
+
+            .teams-img {
+              display: flex;
+              justify-content: center;
+              height: 150px;
+              width: calc(100% - 2em);
+              margin-inline: auto;
+            }
+
+                .coachs-picture{
+                  display: block;
+                  height: 100%;
+                  width: 150px;
+                  object-fit: cover;
+                  border-radius: 50%;
+                  border: 1px solid rgba(0, 0, 0, 0.459);
+                  box-shadow: 0 0 15px 2px rgba(218, 158, 124, 0.219), 0 0 5px 1px rgba(240, 191, 163, 0.519);
+              }
+
+                .teams-name {
+                  margin-top: 1.5em;
+                  font-size: 18px;
+
+                  span {
+                    font-weight: 600;
+                  }
+                }
+
+                .teams-category {
+                  display: flex;
+                  justify-content: center;
+                  gap: .8em;
+                  align-items: center;
+
+                  .category-icon {
+                    width: 24px;
+                  }
+
+                  p {
+                    color: rgb(78, 78, 78);
+                    font-size: 18px;
+                    
+                  }
+                }
+
+                .teams-description > p {
+                  margin-top: 1em;
+                }
+
+                i {
+                  color: black;
+                }       
+}
+
+@media (min-width: 768px) {
+    .teams-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    }
+}
+          
+@media (min-width: 1300px) {
+    .teams-container {
+        display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+      padding: 0 2em; 
+          }
+
+    .teams-content {
+      width: 100%;   
+     
+      }
+    }   
