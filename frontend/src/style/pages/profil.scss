@@ -3,6 +3,14 @@
 
 .profil-wrapper {
 padding-top: 25px;
+opacity: 0;
+visibility: hidden;
+transition: opacity 500ms ease-in;
+
+&.active {
+    opacity: 1;
+    visibility: visible;
+  }
 
     h1 {
         text-align: center;
@@ -81,7 +89,9 @@ padding-top: 25px;
         margin: 50px auto;
     }
 
+
 }
+
 
 .modal-wrapper {
 

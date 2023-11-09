@@ -1,8 +1,9 @@
 <script>
+  import Loading  from "../components/Loading.svelte";
   import basket from "../assets/images/basket.jpg";
   import { link } from "svelte-spa-router";
   import endpoint from '../storage.js';
-
+  import { onMount } from 'svelte';
   
 export let name, category_id, time, formattedTime, instructions;
   
@@ -10,8 +11,7 @@ export let name, category_id, time, formattedTime, instructions;
   let member = []
   let icons = [];
   let exercices = []
-
-
+  let isLoading = true;
 
 
  //----------------Récupération de l'utilisateur-----------------
@@ -26,7 +26,8 @@ export let name, category_id, time, formattedTime, instructions;
           });
       member = await dataresponse.json();
       console.log(member)
-          console.log(dataresponse); 
+      console.log(dataresponse);
+      isLoading = false;
         } catch (error) {
           console.error('Une erreur s\'est produite:', error);
         }
@@ -239,38 +240,50 @@ async function addExerciceUser() {
       }
     }
 
+    onMount(() => {
+    // Simulez un délai (par exemple, 2 secondes) avant de montrer le contenu
+    setTimeout(() => {
+      isContentVisible = true;
+    }, 2000);
+  });
+
 
   </script>
   
-  <section class="profil-wrapper">
-      <h1>Bonjour <span class="blue-title">{member.firstname}</span></h1>
-      <h2>Bienvenue sur votre espace membre</h2>
+  {#if isLoading}
+  <Loading />
+  {:else}
+
+  <section class={`profil-wrapper ${isLoading ? '' : 'active'}` }>
+  
+    <h1>Bonjour <span class="blue-title">{member.firstname}</span></h1>
+    <h2>Bienvenue sur votre espace membre</h2>
   
       <div class="profil-container">
-          <h2>Mon profil :</h2>
+        <h2>Mon profil :</h2>
   
-          <div class="shoes-block">
-                <img src={basket} class="shoes-picture" alt="image de baskets">
+        <div class="shoes-block">
+          <img src={basket} class="shoes-picture" alt="image de baskets">
+        </div>
+  
+        <div class="profil-items">
+          <div class="profil name">
+            <p>{member.firstname} {member.lastname}, <span class="age-profil">{member.age} ans</span></p>
           </div>
-  
-          <div class="profil-items">
-              <div class="profil name">
-                  <p>{member.firstname} {member.lastname}, <span class="age-profil">{member.age} ans</span></p>
-              </div>
-              <div class="profil email">
-                  <p>{member.email}</p>
-              </div>
-             <div class="line"></div>
-             <div class="profil level">
-
-                  <p>Niveau {member.level}</p>
-              </div>
-              <div class="profil number">
-                  <p>N° abonné : {member.number}</p>
-              </div>
+          <div class="profil email">
+            <p>{member.email}</p>
           </div>
-  
+          <div class="line"></div>
+          <div class="profil level">
+            <p>Niveau {member.level}</p>
+          </div>
+          <div class="profil number">
+            <p>N° abonné : {member.number}</p>
+          </div>
+        </div>
+      </div> 
   </section>
+{/if}
   
   <section class="modal-wrapper">
   
