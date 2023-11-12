@@ -3,8 +3,8 @@
 
 
 .container-exercice {
-  
 padding-top: 45px;
+width: 400px;
 
   
     h1 {
@@ -24,7 +24,7 @@ padding-top: 45px;
 
     .media-block {
       position: relative;
-      width: 500px;
+      width: 400px;
       margin: auto;
 
     
@@ -44,7 +44,8 @@ padding-top: 45px;
     
       .exercice-picture {
         height: 350px;
-        width: 500px;
+        width: 100%;
+        max-width: 500px;
         margin: auto;
         border: solid black 1px;
         transition: transform 0.5s;
@@ -54,8 +55,8 @@ padding-top: 45px;
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
         height: 100%;
+        width: 100%;
         background: linear-gradient(transparent, #f0f0f0);
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -72,6 +73,8 @@ padding-top: 45px;
     }
   }
             .container-content {
+              flex-direction: column;
+            
                 h2 {
                   text-decoration: none;   
                 span {
@@ -79,9 +82,9 @@ padding-top: 45px;
                 }
             }
 
-            .programme-block {           
+            .programme-block {     
               display: flex;
-              justify-content: center;
+              justify-content: center;      
               gap: 1em;
               border: .1px solid rgba(0, 0, 0, .4);
               width: 350px;

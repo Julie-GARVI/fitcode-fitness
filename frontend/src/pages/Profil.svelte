@@ -12,6 +12,7 @@ export let name, category_id, time, formattedTime, instructions;
   let icons = [];
   let exercices = []
   let isLoading = true;
+  let activeClass = '';
 
 
  //----------------Récupération de l'utilisateur-----------------
@@ -27,7 +28,13 @@ export let name, category_id, time, formattedTime, instructions;
       member = await dataresponse.json();
       console.log(member)
       console.log(dataresponse);
+
       isLoading = false;
+      !isLoading ?  setTimeout(() => {
+      activeClass = 'active';
+    }, 100) 
+    : activeClass = "";
+
         } catch (error) {
           console.error('Une erreur s\'est produite:', error);
         }
@@ -254,7 +261,7 @@ async function addExerciceUser() {
   <Loading />
   {:else}
 
-  <section class={`profil-wrapper ${isLoading ? '' : 'active'}` }>
+<section class={`profil-wrapper ${activeClass}`}>
   
     <h1>Bonjour <span class="blue-title">{member.firstname}</span></h1>
     <h2>Bienvenue sur votre espace membre</h2>

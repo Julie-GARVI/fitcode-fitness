@@ -52,14 +52,13 @@ padding: 20px;
             &:hover { 
             background-color: #e2d5c3;  
             }
-         
           }                  
         }
       }
     
                 
 
-@media (min-width: 768px) {
+@media (min-width: 740px) {
     .exercice-container{
       display: grid;
       grid-template-columns: repeat(2, 1fr);

@@ -18,8 +18,12 @@ header {
 
 
     .logofit {
-      width: 110px;
+      width: 70px;
       border-radius: 150%;
+
+      @media (min-width: 1024px) {
+        width: 100px;
+      }
     }
   }
 
@@ -66,7 +70,7 @@ header {
           @media (max-width: 868px) {
             width: 90px;
             margin-top: 10px;
-         }
+          }
         }
       }
     }
@@ -87,9 +91,7 @@ header {
           flex-direction: row;
           
         }
-
       }
-
     }
   }
   
