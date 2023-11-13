@@ -57,7 +57,8 @@
           },
         });
         if (dataresponse.ok) {
-          exercice = await dataresponse.json(); 
+          exercice = await dataresponse.json();
+          category_id = exercice.category_id; 
         } else {
           console.error("Erreur lors de la récupération des données de l'exercice");
         }
@@ -89,14 +90,14 @@
     console.log(selectedCategory);
 
     const dataObjectForm = {
-        category_id: selectedCategory.id,
         name: formData.get('name'),
         time: formData.get('time'),
         instructions: formData.get('instructions')
     };
 
-    console.log(exerciceId);
-    console.log(dataObjectForm);
+    if (selectedCategory) {
+        dataObjectForm.category_id = selectedCategory.id;
+    }
 
     try {
         const response = await fetch(`${endpoint}/exercices/${id}`, {
