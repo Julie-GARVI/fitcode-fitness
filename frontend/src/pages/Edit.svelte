@@ -1,4 +1,7 @@
 <script>
+
+  window.scrollTo(0, 0);
+
   let icons = [];
   let exercice = [];
   let exerciceId = '';
