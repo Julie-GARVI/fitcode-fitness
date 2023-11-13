@@ -99,7 +99,7 @@ class ExerciceController extends Controller
 
 
 
-// --------------------CREATION DES ECERCICES-------------------------
+// --------------------CREATION DES EXERCICES-------------------------
     public function create(Request $request)
 {
     $user = Auth::user();

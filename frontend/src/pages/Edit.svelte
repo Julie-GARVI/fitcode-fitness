@@ -126,7 +126,7 @@
     } catch (error) {
         console.error('Une erreur s\'est produite:', error);
     }
-}
+  }
   
     </script>
   
@@ -139,14 +139,21 @@
           <div class="value categories">
             <label for="categories">Modifier votre catégorie :</label>
             <div class="select-block">
-                {#each icons as icon}
-                <button type="button" class="category-item" on:click={() => clickCategory(icon.category[0].id)}>
-                        <img src={'http://127.0.0.1:8000/icons/' + icon.icon_path} class="category-picture" alt={'Icone de ' + icon.category[0].name}>
-                        <p>{icon.category[0].name}</p>
-                    </button>
-                {/each}
+              {#each icons as icon}
+                <button
+                  type="button"
+                  class="category-item"
+                  on:click={() => clickCategory(icon.category[0].id)}
+                  data-category-id={icon.category[0].id}
+                  class:active={icon.category[0].id === exercice.category_id}
+                >
+                  <img src={'http://127.0.0.1:8000/icons/' + icon.icon_path} class="category-picture" alt={'Icone de ' + icon.category[0].name}>
+                  <p>{icon.category[0].name}</p>
+                </button>
+              {/each}
             </div>
           </div>
+          
   
           <span class="empty-alert alert">Erreur, un champs est vide</span>
   
