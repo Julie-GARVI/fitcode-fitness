@@ -1,4 +1,6 @@
 <script>
+    window.scrollTo(0, 0);
+    
   import poids from "../assets/images/poids.jpg";
   import Team from "../components/Team.svelte";
   import endpoint from '../storage.js';

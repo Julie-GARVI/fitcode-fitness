@@ -1,4 +1,6 @@
 <script>
+  window.scrollTo(0, 0);
+  
   import map from "../assets/images/map.png";
   import endpoint from '../storage.js';
   

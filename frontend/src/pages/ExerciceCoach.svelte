@@ -1,4 +1,6 @@
 <script>
+  window.scrollTo(0, 0);
+
   import Chronometer from "../components/Chronometer.svelte";
   import endpoint from '../storage.js';
   

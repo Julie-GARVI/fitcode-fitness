@@ -1,4 +1,6 @@
 <script>
+  window.scrollTo(0, 0);
+  
   import Loading  from "../components/Loading.svelte";
   import basket from "../assets/images/basket.jpg";
   import { link } from "svelte-spa-router";

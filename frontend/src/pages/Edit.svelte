@@ -3,7 +3,7 @@
   let exercice = [];
   let exerciceId = '';
   import { push } from "svelte-spa-router";
-  export let name, time, instructions;
+  export let name, time, instructions, category_id;
   import endpoint from '../storage.js';
  
   
@@ -68,51 +68,62 @@
     getExercicesData(exerciceId);
   
   
-    //Fonction permettant de modifier un exercice
+    //----------------------------Fonction permettant de modifier un exercice----------------------------------------
     async function editExercicesData(id) {
     const formElement = document.querySelector("form");
     const formData = new FormData(formElement);
-  
+
+    // L'id de l'exercice correspond au bouton
+    const categoriesData = [
+        { id: 1, name: "Musculation" },
+        { id: 2, name: "Yoga" },
+        { id: 3, name: "Aquagym" },
+        { id: 4, name: "Cardio" }
+    ];
+
+    const selectedCategory = categoriesData.find(category => category.id === category_id);
+
+    console.log(selectedCategory);
+
     const dataObjectForm = {
-      category_id: formData.get('category_id'),
-      name: formData.get('name'),
-      time: formData.get('time'),
-      instructions: formData.get('instructions')
+        category_id: selectedCategory.id,
+        name: formData.get('name'),
+        time: formData.get('time'),
+        instructions: formData.get('instructions')
     };
-  
+
     console.log(exerciceId);
     console.log(dataObjectForm);
-  
+
     try {
-      const response = await fetch(`${endpoint}/exercices/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataObjectForm)
-      });
-  
-      if (response.ok) {
-  
-          const showSuccess = document.querySelector(".success")
-          showSuccess.style.display = "block";
-          setTimeout(() => {
-            showSuccess.style.display = "none";
-              }, 3000);
-     
-        formElement.reset()
-        push("/profil");
-  
-      } else {
-        console.error('Erreur lors de la mise à jour de l\'exercice');
-  
-      }
+        const response = await fetch(`${endpoint}/exercices/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataObjectForm)
+        });
+
+        if (response.ok) {
+
+            const showSuccess = document.querySelector(".success")
+            showSuccess.style.display = "block";
+            setTimeout(() => {
+                showSuccess.style.display = "none";
+            }, 3000);
+
+            formElement.reset()
+            push("/profil");
+
+        } else {
+            console.error('Erreur lors de la mise à jour de l\'exercice');
+
+        }
     } catch (error) {
-      console.error('Une erreur s\'est produite:', error);
+        console.error('Une erreur s\'est produite:', error);
     }
-  }
-  
+}
   
     </script>
   

@@ -1,4 +1,5 @@
 <script>
+    window.scrollTo(0, 0);
 
     export let lastname, firstname, age, level, email, password, category_id;
     import { push } from "svelte-spa-router";

@@ -1,4 +1,6 @@
 <script>
+    window.scrollTo(0, 0);
+
     import exercices from "../assets/images/exercices.jpg";
     import Exercice from "../components/Exercice.svelte";
     import endpoint from '../storage.js';

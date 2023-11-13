@@ -2,6 +2,7 @@
 @use "../utils/_mixins.scss" as *;
 
 .edit-exercices {
+padding-top: 35px;
 
     .form-crud {
       @include crudForm;
