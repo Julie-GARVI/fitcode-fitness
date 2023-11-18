@@ -50,7 +50,7 @@ public function createUser(Request $request)
         $validateUser = Validator::make($request->all(), [
             'lastname' => ['required', 'max:50', 'string', 'regex:' . $this->regex ],
             'firstname' => ['required', 'max:50', 'string', 'regex:' . $this->regex],
-            'age' => ['required', 'integer'],
+            'age' => ['required', 'min:12', 'max:90', 'integer'],
             'email' => ['required', 'email', 'unique:users', 'regex:' . $this->regex],
             'password' => ['required', 'min:8', 'regex:' . $this->passwordRegex],
             'category_id' => 'sometimes',
