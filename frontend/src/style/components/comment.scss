@@ -1,0 +1,88 @@
+@use "../utils/_variables.scss" as *;
+
+h2 {
+  text-decoration: underline;
+}
+
+.wrapper-comment {
+  display: grid;
+  gap: 2em;
+  margin-inline: 5vw;
+
+    .comment-container {
+      box-sizing: border-box;
+      margin-inline: auto;
+      background-color: #f2f2f2;
+      padding: 2em;
+      box-shadow: 0 2px 5px 3px rgba(3, 25, 37, 0.120), 0 0 20px 5px rgba(3, 25, 37, 0.120);
+      width: 100%;
+      border-radius: 20px;
+      max-width: 500px;
+    }
+
+        .exercice-title {
+          font-size: 22px;
+          font-weight: 600;
+          text-align: center;
+          height: 80px;
+
+          p {
+            line-height: normal;
+          }
+
+        }
+
+        .rating {
+          text-align: center;
+        }
+
+        .rating:not(:checked) > input {
+          position: absolute;
+          appearance: none;
+        }
+        
+        .rating:not(:checked) > label {
+          font-size: 30px;
+          color: #ff9e0b;
+        }
+        
+        .rating:not(:checked) > label:before {
+          content: '★';
+        }
+        
+        .comment-user {
+          color: rgb(78, 78, 78);
+          text-align: center;
+        }
+
+        .comment-content {
+          line-height: 1.5;
+        }
+  }
+
+  
+  @media (min-width: 768px) {
+    .wrapper-comment {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    }
+}
+          
+@media (min-width: 1300px) {
+    .wrapper-comment {
+        display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+      padding: 0 2em; 
+          }
+
+    .comment-container {
+      width: 100%;   
+     
+      }
+    }   
+
+  
+  
+  

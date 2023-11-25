@@ -3,6 +3,7 @@
     
   import poids from "../assets/images/poids.jpg";
   import Team from "../components/Team.svelte";
+  import Comment from "../components/Comment.svelte";
   import endpoint from '../storage.js';
   import { link, push } from "svelte-spa-router";
   import { isAuthenticated } from "/src/storage.js";
@@ -121,17 +122,17 @@ try {
           description = "description" />
   
       </section>
+
+    <article class="comments-users">
+        <Comment 
+        title = "title"
+        rating = "rating"
+        lastname = "lastname"
+        age = "age"
+        date = "date"
+        content = "content"/>
+    </article>
+
   </div>
   
   
-  
-  
-  <!-- <style>
-  .fitness-home{
-  min-width: 100%;
-  background: url("../assets/images/home.jpg");
-  background-size: cover; 
-  background-repeat: no-repeat; 
-  background-position: center; 
-  }
-</style> -->

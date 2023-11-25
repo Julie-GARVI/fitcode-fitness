@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MultimediaController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,8 @@ use Illuminate\Support\Facades\Route;
 // -----------------------------------------Routes publiques--------------------------------__
 
     Route::get('/teams', [UserController::class, 'list']);
+
+    Route::get('/comments', [CommentController::class, 'list']);
 
     Route::post('/auth/register', [UserController::class, 'createUser']);
 
