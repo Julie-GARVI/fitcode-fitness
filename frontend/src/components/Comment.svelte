@@ -35,11 +35,13 @@ import '@splidejs/svelte-splide/css';
         <Splide aria-label="slider comment" options={ {
           rewind: true,
           gap   : '2rem',
-          type: 'slide',
+          type: 'loop',
           wheel : true,
           pauseOnHover: true,
           interval: 3500,
-          trimSpace: false,  
+          trimSpace: false,
+          label: 'My Carousel',
+          perPage: 3,
         } } > 
 
           {#each comments as comment}
@@ -77,7 +79,6 @@ import '@splidejs/svelte-splide/css';
           </SplideSlide>
 
           {/each}
-
 
         </Splide>
 

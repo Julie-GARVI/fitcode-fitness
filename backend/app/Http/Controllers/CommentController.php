@@ -9,7 +9,7 @@ class CommentController extends Controller
 {
     public function list()
     {
-        $comments = Comment::limit(4)->get();
+        $comments = Comment::limit(6)->get();
 
         foreach ($comments as $comment) {
             $comment->user;

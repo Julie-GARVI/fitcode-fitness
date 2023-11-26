@@ -15,6 +15,15 @@ h2 {
     background-color: $color-beige;
   }
 
+  .splide__arrow:hover {
+    background-color: rgb(223, 212, 189);
+  }
+
+  .splide__track {
+    padding-block: 0.5em;
+    margin-bottom: 1.5em;
+  }
+
     .comment-container {
       box-sizing: border-box;
       margin-inline: auto;
@@ -63,6 +72,10 @@ h2 {
 
         .comment-content {
           line-height: 1.5;
+        }
+
+        .splide__pagination__page.is-active {
+          background-color: #e8d3a9;
         }
 
       } 
