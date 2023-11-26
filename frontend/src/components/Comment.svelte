@@ -39,17 +39,7 @@ import '@splidejs/svelte-splide/css';
           wheel : true,
           pauseOnHover: true,
           interval: 3500,
-          trimSpace: false,
-          breakpoints: {
-          580: {
-            perPage: 2,
-            padding: { left: '0rem', right: '0rem' },
-          },
-          900: {
-            perPage: 3,
-          },
-        },
-    
+          trimSpace: false,  
         } } > 
 
           {#each comments as comment}

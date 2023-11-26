@@ -1,9 +1,10 @@
 @use "../utils/_mixins.scss" as *;
 
 .contact-form {
+  max-width: 1000px;
+  margin-inline: auto;
 
     .wrapper-contact {
-
         margin: 50px 0;
 
         @include form;
@@ -68,12 +69,13 @@
             .wrapper-contact {
               display: flex;
               align-items: center;
-              gap: 50px;
+              gap: 70px;
 
 
               .form-container {
                 box-shadow: none;
                 width: 400px;
+                flex: 65%;
               }
 
               .map-block {

@@ -1,11 +1,10 @@
 @use "../utils/_variables.scss" as *;
 
-
-
 .container-exercice {
 padding-top: 45px;
 width: 100%;
 max-width: 800px;
+margin-inline: auto;
 
   
     h1 {

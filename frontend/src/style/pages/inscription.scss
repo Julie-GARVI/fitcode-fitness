@@ -2,6 +2,9 @@
 @use "../utils/_variables.scss" as *;
 
 .register-users {
+  max-width: 800px;
+  margin-inline: auto;
+  margin-top: 50px;
 
     .register-description {
       background-color: $color-beige;
