@@ -16,6 +16,8 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
+    "@splidejs/splide": "^4.1.4",
+    "@splidejs/svelte-splide": "^0.2.9",
     "svelte-spa-router": "^3.3.0"
   }
 }
