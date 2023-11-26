@@ -4,8 +4,11 @@ h2 {
   text-decoration: underline;
 }
 
+.splide__arrow:hover {
+  background-color: $color-beige;
+}
+
 .wrapper-comment {
-  display: grid;
   gap: 2em;
   margin-inline: 5vw;
 
@@ -60,29 +63,3 @@ h2 {
         }
   }
 
-  
-  @media (min-width: 768px) {
-    .wrapper-comment {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    }
-}
-          
-@media (min-width: 1300px) {
-    .wrapper-comment {
-        display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 1fr;
-      padding: 0 2em; 
-          }
-
-    .comment-container {
-      width: 100%;   
-     
-      }
-    }   
-
-  
-  
-  

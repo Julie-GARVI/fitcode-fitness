@@ -2,6 +2,8 @@
     export let title, rating, lastname, age, date, content;
     import endpoint from '../storage.js';
     import { Splide, SplideSlide } from '@splidejs/svelte-splide';
+    // Default theme
+import '@splidejs/svelte-splide/css';
 
     let comments = [];
 
@@ -26,13 +28,17 @@
 
   <h2>Vos avis</h2>
 
-    <i class="fa-solid fa-arrow-left fa-xl"></i>
 
       <div class="wrapper-comment">
 
-        {#each comments as comment}
+        <Splide aria-label="slider commentaire"  options={ {
+          rewind: true,
+          gap   : '2rem',
+        } }> 
 
-            <div class="comment-container">
+          {#each comments as comment}
+
+            <SplideSlide class="comment-container">
   
               <div class="exercice-title">
                 <p>{comment.title}</p>
@@ -61,10 +67,13 @@
             <div class="comment-content">
               <p>{comment.content}</p>
             </div>
-      </div>
-  
-        {/each}
 
-    <i class="fa-solid fa-arrow-right fa-xl"></i>
+          </SplideSlide>
+
+          {/each}
+
+
+        </Splide>
+
 </div>
 
