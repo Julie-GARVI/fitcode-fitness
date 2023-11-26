@@ -24,6 +24,7 @@ import '@splidejs/svelte-splide/css';
     }
     getCommentData() 
 
+  
 </script>
 
   <h2>Vos avis</h2>
@@ -31,10 +32,25 @@ import '@splidejs/svelte-splide/css';
 
       <div class="wrapper-comment">
 
-        <Splide aria-label="slider commentaire"  options={ {
+        <Splide aria-label="slider comment" options={ {
           rewind: true,
           gap   : '2rem',
-        } }> 
+          type: 'slide',
+          wheel : true,
+          pauseOnHover: true,
+          interval: 3500,
+          trimSpace: false,
+          breakpoints: {
+          580: {
+            perPage: 2,
+            padding: { left: '0rem', right: '0rem' },
+          },
+          900: {
+            perPage: 3,
+          },
+        },
+    
+        } } > 
 
           {#each comments as comment}
 

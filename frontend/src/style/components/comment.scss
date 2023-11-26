@@ -4,13 +4,16 @@ h2 {
   text-decoration: underline;
 }
 
-.splide__arrow:hover {
-  background-color: $color-beige;
-}
-
 .wrapper-comment {
   gap: 2em;
   margin-inline: 5vw;
+
+  .splide {
+    padding: .5em;
+
+  .splide__arrow {
+    background-color: $color-beige;
+  }
 
     .comment-container {
       box-sizing: border-box;
@@ -61,5 +64,7 @@ h2 {
         .comment-content {
           line-height: 1.5;
         }
+
+      } 
   }
 
