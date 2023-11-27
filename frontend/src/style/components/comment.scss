@@ -19,6 +19,14 @@ h2 {
     background-color: rgb(223, 212, 189);
   }
 
+  .splide__track {
+    padding-block: 0.5em;
+    margin-bottom: 1.5em;
+
+    .splide__slide {
+      margin-left: .5em;
+    }
+  }
 
     .comment-container {
       box-sizing: border-box;
@@ -29,17 +37,7 @@ h2 {
       width: 100%;
       border-radius: 20px;
       max-width: 500px;
-
-      .splide__track {
-        padding-block: 0.5em;
-        margin-bottom: 1.5em;
-
-        .splide__slide {
-          background-color: #ff9e0b;
-          margin: .5em;
-        }
-        
-      }
+    }
 
         .exercice-title {
           font-size: 22px;
@@ -86,8 +84,4 @@ h2 {
 
       } 
   }
-
-}
-
-
 
