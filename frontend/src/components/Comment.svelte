@@ -42,7 +42,16 @@ import '@splidejs/svelte-splide/css';
           trimSpace: false,
           label: 'My Carousel',
           perPage: 3,
-        } } > 
+          breakpoints: {
+		      1040: {
+			    perPage: 2,
+		        },
+          768: {
+			    perPage: 1,
+		        },
+          }
+        }
+      }  > 
 
           {#each comments as comment}
 
