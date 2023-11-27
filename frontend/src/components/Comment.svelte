@@ -35,13 +35,22 @@ import '@splidejs/svelte-splide/css';
         <Splide aria-label="slider comment" options={ {
           rewind: true,
           gap   : '2rem',
-          type: 'loop',
+          type: 'slide',
           wheel : true,
           pauseOnHover: true,
           interval: 3500,
           trimSpace: false,
-          label: 'My Carousel',
+          label: 'Slider avis',
+          breakpoints: {
+		      1040: {
+			    perPage: 2,
+		        },
+          768: {
+			    perPage: 1,
+		        },
+          },
           perPage: 3,
+<<<<<<< HEAD
           breakpoints: {
 		      1040: {
 			    perPage: 2,
@@ -50,6 +59,9 @@ import '@splidejs/svelte-splide/css';
 			    perPage: 1,
 		        },
           }
+=======
+
+>>>>>>> comments
         }
       }  > 
 
