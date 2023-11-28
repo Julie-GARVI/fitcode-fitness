@@ -50,18 +50,6 @@ import '@splidejs/svelte-splide/css';
 		        },
           },
           perPage: 3,
-<<<<<<< HEAD
-          breakpoints: {
-		      1040: {
-			    perPage: 2,
-		        },
-          768: {
-			    perPage: 1,
-		        },
-          }
-=======
-
->>>>>>> comments
         }
       }  > 
 
