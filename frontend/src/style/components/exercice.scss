@@ -37,7 +37,12 @@ padding: 20px;
           padding: 0 1em;
           width: 350px;
           height: 50px;
+
+          @media only screen and (max-width: 500px) {
+            width: 300px;
+          }
         }
+
       }
     }
 

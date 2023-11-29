@@ -70,6 +70,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/auth/logout', [UserController::class, 'logout'])->name('logout');
 
+    Route::post('/exercice/{id}/comments', [CommentController::class, 'create']);
+
     Route::put('/exercices/{id}', [ExerciceController::class, 'update']);
 
     Route::delete('/exercices/{id}', [ExerciceController::class, 'delete']);

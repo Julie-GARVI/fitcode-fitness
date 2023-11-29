@@ -1,9 +1,7 @@
 @use "../utils/_variables.scss" as *;
 
 .container-exercice {
-padding-top: 45px;
-width: 100%;
-max-width: 800px;
+padding-top: 35px;
 margin-inline: auto;
 
   
@@ -24,7 +22,8 @@ margin-inline: auto;
 
     .media-block {
       position: relative;
-      width: 400px;
+      width: 100%;
+      max-width: 400px;
       margin: auto;
 
     
