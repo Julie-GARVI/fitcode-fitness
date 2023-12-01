@@ -3,6 +3,9 @@
 
 .edit-exercices {
 padding-top: 35px;
+width: 100%;
+margin-inline: auto;
+max-width: 600px;
 
     .form-crud {
       @include crudForm;

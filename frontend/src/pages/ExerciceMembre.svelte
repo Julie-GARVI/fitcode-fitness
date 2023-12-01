@@ -75,7 +75,6 @@
   
   
         <div class="exercice-challenge">
-          <h2>Chronométrez votre exercice</h2>
           <Chronometer /> 
         </div>
   </section>

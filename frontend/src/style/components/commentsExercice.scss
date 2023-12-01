@@ -1,0 +1,93 @@
+@use "../utils/_variables.scss" as *;
+@use "../utils/_mixins.scss" as *;
+
+.wrapper-comments {
+
+      h2 {
+        margin-block: 1.5em;
+      }
+
+    .comment-container {
+      display: block;
+      margin-inline: auto;
+      width: 100%;
+      max-width: 450px;
+      line-height: 0;
+      margin-top: 2em;
+
+      .comment-item {
+
+        p {
+          margin-bottom: 1em;
+          text-decoration: underline;
+          font-size: 19px;
+
+        }
+      }
+
+      .comments-wrapp {
+        margin-top: 2em;
+        line-height: 15px;
+
+        .comments-block {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1em;
+          border-bottom: solid .5px rgba(0, 0, 0, 0.3);
+
+          @media only screen and (max-width: 450px) {
+            flex-direction: column;
+            gap: 0;
+          }
+
+          .comment-title {
+            color: $color-blue-dark;
+            font-weight: 600;
+            font-size: 22px;
+          }
+
+          p {
+            font-size: 17px;
+            font-style: italic;
+            color: rgb(78, 78, 78);
+          }
+        }
+
+        .comments-content {
+          display: block;
+          width: 100%;
+          border-bottom: solid 1px rgba(0, 0, 0, 0.3);
+  
+            p {
+              line-height: 30px;
+              text-align: left;
+              max-width: 450px;
+            }
+        }
+      }
+    }
+ 
+    .comment-add {
+    padding-top: 25px;
+    background-color: $color-blue-light;
+
+        .form-crud {
+            @include crudForm;
+            padding-top: 0;
+            width: 100%;
+            max-width: 600px;
+            
+            .stars-rating {
+                background-color: $color-blue-light;   
+            
+            }
+            .svelte-o2eiqg {
+                background-color: #dbd9d905;
+                padding: .5em;
+                border-radius: 10px;  
+
+            }
+        }
+    }
+}

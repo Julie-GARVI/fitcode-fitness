@@ -37,6 +37,8 @@
   
   </script>
   
+  <h2>Chronométrez votre exercice</h2>
+  
   <div class="wrapper">
     <i class="fa-solid fa-clock fa-beat-fade"></i>
     <div id="chrono">{formatTime(milliSeconds)}

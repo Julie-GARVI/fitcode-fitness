@@ -2,7 +2,6 @@
   
   import Router, { location } from "svelte-spa-router";
   import routes from "./routes.js";
-  
   import Header from "./layout/Header.svelte";
   import Footer from "./layout/Footer.svelte";
 

@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/teams', [UserController::class, 'list']);
 
-    Route::get('/comments', [CommentController::class, 'list']);
+    Route::get('/comments', [CommentController::class, 'list'])->name('comments.home');
 
     Route::post('/auth/register', [UserController::class, 'createUser']);
 
@@ -46,6 +46,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/categories', [CategoryController::class, 'list']);
 
     Route::get('/users/{user}/categories', [UserController::class, 'listUserCategories']);
+
 
 
 // ----------------------------------------Routes privées--------------------------------__
@@ -65,6 +66,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/exercices/members', [ExerciceController::class, 'list'])->name('exercices.members');
 
     Route::get('/multimedias', [MultimediaController::class, 'list']);
+
+    Route::get('exercice/{id}/comments', [CommentController::class, 'list'])->name('comments.exercice');
 
     Route::post('/exercices', [ExerciceController::class, 'create']);
 

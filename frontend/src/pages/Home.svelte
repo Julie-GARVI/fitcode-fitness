@@ -3,7 +3,7 @@
     
   import poids from "../assets/images/poids.jpg";
   import Team from "../components/Team.svelte";
-  import Comment from "../components/Comment.svelte";
+  import CommentsHome from "../components/CommentsHome.svelte";
   import endpoint from '../storage.js';
   import { link, push } from "svelte-spa-router";
   import { isAuthenticated } from "/src/storage.js";
@@ -124,7 +124,7 @@ try {
       </section>
 
     <article class="comments-users">
-        <Comment 
+        <CommentsHome
         title = "title"
         rating = "rating"
         lastname = "lastname"
