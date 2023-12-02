@@ -3,7 +3,7 @@
 // Dans ce dossier mixins, sont stockés des morceaux de styles qui se répètent au minimum 2 fois sur le site
 // On y retrouve dans cet ordre :
 // 1. Icones = minin icons
-// 2. Boutons = mixin button
+// 2. Boutons = mixin button et buttonBlue
 // 3. Formulaires du CRUD (create et update) = mixin crudForm
 // 4. Exercice = mixin exercice
 // 5. Formulaires de connexion, inscription et contact = Form
@@ -46,6 +46,7 @@
 	  border: inherit;
     cursor: pointer;
 }
+
 
 
 @mixin crudForm { 

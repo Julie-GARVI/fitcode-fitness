@@ -38,10 +38,11 @@
 
   
   const rateStar = () => {
-  // Utilisez dataset.value pour récupérer la valeur du dataset
+  
   rating = parseInt(stars.dataset.value, 6);
+
   console.log("Rating:", rating);
-  // Ajustez la couleur ici pour que toutes les étoiles jusqu'à la cible restent jaunes
+ 
   document.querySelectorAll('.fa-star').forEach(star => {
     if (parseInt(star.dataset.value, 6) <= rating) {
       star.style.color = "yellow";

@@ -43,7 +43,7 @@ public function create(Request $request, $exerciceId)
     try {
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'regex:' . $this->regex],
-            'rating' => 'required',
+            'rating' => ['required', 'min:1', 'integer'],
             'content' => ['required', 'regex:' . $this->regex]
         ]);
         $validator->validate();

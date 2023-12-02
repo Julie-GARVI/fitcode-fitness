@@ -2,6 +2,7 @@
 @use "../utils/_mixins.scss" as *;
 
 .wrapper-comments {
+  width: 100%;
 
       h2 {
         margin-block: 1.5em;
@@ -10,10 +11,7 @@
     .comment-container {
       display: block;
       margin-inline: auto;
-      width: 100%;
-      max-width: 450px;
-      line-height: 0;
-      margin-top: 2em;
+      padding-inline: 5vw;
 
       .comment-item {
 
@@ -26,8 +24,11 @@
       }
 
       .comments-wrapp {
-        margin-top: 2.5em;
-        line-height: 15px;
+        line-height: 25px;
+        margin-inline: auto;
+        max-width: 500px;
+        padding-block: 1em;
+        
 
         .comments-block {
           display: flex;
@@ -65,6 +66,20 @@
               max-width: 450px;
             }
         }
+      }
+
+      .btn-link {
+        display: block;
+        width: 100px;
+        margin-inline: auto;
+        cursor: pointer;
+        background-color: $color-blue-light;
+        border-radius: 5px;
+        margin-bottom: 15px;
+
+        &:hover { 
+          background-color: #c3d3e2;  
+          }
       }
     }
  
