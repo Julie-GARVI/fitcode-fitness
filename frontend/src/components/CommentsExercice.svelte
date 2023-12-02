@@ -8,10 +8,12 @@
     let content = '';
     let isCommented = false;
     let rating = 0;
+    let page = 1; 
+    const commentsPerPage = 4; 
     
     async function getCommentExerciceId() {
             try {
-              const response = await fetch(`${endpoint}/exercice/${exerciceId}/comments`, {
+                const response = await fetch(`${endpoint}/exercice/${exerciceId}/comments?page=${page}&perPage=${commentsPerPage}`,{
                     method: 'GET',
                     headers: {
                         'Authorization' : `Bearer ${localStorage.getItem('accessToken')}`,  
@@ -21,11 +23,15 @@
     
               if (response.ok) {
         
-                comments = await response.json();
+                const newComments = await response.json();
+
+                comments = [...comments, ...newComments];
+
                 console.log(response)
                 console.log(comments)
                 console.log(isCommented)
                 
+                page += 1;
 
               } else {
                 console.log("Erreur lors de la récupération des données des commentaires");
@@ -64,63 +70,6 @@
         const addCommentsInDom = document.querySelector(".comment-container")
                 console.log(addCommentsInDom)
 
-              //------------------------Ajout de la 1ère div--------------------------------
-             /* const addCommentsContainer = document.createElement("div");
-                addCommentsContainer.classList.add("comment-container");
-                addCommentsInDom.append(addCommentsContainer);
-
-
-                        //------------------------Ajout de la 2ème div--------------------------------
-                        const addCommentsWrapp = document.createElement("div");
-                        addCommentsWrapp.classList.add("comments-wrapp");
-                        addCommentsContainer.append(addCommentsWrapp);
-
-
-                                //--------------Ajout des étoiles-----------------------                                
-                                const addWrapperStars = document.createElement("div")
-                                addWrapperStars.classList.add('wrapper-stars')
-                                addCommentsWrapp.append(addWrapperStars);
-
-                                for (let i = 1; i <= 5; i++) {
-                                    const addStars = document.createElement("i");
-                                    addStars.className = "fa-solid fa-star fa-xl";
-
-                                       
-                                    addStars.style.color = i <= rating ? 'yellow' : '#f0f0f0';
-
-                                    addWrapperStars.appendChild(addStars);
-                                }
-
-
-                        //------------------------Ajout de la 3ème div--------------------------------
-                        const addCommentsBlock = document.createElement("div");
-                        addCommentsBlock.classList.add("comments-block");
-                        addCommentsWrapp.append(addCommentsBlock);
-
-
-                                //--------------Ajout du titre du commentaire-----------------------
-                                const addTitleComment = document.createElement("span");
-                                addTitleComment.textContent = responseData.title;
-                                addTitleComment.classList.add("comment-title");
-                                addCommentsBlock.append(addTitleComment);
-
-
-                                        //--------------Ajout du prénom et de la date-----------------------
-                                        const addNameComment = document.createElement("p");
-                                        addNameComment.textContent = `de ${responseData.user.firstname}, le ${responseData.date}`;
-                                        addCommentsBlock.append(addNameComment);
-
-
-                        //------------------------Ajout de la 4ème div--------------------------------
-                        const addCommentsBlockContent = document.createElement("div");
-                        addCommentsBlockContent.classList.add("comments-content");
-                        addCommentsWrapp.append(addCommentsBlockContent);
-
-
-                                    //------------------------Ajout du commentaire--------------------------------
-                                    const addCommentsContent = document.createElement("p");
-                                    addCommentsContent.textContent = responseData.content;
-                                    addCommentsBlockContent.append(addCommentsContent);*/
        getCommentExerciceId();
   
  
@@ -170,7 +119,7 @@
                 </div>
                 
                 {/each}
-                <button class="btn-link">Voir plus</button>
+                <button class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
             </div>
         {/if}
     

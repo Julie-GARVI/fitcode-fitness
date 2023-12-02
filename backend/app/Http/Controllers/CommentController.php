@@ -25,7 +25,13 @@ class CommentController extends Controller
 
     if ($request->routeIs('comments.exercice')) {
 
+        $perPage = 4;
+        $page = $request->input('page', 1);
+
         $comments = Comment::where('exercice_id', $exerciceId)
+            ->orderBy('id', 'desc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
             ->where('id', '>', 6)
             ->get();
 
