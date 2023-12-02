@@ -20,19 +20,22 @@
                 });
     
               if (response.ok) {
+        
                 comments = await response.json();
                 console.log(response)
                 console.log(comments)
+                console.log(isCommented)
+                
 
               } else {
                 console.log("Erreur lors de la récupération des données des commentaires");
+           
               } 
             } catch(error) {
                 console.error("Une erreur s'est produite:", error)
             }
     }
     getCommentExerciceId();
-
    
 
     async function addCommentsExercice() {
@@ -50,7 +53,7 @@
 
 
         if (commentResponse.ok)  {
-        isCommented = true;
+            
         const responseData = await commentResponse.json();
         console.log(commentResponse);
         console.log(responseData);
@@ -62,7 +65,7 @@
                 console.log(addCommentsInDom)
 
               //------------------------Ajout de la 1ère div--------------------------------
-              const addCommentsContainer = document.createElement("div");
+             /* const addCommentsContainer = document.createElement("div");
                 addCommentsContainer.classList.add("comment-container");
                 addCommentsInDom.append(addCommentsContainer);
 
@@ -117,7 +120,9 @@
                                     //------------------------Ajout du commentaire--------------------------------
                                     const addCommentsContent = document.createElement("p");
                                     addCommentsContent.textContent = responseData.content;
-                                    addCommentsBlockContent.append(addCommentsContent);
+                                    addCommentsBlockContent.append(addCommentsContent);*/
+       getCommentExerciceId();
+  
  
         } else {
 
@@ -137,7 +142,7 @@
     
     <h2>Votre avis sur l'exercice</h2>
     
-            {#if isCommented === false || comments.lenght === 0}
+            {#if isCommented === false && comments.length === 0}
             <p>Aucun commentaire</p>
             {:else} 
 
