@@ -302,8 +302,7 @@ async function addExerciceUser() {
   
       <form class="form-crud" on:submit|preventDefault={addExerciceUser}>
   
-        <i class="fa-solid fa-xmark fa-xl" aria-label="Fermer la modale" on:click={closeModal}></i>
-  
+        <i class="fa-solid fa-xmark fa-xl" aria-label="Fermer la modale" type="button" on:click={closeModal}></i>
         
         <div class="value categories">
           <label for="categories">Selectionner votre catégorie :</label>

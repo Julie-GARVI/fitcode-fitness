@@ -1,0 +1,19 @@
+@use "../utils/_variables.scss" as *;
+
+.wrapper-stars {
+    display: block;
+    margin-inline: auto;
+    width: 160px;
+    height: 50px;
+    line-height: 50px;
+    background-color: white;
+    border-radius: 15px;
+    padding-inline: 10px; 
+
+
+        i {
+            color: rgb(78, 78, 78);
+            cursor: pointer;
+        }
+
+}
