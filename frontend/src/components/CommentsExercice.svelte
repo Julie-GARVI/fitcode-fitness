@@ -86,20 +86,36 @@
                                 addTitleComment.classList.add("comment-title");
                                 addCommentsBlock.append(addTitleComment);
 
+
                                 //--------------Ajout du prénom et de la date-----------------------
                                 const addNameComment = document.createElement("p");
                                 addNameComment.textContent = `de ${responseData.user.firstname}, le ${responseData.date}`;
                                 addCommentsBlock.append(addNameComment);
 
 
-                                        //------------------------Ajout de la 4ème div--------------------------------
-                                        const addCommentsBlockContent = document.createElement("div");
-                                        addCommentsBlockContent.classList.add("comments-content");
-                                        addCommentsWrapp.append(addCommentsBlockContent);
+                                        //--------------Ajout des étoiles-----------------------                                
+                                        const addWrapperStars = document.createElement("div")
+                                        addWrapperStars.classList.add('wrapper-stars')
+                                        addCommentsWrapp.append(addWrapperStars);
 
-                                        const addCommentsContent = document.createElement("p");
-                                        addCommentsContent.textContent = responseData.content;
-                                        addCommentsBlockContent.append(addCommentsContent);
+                                        for (let i = 1; i <= 5; i++) {
+                                        const addStars = document.createElement("i");
+                                        addStars.className = "fa-solid fa-star fa-xl";
+
+                                       
+                                        addStars.style.color = i <= rating ? 'yellow' : 'white';
+
+                                        addWrapperStars.appendChild(addStars);
+                                    }
+
+                                                //------------------------Ajout de la 4ème div--------------------------------
+                                                const addCommentsBlockContent = document.createElement("div");
+                                                addCommentsBlockContent.classList.add("comments-content");
+                                                addCommentsWrapp.append(addCommentsBlockContent);
+
+                                                const addCommentsContent = document.createElement("p");
+                                                addCommentsContent.textContent = responseData.content;
+                                                addCommentsBlockContent.append(addCommentsContent);
 
             
         } else {
