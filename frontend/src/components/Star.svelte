@@ -1,78 +1,75 @@
 <script>
 
-    let stars = "";
-    export let rating;
-  
-    const starSelect = (event) => {
-     
-      document.querySelectorAll('.fa-star').forEach(star => {
-        star.style.color = "";
-      });
- 
-      stars = event.target;
-      console.log(stars)
-      stars.style.color = "yellow";
+  let stars = "";
+  export let rating;
 
-      let previousStar = stars.previousElementSibling;
-      previousStar.style.color = "yellow"
+  const starSelect = (event) => {
+   
+    document.querySelectorAll('.fa-star').forEach(star => {
+      star.style.color = "";
+    });
 
-      while(previousStar) {
-        previousStar.style.color = "yellow";
-        previousStar = previousStar.previousElementSibling;
-      }
-    }
+    stars = event.target;
+    console.log(stars)
+    stars.style.color = "yellow";
 
-   const resetStars = (event) => {
+    let previousStar = stars.previousElementSibling;
+    previousStar.style.color = "yellow"
 
-    if (event === 'click') {
-      document.querySelectorAll('.fa-star').forEach(star => {
-        star.style.color = "yellow";
-      });
-
-      
-        document.querySelectorAll('.fa-star').forEach(star => {
-        star.style.color = "white";
-      });
+    while(previousStar) {
+      previousStar.style.color = "yellow";
+      previousStar = previousStar.previousElementSibling;
     }
   }
 
-    
-    const rateStar = () => {
-    // Utilisez dataset.value pour récupérer la valeur du dataset
-    rating = parseInt(stars.dataset.value, 6);
-    console.log("Rating:", rating);
-    // Ajustez la couleur ici pour que toutes les étoiles jusqu'à la cible restent jaunes
+ const resetStars = (event) => {
+
+  if (event === 'click') {
     document.querySelectorAll('.fa-star').forEach(star => {
-      if (parseInt(star.dataset.value, 6) <= rating) {
-        star.style.color = "yellow";
-      }
+      star.style.color = "yellow";
+    });
+
+    
+      document.querySelectorAll('.fa-star').forEach(star => {
+      star.style.color = "white";
     });
   }
+}
+
   
-
-  </script>
-    
-    <div class="wrapper-stars" on:mouseout={resetStars} role="button" tabindex="0" on:blur={() => {}}>
-      {#each [1, 2, 3, 4, 5] as value (value)}
-        <i class="fa-solid fa-star fa-xl" data-value={value} on:mouseover={starSelect} on:click={rateStar} role="button" tabindex="0" on:focus={() => {}}></i>
-      {/each}
-    </div>
-
-  <input type="hidden" id="rating" name="rating" bind:value={rating} on:submit={rateStar}> 
-
-
-  <style>
-    .wrapper-stars {
-        display: block;
-        margin-inline: auto;
-        width: 150px;
+  const rateStar = () => {
+  // Utilisez dataset.value pour récupérer la valeur du dataset
+  rating = parseInt(stars.dataset.value, 6);
+  console.log("Rating:", rating);
+  // Ajustez la couleur ici pour que toutes les étoiles jusqu'à la cible restent jaunes
+  document.querySelectorAll('.fa-star').forEach(star => {
+    if (parseInt(star.dataset.value, 6) <= rating) {
+      star.style.color = "yellow";
     }
-  
-    i {
-        color: white;
-        cursor: pointer;
-    }
-  </style>
-  
+  });
+}
 
-   
+
+</script>
+  
+  <div class="wrapper-stars" on:mouseout={resetStars} role="button" tabindex="0" on:blur={() => {}}>
+    {#each [1, 2, 3, 4, 5] as value (value)}
+      <i class="fa-solid fa-star fa-xl" data-value={value} on:mouseover={starSelect} on:click={rateStar} role="button" tabindex="0" on:focus={() => {}}></i>
+    {/each}
+  </div>
+
+<input type="hidden" id="rating" name="rating" bind:value={rating} on:submit={rateStar}> 
+
+
+<style>
+  .wrapper-stars {
+      display: block;
+      margin-inline: auto;
+      width: 150px;
+  }
+
+  i {
+      color: white;
+      cursor: pointer;
+  }
+</style>
