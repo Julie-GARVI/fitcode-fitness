@@ -77,17 +77,17 @@
             padding-top: 0;
             width: 100%;
             max-width: 600px;
-            
-            .stars-rating {
-                background-color: $color-blue-light;   
-            
-            }
-            .svelte-o2eiqg {
-                background-color: #dbd9d905;
-                padding: .5em;
-                border-radius: 10px;  
 
+          .btn-block {
+
+            .btn-submit {
+              background-color: #fff;
             }
+
+            .btn-submit:hover {
+              background-color: #f0f0f0;;
+            }
+          }
         }
+      }
     }
-}

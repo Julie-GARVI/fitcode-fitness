@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
@@ -44,6 +43,7 @@ public function create(Request $request, $exerciceId)
     try {
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'regex:' . $this->regex],
+            'rating' => 'required',
             'content' => ['required', 'regex:' . $this->regex]
         ]);
         $validator->validate();
@@ -56,6 +56,7 @@ public function create(Request $request, $exerciceId)
     $comment = new Comment();
     $comment->exercice_id = $exerciceId;
     $comment->title = $request->input('title');
+    $comment->rating = $request->input('rating');
     $comment->content = $request->input('content');
 
     $comment->date = $currentDate->toDateString();;
