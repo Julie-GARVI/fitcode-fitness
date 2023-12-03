@@ -35,7 +35,7 @@
         line-height: 25px;
         margin-inline: auto;
         max-width: 500px;
-        padding-bottom: 1em;
+        padding-bottom: 2em;
         
 
         .comments-block {
@@ -74,9 +74,15 @@
               max-width: 450px;
             }
           }
-        }    
-      }
-   
+
+        .delete-btn {
+          float: right;
+          margin-top: .5em;
+          cursor: pointer;
+        }
+      }    
+    }
+
 
       .btn-link {
         display: block;

@@ -10,6 +10,8 @@ use Illuminate\Validation\ValidationException;
 
 class CommentController extends Controller
 {
+
+//-----------------------------Commentaires HOME--------------------------------
     public function list(Request $request, $exerciceId = null)
 {
     if ($request->routeIs('comments.home')) {
@@ -23,6 +25,7 @@ class CommentController extends Controller
         return $comments;
     }
 
+//--------------------------Commentaires EXERCICE--------------------------------
     if ($request->routeIs('comments.exercice')) {
 
         $perPage = 4;
@@ -44,6 +47,7 @@ class CommentController extends Controller
 }
 
 
+//------------------------Création d'un commentaire--------------------------------
 public function create(Request $request, $exerciceId)
   {
     try {
@@ -72,6 +76,16 @@ public function create(Request $request, $exerciceId)
     $comment->save();
 
     return $comment;
+  }
+
+
+//------------------------Supprimer un commentaire--------------------------------
+  public function delete($id)
+  {
+      $comment = Comment::find($id);
+      $comment->delete();
+
+      return response()->json(['message' => 'Comment deleted']);
   }
 }
 

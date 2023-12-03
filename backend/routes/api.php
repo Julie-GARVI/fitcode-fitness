@@ -79,4 +79,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::delete('/exercices/{id}', [ExerciceController::class, 'delete']);
 
+    Route::delete('/exercice/{id}/comment', [CommentController::class, 'delete']);
+
 });

@@ -10,6 +10,8 @@
     let rating = 0;
     let page = 1; 
     const commentsPerPage = 4;
+    let resize = window.innerWidth <= 1150 ? true : false;
+    let scrolling = window.innerWidth > 1150 ? true : false;
     
     async function getCommentExerciceId() {
             try {
@@ -33,6 +35,7 @@
                 
                 page += 1;
 
+
               } else {
                 console.log("Erreur lors de la récupération des données des commentaires");
            
@@ -41,6 +44,8 @@
                 console.error("Une erreur s'est produite:", error)
             }
     }
+
+    
     getCommentExerciceId();
    
 
@@ -138,6 +143,16 @@
         return comments.length % commentsPerPage === 0;
     }
 
+
+    function isSmallScreen() {
+        return window.innerWidth;
+    }
+
+    window.addEventListener('scroll', () => {
+        resize = isSmallScreen() <= 1150 ? true : false;
+    });
+    
+
     
     </script>
 
@@ -148,6 +163,8 @@
         <p>Aucun commentaire</p>
     {:else} 
        
+   
+        
             <div class="comment-container" on:scroll={getCommentExerciceId}>
                 {#each comments as comment}
                     <div class="comments-wrapp">
@@ -163,15 +180,18 @@
                         <div class="comments-content">
                             <p>{comment.content}</p>
                         </div>
+                       <button class="delete-btn">Supprimer</button>
                     </div>
                 {/each}   
-    
+
                 {#if hasMoreComments()}
-                    <button class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
-                {/if}
+                <button type="hidden" class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
+            {/if}
+            
             </div>
-    {/if}   
+        {/if}  
 </div>    
+            
     
     <div class="comment-add">
     
