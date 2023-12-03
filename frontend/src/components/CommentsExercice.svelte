@@ -10,7 +10,6 @@
     let rating = 0;
     let page = 1; 
     const commentsPerPage = 4; 
-    let resize = window.innerWidth <= 1150 ? true : false;
     
     async function getCommentExerciceId() {
             try {
@@ -134,18 +133,6 @@
         console.error("Erreur lors de lors de l'envoi du commentaire :", error);
     }
 }
-
-    function hasMoreComments() {
-        return comments.length % commentsPerPage === 0;
-    }
-
-    function isWideScreen() {
-        return window.innerWidth;
-    }
-
-    window.addEventListener('scroll', () => {
-        resize = isWideScreen() <= 1150 ? true : false;
-    });
     
     </script>
 
@@ -156,12 +143,12 @@
         <p>Aucun commentaire</p>
     {:else} 
        
-            <div class="comment-container">
+            <div class="comment-container" on:scroll={getCommentExerciceId}>
                 {#each comments as comment}
                     <div class="comments-wrapp">
                         <div class="wrapper-stars">
                             {#each [1, 2, 3, 4, 5] as value (value)}
-                                <i class="fa-solid fa-star fa-xl" style="{value <= comment.rating ? 'color: yellow;' : 'color: white;'}"></i>
+                                <i class="fa-solid fa-star fa-xl" style="{value <= comment.rating ? 'color: yellow;' : 'color: #f0f0f0;'}"></i>
                             {/each}
                         </div>
                         <div class="comments-block">
@@ -172,18 +159,12 @@
                             <p>{comment.content}</p>
                         </div>
                     </div>
-                {/each}
-
-                {#if hasMoreComments() && resize}
-                    <button class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
-                {/if}
-
-                {#if hasMoreComments() && window.innerWidth > 1150}
-                    <h1>Test</h1>
-                {/if}
+                {/each}   
+    
+                <button class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
             </div>
-        {/if}
-</div>
+    {/if}   
+</div>    
     
     <div class="comment-add">
     
