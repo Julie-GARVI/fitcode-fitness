@@ -4,9 +4,14 @@
 .wrapper-comments {
   width: 100%;
 
-      h2 {
+  .section-comments {
+
+      p {
         margin-block: 1.5em;
+        text-align: center;
+        font-size: 20px;
       }
+    }
 
     .comment-container {
       display: block;

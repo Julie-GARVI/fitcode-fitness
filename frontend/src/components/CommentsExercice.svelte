@@ -9,7 +9,7 @@
     let isCommented = false;
     let rating = 0;
     let page = 1; 
-    const commentsPerPage = 4; 
+    const commentsPerPage = 4;
     
     async function getCommentExerciceId() {
             try {
@@ -133,6 +133,11 @@
         console.error("Erreur lors de lors de l'envoi du commentaire :", error);
     }
 }
+
+    function hasMoreComments() {
+        return comments.length % commentsPerPage === 0;
+    }
+
     
     </script>
 
@@ -161,7 +166,9 @@
                     </div>
                 {/each}   
     
-                <button class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
+                {#if hasMoreComments()}
+                    <button class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
+                {/if}
             </div>
     {/if}   
 </div>    
