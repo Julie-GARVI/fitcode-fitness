@@ -78,7 +78,7 @@ try {
               <h2>Votre espace membre</h2>
                   <div class="img-block">
                       <!-- svelte-ignore a11y-img-redundant-alt -->
-                      <img src="{poids}" class="picture-sport" alt="Image de poids">
+                      <img src={poids} class="picture-sport" alt="Image de poids">
                   </div>
   
                       <h3>Connectez-vous à votre compte :</h3>

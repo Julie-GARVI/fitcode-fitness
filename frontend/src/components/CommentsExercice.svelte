@@ -186,7 +186,7 @@
             </div>
                 <input type="hidden" id="rating" name="rating" value="0"> 
             <div class="value content">
-                <label for="content">Votre commentaire :</label>
+                <label for="content">Vos commentaires :</label>
                 <textarea type="text" id="content" name="content" placeholder="L'entrainement en intervalles m'a permis d'améliorer ma force physique..." bind:value={content}></textarea>
             </div>
             <div class="btn-block">
