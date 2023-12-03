@@ -12,6 +12,8 @@
       display: block;
       margin-inline: auto;
       padding-inline: 5vw;
+      max-height: 1000px;
+      overflow-y: auto; 
 
       .comment-item {
 

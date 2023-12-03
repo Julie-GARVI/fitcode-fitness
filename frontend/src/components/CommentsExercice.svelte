@@ -10,6 +10,7 @@
     let rating = 0;
     let page = 1; 
     const commentsPerPage = 4; 
+    let resize = window.innerWidth <= 1150 ? true : false;
     
     async function getCommentExerciceId() {
             try {
@@ -87,7 +88,7 @@
                                       addStars.className = "fa-solid fa-star fa-xl";
 
                                        
-                                      addStars.style.color = i <= rating ? 'yellow' : 'white';
+                                      addStars.style.color = i <= rating ? 'yellow' : '#f0f0f0';
 
                                       addWrapperStars.appendChild(addStars);
                                     }
@@ -134,50 +135,55 @@
     }
 }
 
-function hasMoreComments() {
+    function hasMoreComments() {
         return comments.length % commentsPerPage === 0;
     }
+
+    function isWideScreen() {
+        return window.innerWidth;
+    }
+
+    window.addEventListener('scroll', () => {
+        resize = isWideScreen() <= 1150 ? true : false;
+    });
     
     </script>
 
-        <div class="section-comments">
-
-        <h2>Votre avis sur l'exercice</h2>
+<div class="section-comments">
+    <h2>Votre commentaires :</h2>
     
-        {#if comments === false || comments.length === 0}
-            <p>Aucun commentaire</p>
-        {:else} 
-
+    {#if comments === false || comments.length === 0}
+        <p>Aucun commentaire</p>
+    {:else} 
+       
             <div class="comment-container">
-
                 {#each comments as comment}
-
-                <div class="comments-wrapp">
-                    <div class="comments-block">
-                        <span class="comment-title">{comment.title}</span>
-                        <p>De {comment.user.firstname}, le {comment.date}</p>
+                    <div class="comments-wrapp">
+                        <div class="wrapper-stars">
+                            {#each [1, 2, 3, 4, 5] as value (value)}
+                                <i class="fa-solid fa-star fa-xl" style="{value <= comment.rating ? 'color: yellow;' : 'color: white;'}"></i>
+                            {/each}
+                        </div>
+                        <div class="comments-block">
+                            <span class="comment-title">{comment.title}</span>
+                            <p>De {comment.user.firstname}, le {comment.date}</p>
+                        </div>
+                        <div class="comments-content">
+                            <p>{comment.content}</p>
+                        </div>
                     </div>
-                    <div class="wrapper-stars">
-                        {#each [1, 2, 3, 4, 5] as value (value)}
-                        <i class="fa-solid fa-star fa-xl" style="{value <= comment.rating ? 'color: yellow;' : 'color: white;'}"></i>
-                        {/each}
-                      </div>
-                    <div class="comments-content">
-                        <p>{comment.content}</p>
-                    </div>
-                </div>
-                
                 {/each}
 
-            {#if hasMoreComments()}
-                <button class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
-            {/if}
-               
+                {#if hasMoreComments() && resize}
+                    <button class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
+                {/if}
+
+                {#if hasMoreComments() && window.innerWidth > 1150}
+                    <h1>Test</h1>
+                {/if}
             </div>
         {/if}
-    </div>
- 
-    
+</div>
     
     <div class="comment-add">
     
