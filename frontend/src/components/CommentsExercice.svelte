@@ -70,9 +70,58 @@
         const addCommentsInDom = document.querySelector(".comment-container")
                 console.log(addCommentsInDom)
 
-       getCommentExerciceId();
+
+                        //------------------------Ajout de la 1ère div--------------------------------
+                        const addCommentsWrapp = document.createElement("div");
+                        addCommentsWrapp.classList.add("comments-wrapp");
+                        addCommentsInDom.prepend(addCommentsWrapp);
+
+
+                                //------------------------Ajout de la 2ème div--------------------------------
+                                const addCommentsBlock = document.createElement("div");
+                                addCommentsBlock.classList.add("comments-block");
+                                addCommentsWrapp.append(addCommentsBlock);
+
+
+                                //--------------Ajout du titre du commentaire-----------------------
+                                const addTitleComment = document.createElement("span");
+                                addTitleComment.textContent = responseData.title;
+                                addTitleComment.classList.add("comment-title");
+                                addCommentsBlock.append(addTitleComment);
+
+
+                                //--------------Ajout du prénom et de la date-----------------------
+                                const addNameComment = document.createElement("p");
+                                addNameComment.textContent = `de ${responseData.user.firstname}, le ${responseData.date}`;
+                                addCommentsBlock.append(addNameComment);
+
+
+                                        //--------------Ajout des étoiles-----------------------                                
+                                        const addWrapperStars = document.createElement("div")
+                                        addWrapperStars.classList.add('wrapper-stars')
+                                        addCommentsWrapp.append(addWrapperStars);
+
+                                        for (let i = 1; i <= 5; i++) {
+                                        const addStars = document.createElement("i");
+                                        addStars.className = "fa-solid fa-star fa-xl";
+
+                                       
+                                        addStars.style.color = i <= rating ? 'yellow' : 'white';
+
+                                        addWrapperStars.appendChild(addStars);
+                                    }
+
+                        //------------------------Ajout de la 3ème div--------------------------------
+                        const addCommentsBlockContent = document.createElement("div");
+                        addCommentsBlockContent.classList.add("comments-content");
+                        addCommentsWrapp.append(addCommentsBlockContent);
+
+                        const addCommentsContent = document.createElement("p");
+                        addCommentsContent.textContent = responseData.content;
+                        addCommentsBlockContent.append(addCommentsContent);
+
+                getCommentExerciceId();
   
- 
         } else {
 
             console.log("Échec de la requête.", commentResponse.status);
@@ -83,43 +132,47 @@
         console.error("Erreur lors de lors de l'envoi du commentaire :", error);
     }
 }
-    
+
+function hasMoreComments() {
+        return comments.length % commentsPerPage === 0;
+    }
     
     </script>
-    
-    
-            <div class="comment-container">
 
-                <h2>Votre avis sur l'exercice</h2>
+        <div class="section-comments">
+
+        <h2>Votre avis sur l'exercice</h2>
     
-        {#if isCommented === false && comments.length === 0}
-        <p>Aucun commentaire</p>
+        {#if comments === false || comments.length === 0}
+            <p>Aucun commentaire</p>
         {:else} 
 
-                <div class="comment-item">
-                    <p>Commentaires :</p>
-                </div>
+            <div class="comment-container">
 
                 {#each comments as comment}
 
-                
                 <div class="comments-wrapp">
-                    <div class="wrapper-stars">
-                        {#each [1, 2, 3, 4, 5] as value (value)}
-                        <i class="fa-solid fa-star fa-xl" style="{value <= comment.rating ? 'color: yellow;' : 'color: #f0f0f0;'}"></i>
-                        {/each}
-                      </div>
                     <div class="comments-block">
                         <span class="comment-title">{comment.title}</span>
                         <p>De {comment.user.firstname}, le {comment.date}</p>
                     </div>
+                    <div class="wrapper-stars">
+                        {#each [1, 2, 3, 4, 5] as value (value)}
+                        <i class="fa-solid fa-star fa-xl" style="{value <= comment.rating ? 'color: yellow;' : 'color: white;'}"></i>
+                        {/each}
+                      </div>
                     <div class="comments-content">
                         <p>{comment.content}</p>
                     </div>
                 </div>
                 
                 {/each}
+
+            {#if hasMoreComments()}
                 <button class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
+            {/if}
+               
+            </div>
         {/if}
     </div>
  
