@@ -87,15 +87,15 @@
     
     </script>
     
-    <section class="wrapper-comments">
     
-    <h2>Votre avis sur l'exercice</h2>
-    
-            {#if isCommented === false && comments.length === 0}
-            <p>Aucun commentaire</p>
-            {:else} 
-
             <div class="comment-container">
+
+                <h2>Votre avis sur l'exercice</h2>
+    
+        {#if isCommented === false && comments.length === 0}
+        <p>Aucun commentaire</p>
+        {:else} 
+
                 <div class="comment-item">
                     <p>Commentaires :</p>
                 </div>
@@ -120,8 +120,9 @@
                 
                 {/each}
                 <button class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
-            </div>
         {/if}
+    </div>
+ 
     
     
     <div class="comment-add">
@@ -148,5 +149,4 @@
     </div>
     
 
-    </section>
     

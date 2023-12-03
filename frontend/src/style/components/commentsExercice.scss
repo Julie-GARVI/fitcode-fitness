@@ -65,8 +65,10 @@
               text-align: left;
               max-width: 450px;
             }
-        }
+          }
+        }    
       }
+   
 
       .btn-link {
         display: block;
@@ -80,9 +82,12 @@
         &:hover { 
           background-color: #c3d3e2;  
           }
+        }
       }
-    }
- 
+     
+  
+
+
     .comment-add {
     padding-top: 25px;
     background-color: $color-blue-light;
@@ -105,4 +110,28 @@
           }
         }
       }
-    }
+
+      .comment-container {
+        @media (min-width: 1150px) {
+          grid-area: 1 / 2 / 4 / 3; 
+
+        }
+
+      }
+
+      .comment-add {
+        @media (min-width: 1150px) {
+          grid-area: 2 / 1 / 3 / 2;
+
+        }
+
+      }
+    
+
+        
+      
+
+
+
+
+    

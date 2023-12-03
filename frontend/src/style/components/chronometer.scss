@@ -42,3 +42,9 @@
         }
     }
 }
+
+  .wrapper-chronometrer {
+    @media (min-width: 1150px) {
+    grid-area: 1 / 1 / 2 / 2;
+    }
+  }

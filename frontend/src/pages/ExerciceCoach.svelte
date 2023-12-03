@@ -72,7 +72,9 @@
             <p>{exercice.instructions}</p>
         </div>
   
-  
+  </section>
+
+  <section class="wrapper-comments">
         <div class="exercice-challenge">
           <Chronometer /> 
           <CommentsExercice 
