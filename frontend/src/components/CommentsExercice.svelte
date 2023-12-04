@@ -11,7 +11,6 @@
     let page = 1; 
     const commentsPerPage = 4;
     let resize = window.innerWidth <= 1150 ? true : false;
-    let scrolling = window.innerWidth > 1150 ? true : false;
     
     async function getCommentExerciceId() {
             try {
@@ -151,6 +150,30 @@
     window.addEventListener('scroll', () => {
         resize = isSmallScreen() <= 1150 ? true : false;
     });
+
+
+     //-----------------Supprimer un commentaire------------------------ 
+     async function deleteComment(id) {
+  
+  try {
+      const dataresponse = await fetch(`${endpoint}/exercice/${id}/comment`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+        'Content-Type': 'application/json'
+      },
+    });
+    const comment = await dataresponse.json();
+    console.log(comment)
+
+    const commentDelete = document.querySelector('.comments-wrapp');
+    console.log(commentDelete)
+    commentDelete.remove();
+
+    } catch (error) {
+    console.error('Une erreur s\'est produite:', error);
+  }
+}
     
 
     
@@ -164,33 +187,35 @@
     {:else} 
        
    
-        
-            <div class="comment-container" on:scroll={getCommentExerciceId}>
-                {#each comments as comment}
-                    <div class="comments-wrapp">
-                        <div class="wrapper-stars">
-                            {#each [1, 2, 3, 4, 5] as value (value)}
-                                <i class="fa-solid fa-star fa-xl" style="{value <= comment.rating ? 'color: yellow;' : 'color: #f0f0f0;'}"></i>
-                            {/each}
-                        </div>
-                        <div class="comments-block">
-                            <span class="comment-title">{comment.title}</span>
-                            <p>De {comment.user.firstname}, le {comment.date}</p>
-                        </div>
-                        <div class="comments-content">
-                            <p>{comment.content}</p>
-                        </div>
-                       <button class="delete-btn">Supprimer</button>
-                    </div>
-                {/each}   
-
-                {#if hasMoreComments()}
-                <button type="hidden" class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
+    <div class="comment-container" on:scroll={getCommentExerciceId}>
+      {#each comments as comment}
+          <div class="comments-wrapp">
+              <div class="wrapper-stars">
+                  {#each [1, 2, 3, 4, 5] as value (value)}
+                      <i class="fa-solid fa-star fa-xl" style="{value <= comment.rating ? 'color: yellow;' : 'color: #f0f0f0;'}"></i>
+                  {/each}
+              </div>
+              <div class="comments-block">
+                  <span class="comment-title">{comment.title}</span>
+                  <p>De {comment.user.firstname}, le {comment.date}</p>
+              </div>
+              <div class="comments-content">
+                  <p>{comment.content}</p>
+              </div>
+              {#if comment.user.id == localStorage.getItem('id')}
+              <!-- Show delete button only if the comment belongs to the logged-in user -->
+              <button class="delete-btn" on:click={() => deleteComment(comment.id)}>Supprimer</button>
             {/if}
-            
-            </div>
-        {/if}  
-</div>    
+          </div>
+      {/each}   
+
+      {#if hasMoreComments()}
+      <button type="hidden" class="btn-link" on:click={getCommentExerciceId}>Voir plus</button>
+  {/if}
+  
+  </div>
+{/if}  
+</div>     
             
     
     <div class="comment-add">

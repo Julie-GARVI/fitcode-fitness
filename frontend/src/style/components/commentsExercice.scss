@@ -84,18 +84,24 @@
     }
 
 
-      .btn-link {
+      .btn-link, .delete-btn {
         display: block;
+        float: right;
         width: 100px;
         margin-inline: auto;
         cursor: pointer;
         background-color: $color-blue-light;
         border-radius: 5px;
         margin-bottom: 15px;
+        font-weight: 600;
 
         &:hover { 
           background-color: #c3d3e2;  
           }
+        }
+
+        .btn-link {
+          display: none;
         }
       }
      

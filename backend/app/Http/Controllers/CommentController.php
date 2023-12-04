@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
 
@@ -82,7 +83,11 @@ public function create(Request $request, $exerciceId)
 //------------------------Supprimer un commentaire--------------------------------
   public function delete($id)
   {
-      $comment = Comment::find($id);
+
+    $user = Auth::user();
+    $userId = $user->id;
+
+      $comment = Comment::where('user_id', $userId)->find($id);
       $comment->delete();
 
       return response()->json(['message' => 'Comment deleted']);
