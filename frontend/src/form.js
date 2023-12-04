@@ -16,6 +16,9 @@ function validateForm() {
         const nameInputs = document.querySelectorAll('.name');
         const timeInputs = document.querySelectorAll('.time');
         const instructionsInputs = document.querySelectorAll('.instructions');
+        const starInputs = document.querySelectorAll('.star');
+        const titleInputs = document.querySelectorAll('.title');
+        const contentInputs = document.querySelectorAll('.content');
 
         let isError = false;
         let tabError = [];
@@ -107,6 +110,7 @@ function validateForm() {
                 messageSend();
             }
         });
+
     
     //Cible tous les champs NAME
     nameInputs.forEach(name => {
@@ -141,6 +145,33 @@ function validateForm() {
         }
     });
 
+    //Cible tous les champs RATING
+    starInputs.forEach(star => {
+        if (star.value <= 0) {
+            isError = true;
+            tabError.push("Erreur, le champ rating est vide");
+            emptyStarAlert();
+        }
+    });
+
+    //Cible tous les champs TITLE
+    titleInputs.forEach(title => {
+        if (title.value === "") {
+            isError = true;
+            tabError.push("Erreur, le champ titre est vide");
+            emptyAlert();
+        }
+    });
+
+    //Cible tous les champs CONTENT
+    contentInputs.forEach(content => {
+        if (content.value === "") {
+            isError = true;
+            tabError.push("Erreur, le champ content est vide");
+            emptyAlert();
+        }
+    });
+
         function specialCharacters(value) {
             const characters = /[#$%^&*\[\]{}\\|<>\/~]/;
             return characters.test(value);
@@ -156,6 +187,16 @@ function validateForm() {
                 alert.style.display = "none";
             }, 2500);
         }
+
+    //Empêche que le rating soit vide
+    function emptyStarAlert() {
+        const alert = document.querySelector(".star-alert");
+        alert.style.display = "block";
+
+        setTimeout(() => {
+            alert.style.display = "none";
+        }, 2500);
+    }
 
     //Limite d'âge
         function limitAgeAlert() {
@@ -210,6 +251,8 @@ function validateForm() {
             }, 2500);
         }
 
+
+        //-------------------MESSAGE---------------------------
         function messageAlert() {
             const alert = document.querySelector(".message");
             alert.style.display = "block";
@@ -219,6 +262,7 @@ function validateForm() {
             }, 2500);
         }
 
+         //-------------------NAME--------------------------
         function nameAlert() {
             const alert = document.querySelector(".name");
             alert.style.display = "block";
@@ -228,8 +272,29 @@ function validateForm() {
             }, 2500);
         }
 
+        //-------------------INSTRUCTIONS-----------------------
         function instructionsAlert() {
             const alert = document.querySelector(".instructions");
+            alert.style.display = "block";
+
+            setTimeout(() => {
+                alert.style.display = "none";
+            }, 2500);
+        }
+
+        //-------------------TITLE-----------------------
+        function titleAlert() {
+            const alert = document.querySelector(".title");
+            alert.style.display = "block";
+
+            setTimeout(() => {
+                alert.style.display = "none";
+            }, 2500);
+        }
+
+        //-------------------CONTENT-----------------------
+        function contentAlert() {
+            const alert = document.querySelector(".content");
             alert.style.display = "block";
 
             setTimeout(() => {

@@ -53,10 +53,11 @@
 
 </script>
   
+<span class="star-alert alert">Veuillez renseigner votre note</span>
   <div class="wrapper-stars" on:mouseout={resetStars} role="button" tabindex="0" on:blur={() => {}}>
       {#each [1, 2, 3, 4, 5] as value (value)}
       <i class="fa-solid fa-star star-mouseover fa-xl" data-value={value} on:mouseover={starSelect} on:click={rateStar} type="button" tabindex="0" on:focus={() => {}}></i>
     {/each}
   </div>
 
-<input type="hidden" id="rating" name="rating" bind:value={rating} on:submit={rateStar}> 
+<input type="hidden" id="star" class="star create" name="rating" bind:value={rating} on:submit={rateStar}> 

@@ -225,14 +225,20 @@
         <Star bind:rating={rating} /> 
 
         <form class="form-crud" on:submit|preventDefault={addCommentsExercice}>
+    
             <div class="value title">
+            <span class="empty-alert alert">Erreur, un champs est vide</span>
+
+            <span class="title alert">Erreur ! Votre titre ne doit pas contenir de caractères particuliers</span>
                 <label for="title">Titre du commentaire :</label>
-                <input type="text" id="title" name="title" class="title create" placeholder="Très satisfait de l'entraînement en intervalles" bind:value={title}>
+                <input type="text" id="title" class="title create" name="title" placeholder="Très satisfait de l'entraînement en intervalles" bind:value={title}>
             </div>
                 <input type="hidden" id="rating" name="rating" value="0"> 
             <div class="value content">
+
+            <span class="content alert">Erreur ! Votre commentaire ne doit pas contenir de caractères particuliers</span>
                 <label for="content">Vos commentaires :</label>
-                <textarea type="text" id="content" name="content" placeholder="L'entrainement en intervalles m'a permis d'améliorer ma force physique..." bind:value={content}></textarea>
+                <textarea type="text" id="content" class="content create" name="content" placeholder="L'entrainement en intervalles m'a permis d'améliorer ma force physique..." bind:value={content}></textarea>
             </div>
             <div class="btn-block">
                 <button type="submit" class="btn-submit" aria-label="Ajouter un commentaire">Ajouter</button>
