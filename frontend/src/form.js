@@ -161,6 +161,10 @@ function validateForm() {
             tabError.push("Erreur, le champ titre est vide");
             emptyAlert();
         }
+        else if (specialCharacters(title.value)) {
+            isError = true;
+            titleAlert();
+        }
     });
 
     //Cible tous les champs CONTENT
@@ -169,6 +173,10 @@ function validateForm() {
             isError = true;
             tabError.push("Erreur, le champ content est vide");
             emptyAlert();
+        }
+        else if (specialCharacters(content.value)) {
+            isError = true;
+            contentAlert();
         }
     });
 
@@ -284,7 +292,7 @@ function validateForm() {
 
         //-------------------TITLE-----------------------
         function titleAlert() {
-            const alert = document.querySelector(".title");
+            const alert = document.querySelector(".title.alert");
             alert.style.display = "block";
 
             setTimeout(() => {
@@ -294,7 +302,7 @@ function validateForm() {
 
         //-------------------CONTENT-----------------------
         function contentAlert() {
-            const alert = document.querySelector(".content");
+            const alert = document.querySelector(".content.alert");
             alert.style.display = "block";
 
             setTimeout(() => {
