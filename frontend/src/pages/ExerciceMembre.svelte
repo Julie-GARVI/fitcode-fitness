@@ -73,9 +73,7 @@
             <p>{exercice.instructions}</p>
         </div>
   
-  
-        <div class="exercice-challenge">
-          <h2>Chronométrez votre exercice</h2>
+        <div class="exercice-member">
           <Chronometer /> 
         </div>
   </section>

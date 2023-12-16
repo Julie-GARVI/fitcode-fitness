@@ -1,6 +1,7 @@
 <script>
   window.scrollTo(0, 0);
 
+  import CommentsExercice from "../components/CommentsExercice.svelte";
   import Chronometer from "../components/Chronometer.svelte";
   import endpoint from '../storage.js';
   
@@ -71,10 +72,18 @@
             <p>{exercice.instructions}</p>
         </div>
   
-  
+  </section>
+
+  <section class="wrapper-comments">
         <div class="exercice-challenge">
-          <h2>Chronométrez votre exercice</h2>
           <Chronometer /> 
+          <CommentsExercice 
+          title = "title"
+          date = "date"
+          content = "content"
+          user = "user"
+          exerciceId={exerciceId}
+          /> 
         </div>
   </section>
 

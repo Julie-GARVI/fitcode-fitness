@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/teams', [UserController::class, 'list']);
 
-    Route::get('/comments', [CommentController::class, 'list']);
+    Route::get('/comments', [CommentController::class, 'list'])->name('comments.home');
 
     Route::post('/auth/register', [UserController::class, 'createUser']);
 
@@ -46,6 +46,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/categories', [CategoryController::class, 'list']);
 
     Route::get('/users/{user}/categories', [UserController::class, 'listUserCategories']);
+
 
 
 // ----------------------------------------Routes privées--------------------------------__
@@ -66,12 +67,18 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/multimedias', [MultimediaController::class, 'list']);
 
+    Route::get('exercice/{id}/comments', [CommentController::class, 'list'])->name('comments.exercice');
+
     Route::post('/exercices', [ExerciceController::class, 'create']);
 
     Route::post('/auth/logout', [UserController::class, 'logout'])->name('logout');
 
+    Route::post('/exercice/{id}/comments', [CommentController::class, 'create']);
+
     Route::put('/exercices/{id}', [ExerciceController::class, 'update']);
 
     Route::delete('/exercices/{id}', [ExerciceController::class, 'delete']);
+
+    Route::delete('/exercice/{id}/comment', [CommentController::class, 'delete']);
 
 });

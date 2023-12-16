@@ -13,14 +13,11 @@
     open = window.innerWidth <= 768 ? false : true;
   }
 
-  // Mettez à jour la variable `open` lorsque `isAuthenticated` change
   const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
 if (storedIsAuthenticated === 'true') {
   isAuthenticated.set(true);
 }
 
-
-  //
 
   window.addEventListener('resize', ShowMenu);
 

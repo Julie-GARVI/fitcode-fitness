@@ -29,7 +29,6 @@ import '@splidejs/svelte-splide/css';
 
   <h2>Vos avis</h2>
 
-
       <div class="wrapper-comment">
 
         <Splide aria-label="slider comment" options={ {

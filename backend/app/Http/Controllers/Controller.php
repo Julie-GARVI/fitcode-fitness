@@ -16,7 +16,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $this->regex = '/^[^#$%^&*\{}|<>~]+$/';
+        $this->regex = '/^[^#$%^&*\|{}<>~]+$/';
         ;
         $this->passwordRegex = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
     }

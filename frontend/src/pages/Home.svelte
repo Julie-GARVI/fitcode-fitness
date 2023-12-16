@@ -3,7 +3,7 @@
     
   import poids from "../assets/images/poids.jpg";
   import Team from "../components/Team.svelte";
-  import Comment from "../components/Comment.svelte";
+  import CommentsHome from "../components/CommentsHome.svelte";
   import endpoint from '../storage.js';
   import { link, push } from "svelte-spa-router";
   import { isAuthenticated } from "/src/storage.js";
@@ -78,7 +78,7 @@ try {
               <h2>Votre espace membre</h2>
                   <div class="img-block">
                       <!-- svelte-ignore a11y-img-redundant-alt -->
-                      <img src="{poids}" class="picture-sport" alt="Image de poids">
+                      <img src={poids} class="picture-sport" alt="Image de poids">
                   </div>
   
                       <h3>Connectez-vous à votre compte :</h3>
@@ -124,7 +124,7 @@ try {
       </section>
 
     <article class="comments-users">
-        <Comment 
+        <CommentsHome
         title = "title"
         rating = "rating"
         lastname = "lastname"

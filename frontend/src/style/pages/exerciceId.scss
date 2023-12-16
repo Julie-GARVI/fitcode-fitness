@@ -1,9 +1,7 @@
 @use "../utils/_variables.scss" as *;
 
 .container-exercice {
-padding-top: 45px;
-width: 100%;
-max-width: 800px;
+padding-top: 35px;
 margin-inline: auto;
 
   
@@ -24,7 +22,8 @@ margin-inline: auto;
 
     .media-block {
       position: relative;
-      width: 400px;
+      width: 100%;
+      max-width: 400px;
       margin: auto;
 
     
@@ -114,13 +113,32 @@ margin-inline: auto;
               width: 100%;
               text-align: center;
               background-color: $color-blue-light;
+              box-shadow: 0 0 15px 2px #c3d3e2, 0 0 5px 1px #c3d3e2;
               border-radius: 10px;
                 
                 h3 {
                   text-transform: uppercase;
                 }
+            
+              }
+                
+            }
+
+            .exercice-challenge {
+              @media (min-width: 1150px) {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                grid-column-gap: 0px;
+                grid-row-gap: 0px;
+                padding-inline: 5vw;
+                margin-bottom: 50px;
+
               }
             }
+
+          
+            
           
         
     
