@@ -48,6 +48,7 @@ public function createUser(Request $request)
 
         // Validation des données
         $validateUser = Validator::make($request->all(), [
+            'gender' => 'required',
             'lastname' => ['required', 'max:50', 'string', 'regex:' . $this->regex ],
             'firstname' => ['required', 'max:50', 'string', 'regex:' . $this->regex],
             'age' => ['required', 'min:12', 'max:90', 'integer'],

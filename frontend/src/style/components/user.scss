@@ -22,24 +22,15 @@
     
         .profil-container {
           background-color: white;
-          //width: 320px;
           padding: 20px;
           margin: auto;
           border-radius: 10px;
           font-size: 18px;
-          //box-shadow: 0 2px 5px 3px rgba(3, 25, 37, 0.120), 0 0 20px 5px rgba(4, 139, 250, 0.041);
-          //@media (min-width: 768px) and (max-width: 1300px) {
-            //width: 500px;
-          //}
-    
-          //@media (min-width: 1100px) {
-            //width: 700px;
-            //box-shadow: none;
-          //}
+  
 
         .profil-items {
             position: relative;
-            margin-top: 150px;
+            margin-top: 100px;
             display: block;
             margin-inline: auto;
             text-align: center;
@@ -55,15 +46,17 @@
               top: 0;
               left: 0;
               right: 0;
-              transform: translateY(-150px);
+              transform: translateY(-100px);
     
               .profil-picture {
-                border-radius: 50%;
                 display: block;
                 margin: auto;
-                max-width: 300px;
-                width: 80%;
+                border-radius: 50%;
                 box-shadow: 0 0 15px 2px $color-blue-light, 0 0 5px 1px $color-blue-light;
+                width: 100%;
+                max-width: 275px;
+                width: 80%;
+                max-height: 275px;
 
             }
         }

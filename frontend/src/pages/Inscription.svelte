@@ -1,7 +1,7 @@
 <script>
     window.scrollTo(0, 0);
 
-    export let lastname, firstname, age, level, email, password, category_id;
+    export let gender, lastname, firstname, age, level, email, password, category_id;
     import { push } from "svelte-spa-router";
     import poidsremove from "../assets/images/poidsremove.png";
     import endpoint from '../storage.js';
@@ -14,6 +14,9 @@
             { id: 3, name: "Aquagym" },
             { id: 4, name: "Cardio" }
         ];
+
+    const genderOptions = ['Femme', 'Homme'];
+
 //-----------------------------Création d'un utilisateur-------------------------
 async function GetUser() {
     try {
@@ -22,7 +25,7 @@ async function GetUser() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ lastname, firstname, age, level, email, password, category_id})
+            body: JSON.stringify({ gender, lastname, firstname, age, level, email, password, category_id})
         });
 
         if (!registerResponse.ok) {
@@ -48,10 +51,12 @@ async function GetUser() {
             push("/profil");
         }
     } catch (error) {
-        // Gérer l'erreur ici, par exemple, afficher un message d'erreur à l'utilisateur.
+
         console.error("Erreur lors de l'inscription :", error);
     }
 }
+
+
     </script>
 
         <section class="register-users">
@@ -78,15 +83,12 @@ async function GetUser() {
                         <span class="wrong-alert alert">Erreur, mot de passe ou email incorrect</span>
 
                         <div class="form gender">
-                            <div class="form woman">
-                                <label for="female">Femme</label>
-                                <input class="gender" id="female" type="radio" name="gender" required>
-                            </div>
-
-                            <div class="form man">                          
-                                <label for="male">Homme</label>
-                                <input class="gender" id="male" type="radio" name="gender">
-                            </div>
+                            {#each genderOptions as option (option)}
+                                <div class="wo-man">
+                                    <label for="gender">{option}</label>
+                                    <input class="{option}" id="gender" type="radio" name="gender" value="{option}" bind:group={gender}>
+                                </div> 
+                            {/each}
                         </div>
     
                         <span class="lastname alert">Erreur ! Votre nom ne doit pas contenir de caractères particuliers</span>

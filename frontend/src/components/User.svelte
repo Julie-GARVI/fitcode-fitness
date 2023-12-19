@@ -1,7 +1,8 @@
 <script>
 import Loading  from "../components/Loading.svelte";
 import endpoint from '../storage.js';
-import chat from "../assets/images/chat.jpg";
+import woman from "../assets/images/exercices.jpg";
+import man from "../assets/images/man.jpg";
 
 let member = []
 let isLoading = true;
@@ -48,7 +49,15 @@ async function getMemberData(id) {
         <div class="profil-items">
 
           <div class="profil-block">
-            <img src={chat} class="profil-picture" alt="image de baskets">
+
+            {#if member.gender === 'Femme'} 
+            <img src={woman} class="profil-picture" alt="image de baskets">
+            {/if}
+
+            {#if member.gender === 'Homme'} 
+            <img src={man} class="profil-picture" alt="image de baskets">
+            {/if}
+
           </div>
 
             <div class="profil-row1">
@@ -80,7 +89,7 @@ async function getMemberData(id) {
               <div class="profil number">
                 <div class="icon-block">
                   <i class="fa-regular fa-user fa-lg"></i>
-                  <p> N° abonné : {member.number}</p>
+                  <p> Membre : n°{member.number}</p>
                 </div>
               </div>
 
