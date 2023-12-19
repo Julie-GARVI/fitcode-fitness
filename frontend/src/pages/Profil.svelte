@@ -4,6 +4,7 @@
   import User from "../components/User.svelte"
   import basket from "../assets/images/basket.jpg";
   import { link } from "svelte-spa-router";
+  import { getIconsData } from "../reusable/getIconData.js"
   import endpoint from '../storage.js';
   import { onMount } from 'svelte';
   
@@ -12,29 +13,15 @@ export let name, category_id, time, formattedTime, instructions;
   let icons = [];
   let exercices = []
 
-
     //------------Récupération des icones--------------------------
-  async function getIconsData() {
-    try {
-      const response = await fetch(`${endpoint}/multimedias`, {
-        method: 'GET',
-        headers: {
-        'Authorization' : `Bearer ${localStorage.getItem('accessToken')}`,	
-        'Content-Type': 'application/json'
-        },
-      });
-    
-      if (response.ok) {
-      icons = await response.json(); 
-      } else {
-        console.error("Erreur lors de la récupération des données des catégories");
-      }
-    } catch (error) {
-      console.error("Une erreur s'est produite:", error);
-    }
-    
-  }
-    getIconsData();
+    onMount(async () => {
+        try {
+        icons = await getIconsData();
+        console.log(icons);
+        } catch (error) {
+        console.error("An error occurred:", error);
+        }
+    });
   
 
   //-----------------Ouvrir et fermer la modale-------------------------

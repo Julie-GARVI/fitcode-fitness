@@ -1,36 +1,23 @@
 <script>
     window.scrollTo(0, 0);
 
+    import { getIconsData } from "../reusable/getIconData.js"
+    import { onMount } from 'svelte';
     import exercices from "../assets/images/exercices.jpg";
     import Exercice from "../components/Exercice.svelte";
-    import endpoint from '../storage.js';
-    
+
     let icons = [];
-    
-    async function getIconsData() {
-      try {
-        const response = await fetch(`${endpoint}/multimedias`, {
-          method: 'GET',
-          headers: {
-          'Authorization' : `Bearer ${localStorage.getItem('accessToken')}`,	
-          'Content-Type': 'application/json'
-          },
-        });
-      
-        if (response.ok) {
-        icons = await response.json(); 
-        } else {
-          console.error("Erreur lors de la récupération des données des catégories");
+
+    onMount(async () => {
+        try {
+        icons = await getIconsData();
+        console.log(icons);
+        } catch (error) {
+        console.error("An error occurred:", error);
         }
-      } catch (error) {
-        console.error("Une erreur s'est produite:", error);
-      }
-      
-    }
-      getIconsData();
+    });
     
-    
-    </script>
+</script>
     
     <div class="wrapper-exercices">
     
@@ -93,10 +80,3 @@
             
         </section>
     </div>
-    
-    <style>
-        /* .background-exercice {
-        background: url("../assets/exercices.jpg");
-        background-size: cover;
-        } */
-    </style>

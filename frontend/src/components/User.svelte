@@ -5,6 +5,7 @@ import woman from "../assets/images/exercices.jpg";
 import man from "../assets/images/man.jpg";
 
 let member = []
+let icons = []
 let isLoading = true;
 let activeClass = '';
 
@@ -33,6 +34,9 @@ async function getMemberData(id) {
        }
      }
  getMemberData(localStorage.getItem("id"))
+
+
+
 </script>
 
 {#if isLoading}
@@ -68,6 +72,7 @@ async function getMemberData(id) {
                     <p><i class="fa-solid fa-paper-plane pink"></i> {member.email}</p>
                 </div>
             </div>
+
             
             <div class="profil-row2">
 

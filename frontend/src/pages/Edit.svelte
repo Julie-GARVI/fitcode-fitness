@@ -5,32 +5,20 @@
   let icons = [];
   let exercice = [];
   let exerciceId = '';
+  import { onMount } from 'svelte';
   import { push } from "svelte-spa-router";
+  import { getIconsData } from "../reusable/getIconData.js"
   export let name, time, instructions, category_id;
   import endpoint from '../storage.js';
- 
   
-  async function getIconsData() {
-    try {
-      const response = await fetch(`${endpoint}/multimedias`, {
-        method: 'GET',
-        headers: {
-        'Authorization' : `Bearer ${localStorage.getItem('accessToken')}`,	
-        'Content-Type': 'application/json'
-        },
-      });
-    
-      if (response.ok) {
-      icons = await response.json(); 
-      } else {
-        console.error("Erreur lors de la récupération des données des catégories");
-      }
-    } catch (error) {
-      console.error("Une erreur s'est produite:", error);
-    }
-    
-  }
-    getIconsData();
+  onMount(async () => {
+        try {
+        icons = await getIconsData();
+        console.log(icons);
+        } catch (error) {
+        console.error("An error occurred:", error);
+        }
+    });
   
     function clickCategory(id) {
     const selectCategory = document.querySelectorAll(".category-item");
