@@ -44,31 +44,46 @@ async function getMemberData(id) {
     <h2>Bienvenue sur votre espace membre</h2>
   
       <div class="profil-container">  
-        <div class="profil-block">
-          <img src={chat} class="profil-picture" alt="image de baskets">
-        </div>
   
         <div class="profil-items">
+
+          <div class="profil-block">
+            <img src={chat} class="profil-picture" alt="image de baskets">
+          </div>
 
             <div class="profil-row1">
                 <div class="profil name">
                     <h2>{member.firstname} {member.lastname}, <span class="age-profil">{member.age} ans</span></h2>
                 </div>
                 <div class="profil email">
-                    <p>{member.email}</p>
+                    <p><i class="fa-solid fa-paper-plane pink"></i> {member.email}</p>
                 </div>
             </div>
             
             <div class="profil-row2">
-                <div class="profil exercice-number">
-                    <p>5 exercices</p>
+
+              <div class="profil exercice-number">
+                <div class="icon-block">
+                  <i class="fa-solid fa-person-running fa-xl"></i>
+                  <p> 5 exercices</p>
                 </div>
-                <div class="profil level">
-                    <p>Niveau {member.level}</p>
+          
+              </div>
+
+              <div class="profil level">
+                <div class="icon-block">
+                  <i class="fa-solid fa-medal fa-lg"></i>
+                  <p>{member.level}</p>
                 </div>
-                <div class="profil number">
-                    <p>N° abonné : {member.number}</p>
+              </div>
+      
+              <div class="profil number">
+                <div class="icon-block">
+                  <i class="fa-regular fa-user fa-lg"></i>
+                  <p> N° abonné : {member.number}</p>
                 </div>
+              </div>
+
             </div>
 
         </div>

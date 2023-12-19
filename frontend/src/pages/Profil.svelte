@@ -38,7 +38,7 @@ export let name, category_id, time, formattedTime, instructions;
   
 
   //-----------------Ouvrir et fermer la modale-------------------------
-    function openModal() {
+   function openModal() {
       const openForm = document.querySelector(".form-crud");
       console.log(openForm);
       openForm.style.display = "block";

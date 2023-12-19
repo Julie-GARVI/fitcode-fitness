@@ -67,7 +67,7 @@ async function GetUser() {
                 </ul>
 
                 <img src="{poidsremove}" class="picture-sport" alt="Image de poids">
-
+                
             </div>
                
                         <form class="form-container" on:submit|preventDefault={GetUser}>
@@ -76,6 +76,18 @@ async function GetUser() {
     
                         <span class="empty-alert alert">Erreur, un champ est vide</span>
                         <span class="wrong-alert alert">Erreur, mot de passe ou email incorrect</span>
+
+                        <div class="form gender">
+                            <div class="form woman">
+                                <label for="female">Femme</label>
+                                <input class="gender" id="female" type="radio" name="gender" required>
+                            </div>
+
+                            <div class="form man">                          
+                                <label for="male">Homme</label>
+                                <input class="gender" id="male" type="radio" name="gender">
+                            </div>
+                        </div>
     
                         <span class="lastname alert">Erreur ! Votre nom ne doit pas contenir de caractères particuliers</span>
                             <div class="form lastname">

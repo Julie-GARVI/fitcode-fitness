@@ -27,6 +27,22 @@
         text-decoration: underline
     }
 
+    .gender {
+      display: flex;
+      justify-content: left;
+      flex-direction: row;
+      gap: 2em;
+      margin-block: 10px;
+      margin-left: 15px;
+    }
+
+    .woman, .man {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-direction: row-reverse;
+    }
+
     @include form;
 
     .categories {
