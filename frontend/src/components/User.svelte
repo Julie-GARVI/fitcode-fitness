@@ -55,11 +55,11 @@ async function getMemberData(id) {
           <div class="profil-block">
 
             {#if member.gender === 'Femme'} 
-            <img src={woman} class="profil-picture" alt="image de baskets">
+              <img src={woman} class="profil-picture" alt="Femme">
             {/if}
 
             {#if member.gender === 'Homme'} 
-            <img src={man} class="profil-picture" alt="image de baskets">
+              <img src={man} class="profil-picture" alt="Homme">
             {/if}
 
           </div>
