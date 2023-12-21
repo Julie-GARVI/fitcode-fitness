@@ -5,9 +5,9 @@ import woman from "../assets/images/exercices.jpg";
 import man from "../assets/images/man.jpg";
 
 let member = []
-let icons = []
 let isLoading = true;
 let activeClass = '';
+export let exercice;
 
 //----------------Récupération de l'utilisateur-----------------
 async function getMemberData(id) {
@@ -79,7 +79,7 @@ async function getMemberData(id) {
               <div class="profil exercice-number">
                 <div class="icon-block">
                   <i class="fa-solid fa-person-running fa-xl"></i>
-                  <p> 5 exercices</p>
+                  <p>{exercice} exercices</p>
                 </div>
           
               </div>
