@@ -5,9 +5,10 @@ import woman from "../assets/images/exercices.jpg";
 import man from "../assets/images/man.jpg";
 
 let member = []
-let icons = []
 let isLoading = true;
 let activeClass = '';
+export let exercice;
+let profilWrapper;
 
 //----------------Récupération de l'utilisateur-----------------
 async function getMemberData(id) {
@@ -36,14 +37,13 @@ async function getMemberData(id) {
  getMemberData(localStorage.getItem("id"))
 
 
-
 </script>
 
 {#if isLoading}
   <Loading />
   {:else}
 
-<section class={`profil-wrapper ${activeClass}`}>
+<section  bind:this={profilWrapper} class={`profil-wrapper ${activeClass}`}>
   
     <h1>Bonjour <span class="blue-title">{member.firstname}</span></h1>
     <h2>Bienvenue sur votre espace membre</h2>
@@ -55,11 +55,11 @@ async function getMemberData(id) {
           <div class="profil-block">
 
             {#if member.gender === 'Femme'} 
-              <img src={woman} class="profil-picture" alt="Femme">
+            <img src={woman} class="profil-picture" alt="femme">
             {/if}
 
             {#if member.gender === 'Homme'} 
-              <img src={man} class="profil-picture" alt="Homme">
+            <img src={man} class="profil-picture" alt="homme">
             {/if}
 
           </div>
@@ -79,7 +79,12 @@ async function getMemberData(id) {
               <div class="profil exercice-number">
                 <div class="icon-block">
                   <i class="fa-solid fa-person-running fa-xl"></i>
-                  <p> 5 exercices</p>
+
+                {#if exercice > 1}
+                  <p><span class="counter">{exercice}</span> exercices</p>
+                {:else}
+                <p><span class="counter">{exercice}</span> exercice</p>
+                {/if}
                 </div>
           
               </div>
