@@ -1,7 +1,7 @@
 <script>
   window.scrollTo(0, 0);
   
-  import Chronometer from "../components/Chronometer.svelte";
+  import Chronometer from "../lib/Chronometer.svelte";
   import basket from "../assets/images/basket.jpg";
   import endpoint from '../storage.js';
   

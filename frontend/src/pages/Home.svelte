@@ -113,24 +113,16 @@ try {
   
       <section class="team-coachs">
   
-          <Team
-          multimedia = "multimedia"
-          lastname = "lastname"
-          firstname = "firstname"
-          age = "age"
-          category = "category"
-          description = "description" />
+          <Team />
   
       </section>
 
+
+  <!-----------------------------------Comment------------------------------------------------->
     <article class="comments-users">
-        <CommentsHome
-        title = "title"
-        rating = "rating"
-        lastname = "lastname"
-        age = "age"
-        date = "date"
-        content = "content"/>
+
+        <CommentsHome />
+        
     </article>
 
   </div>

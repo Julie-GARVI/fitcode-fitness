@@ -1,6 +1,7 @@
 <script>
-    import Star from '../components/Star.svelte'
+    import Star from '../lib/Star.svelte'
     export let date, user, exerciceId;
+    import CommentsExerciceData from '../data/CommentsExerciceData.svelte';
     import endpoint from '../storage.js';
         
     let comments = [];
@@ -190,18 +191,15 @@
     <div class="comment-container" on:scroll={getCommentExerciceId}>
       {#each comments as comment}
           <div class="comments-wrapp">
-              <div class="wrapper-stars">
-                  {#each [1, 2, 3, 4, 5] as value (value)}
-                      <i class="fa-solid fa-star fa-xl" style="{value <= comment.rating ? 'color: yellow;' : 'color: #f0f0f0;'}"></i>
-                  {/each}
-              </div>
-              <div class="comments-block">
-                  <span class="comment-title">{comment.title}</span>
-                  <p>De {comment.user.firstname}, le {comment.date}</p>
-              </div>
-              <div class="comments-content">
-                  <p>{comment.content}</p>
-              </div>
+            
+            <CommentsExerciceData 
+            title={comment.title}
+            rating={comment.rating}
+            user={comment.user}
+            date={comment.date}
+            content={comment.content}
+                 />
+
               {#if comment.user.id == localStorage.getItem('id')}
               <!-- Show delete button only if the comment belongs to the logged-in user -->
               <button class="delete-btn" on:click={() => deleteComment(comment.id)}>Supprimer</button>

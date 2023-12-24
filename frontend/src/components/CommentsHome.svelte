@@ -3,7 +3,7 @@
     import endpoint from '../storage.js';
     import { Splide, SplideSlide } from '@splidejs/svelte-splide';
     // Default theme
-import '@splidejs/svelte-splide/css';
+    import '@splidejs/svelte-splide/css';
 
     let comments = [];
 

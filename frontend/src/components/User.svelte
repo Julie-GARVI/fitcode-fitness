@@ -1,8 +1,7 @@
 <script>
-import Loading  from "../components/Loading.svelte";
+import Loading  from "../lib/Loading.svelte";
 import endpoint from '../storage.js';
-import woman from "../assets/images/exercices.jpg";
-import man from "../assets/images/man.jpg";
+import UserData from '../data/UserData.svelte';
 
 let member = []
 let isLoading = true;
@@ -52,58 +51,16 @@ async function getMemberData(id) {
   
         <div class="profil-items">
 
-          <div class="profil-block">
-
-            {#if member.gender === 'Femme'} 
-            <img src={woman} class="profil-picture" alt="femme">
-            {/if}
-
-            {#if member.gender === 'Homme'} 
-            <img src={man} class="profil-picture" alt="homme">
-            {/if}
-
-          </div>
-
-            <div class="profil-row1">
-                <div class="profil name">
-                    <h2>{member.firstname} {member.lastname}, <span class="age-profil">{member.age} ans</span></h2>
-                </div>
-                <div class="profil email">
-                    <p><i class="fa-solid fa-paper-plane pink"></i> {member.email}</p>
-                </div>
-            </div>
-
-            
-            <div class="profil-row2">
-
-              <div class="profil exercice-number">
-                <div class="icon-block">
-                  <i class="fa-solid fa-person-running fa-xl"></i>
-
-                {#if exercice > 1}
-                  <p><span class="counter">{exercice}</span> exercices</p>
-                {:else}
-                <p><span class="counter">{exercice}</span> exercice</p>
-                {/if}
-                </div>
-          
-              </div>
-
-              <div class="profil level">
-                <div class="icon-block">
-                  <i class="fa-solid fa-medal fa-lg"></i>
-                  <p>{member.level}</p>
-                </div>
-              </div>
-      
-              <div class="profil number">
-                <div class="icon-block">
-                  <i class="fa-regular fa-user fa-lg"></i>
-                  <p> Membre : n°{member.number}</p>
-                </div>
-              </div>
-
-            </div>
+          <UserData 
+          gender={member.gender}
+          firstname={member.firstname}
+          lastname={member.lastname}
+          age={member.age}
+          email={member.email}
+          exercice={exercice}
+          level={member.level}
+          number={member.number}
+          />
 
         </div>
 

@@ -2,7 +2,7 @@
   window.scrollTo(0, 0);
 
   import CommentsExercice from "../components/CommentsExercice.svelte";
-  import Chronometer from "../components/Chronometer.svelte";
+  import Chronometer from "../lib/Chronometer.svelte";
   import endpoint from '../storage.js';
   
   let exerciceId;
@@ -77,11 +77,8 @@
   <section class="wrapper-comments">
         <div class="exercice-challenge">
           <Chronometer /> 
+          
           <CommentsExercice 
-          title = "title"
-          date = "date"
-          content = "content"
-          user = "user"
           exerciceId={exerciceId}
           /> 
         </div>

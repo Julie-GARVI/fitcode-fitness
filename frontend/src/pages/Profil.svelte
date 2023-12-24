@@ -2,7 +2,7 @@
   window.scrollTo(0, 0);
   
   import User from "../components/User.svelte"
-  import Modal from "../components/Modal.svelte"
+  import Modal from "../lib/Modal.svelte"
   import basket from "../assets/images/basket.jpg";
   import { link } from "svelte-spa-router";
   import endpoint from '../storage.js';
