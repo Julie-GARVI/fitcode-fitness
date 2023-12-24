@@ -3,7 +3,7 @@
 
     import { getIconsData } from "../reusable/getIconData.js"
     import { onMount } from 'svelte';
-    import exercices from "../assets/images/exercices.jpg";
+    import exercices from "../assets/images/exercices.webp";
     import Exercice from "../components/Exercice.svelte";
 
     let icons = [];

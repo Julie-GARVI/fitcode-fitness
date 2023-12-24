@@ -1,8 +1,8 @@
 <script>
   window.scrollTo(0, 0);
   
+  import ExerciceData from '../data/ExerciceData.svelte';
   import Chronometer from "../lib/Chronometer.svelte";
-  import basket from "../assets/images/basket.jpg";
   import endpoint from '../storage.js';
   
   let exerciceId;
@@ -40,42 +40,26 @@
   
 </script>
 
+<section class="container-exercice">
+
   {#if exercice !== ""}
 
-  <section class="container-exercice">
+    <ExerciceData 
+  name={exercice.name}
+  user={exercice.user.firstname}
+  category={exercice.category.name}
+  level={exercice.level}
+  time={exercice.time}
+  instructions={exercice.instructions}
+  />
 
-    <h1>{exercice.name}</h1>
+  
+    <div class="exercice-member">
+      <Chronometer /> 
+    </div>
 
-    
-        <div class="media-block">
-          <i class="fa-regular fa-circle-play"></i>
-          <img src={basket} class="shoes-picture" alt="image de baskets">
-          <div class="gradient-layer">
-            <p>Mon exercice en vidéo</p>
-          </div>
-        </div>
-     
-      <div class="container-content">
-        <h2>Lancez le programme de l'exercice <span>{exercice.name}</span></h2>
-  
-          <div class="programme-block">
-            <div class="programme-content">
-              <p>Temps :</p>
-            </div>
-            
-            <div class="programme-items">
-              <p>{exercice.time}</p>
-            </div>
-          </div>
-  
-          <div class="instructions-programme">
-            <h3>Instructions :</h3>
-            <p>{exercice.instructions}</p>
-        </div>
-  
-        <div class="exercice-member">
-          <Chronometer /> 
-        </div>
+    {/if}
+
   </section>
 
-  {/if}
+ 

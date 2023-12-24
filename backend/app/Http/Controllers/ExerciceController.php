@@ -22,7 +22,8 @@ class ExerciceController extends Controller
          //On cible l'id de l'utilisateur connecté
         $user = Auth::user();
         $userId = $user->id;
-        $exercices = Exercice::where('user_id', $userId)->findOrFail($id);
+        $exercices = Exercice::where('user_id', $userId)
+                              ->with('category', 'user')->findOrFail($id);
 
         return $exercices;
     }
@@ -35,8 +36,7 @@ class ExerciceController extends Controller
         $exercices = Exercice::with('category', 'multimedia', 'user')->findOrFail($id);
 
         return $exercices;
-    }
-
+        }
     }
 
 

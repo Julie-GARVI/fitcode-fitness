@@ -1,7 +1,6 @@
 <script>
-	export let name, serie, category, multimedia, level, time, instructions;
+	import ExercicesData from '../data/ExercicesData.svelte';
 	import endpoint from '../storage.js';
-	import { link } from "svelte-spa-router";
 
 	let allExercices = []; 
 	let exercices = []; 
@@ -99,33 +98,16 @@
 <!-- Affichage de tous les exercices à l'aide d'une boucle -->
 <div class="exercice-container">
 	{#each exercices as exercice}
-		<div class="block-exercice">
-	
-			<div class="exercice-name">
-				<h3>{exercice.name}</h3>
-			</div>
-	
-			<div class="img-block">
-				<img src="{'http://127.0.0.1:8000/exercices/' + exercice.multimedia.picture_path}" class="exercice-picture" alt="Photo de {exercice.name}">
-			</div>
+		
+	<ExercicesData 
+	name={exercice.name}
+	category={exercice.category}
+	level={exercice.level}
+	formatted_time={exercice.formatted_time}
+	instructions={exercice.instructions}
+	multimedia={exercice.multimedia.picture_path}
+	id={exercice.id}
+	/>
 
-			<div class="exercice-category">
-				<p>{exercice.category.name}</p>
-			</div>
-
-			<div class="exercice-content">
-				<span><p>{exercice.level}</p></span>
-				<p>Durée : {exercice.formatted_time}</p>
-				<div class="exercice-instruction">
-					<p>{exercice.instructions}</p>
-				</div>
-			</div>
-	
-			<div class="btn-submit">
-				<button class="btn-link" type="submit"><a use:link href="/exercice/coach/{exercice.id}">Démarrer</a></button>
-			</div>
-	
-		</div>
-	  
 	{/each}
   </div>

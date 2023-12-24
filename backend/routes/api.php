@@ -47,8 +47,6 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/users/{user}/categories', [UserController::class, 'listUserCategories']);
 
-
-
 // ----------------------------------------Routes privées--------------------------------__
 
 // Le middleware permet de rendre privé l'accès aux exercices

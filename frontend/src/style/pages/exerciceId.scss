@@ -46,8 +46,14 @@ margin-inline: auto;
         width: 100%;
         max-width: 500px;
         margin: auto;
-        border: solid black 1px;
+        border: solid rgba(0, 0, 0, .4) .1px;
+        border-radius: 10px;
         transition: transform 0.5s;
+      }
+
+      .shoes-picture {
+        border: solid rgba(0, 0, 0, .4) .1px;
+        border-radius: 10px;
       }
     
       .gradient-layer {      

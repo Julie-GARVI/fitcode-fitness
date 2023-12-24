@@ -1,7 +1,7 @@
 <script>
     export let gender, firstname, lastname, age, email, exercice, level, number;
-    import woman from "../assets/images/exercices.jpg";
-    import man from "../assets/images/man.jpg";
+    import woman from "../assets/images/exercices.webp";
+    import man from "../assets/images/man.webp";
 </script>
 
 <div class="profil-block">
