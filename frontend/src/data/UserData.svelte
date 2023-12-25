@@ -1,6 +1,6 @@
 <script>
     export let gender, firstname, lastname, age, email, exercice, level, number;
-    import woman from "../assets/images/exercices.webp";
+    import woman from "../assets/images/woman.webp";
     import man from "../assets/images/man.webp";
 </script>
 
