@@ -51,7 +51,7 @@ if (storedIsAuthenticated === 'true') {
     {/if}
 
     <div class="hamburger-block">
-      <Hamburger bind:open class="nav-menu-hamburger" />
+      <Hamburger bind:open />
     </div>
 
     <nav class="nav-menu" style="{open ? 'display: flex;' : 'display: none;'}">

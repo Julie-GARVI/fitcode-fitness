@@ -2,7 +2,7 @@
 
 import { getIconsData } from "../reusable/getIconData.js"
 import endpoint from '../storage.js';
-export let name, category_id, time, formattedTime, instructions;
+let name, category_id, time, formattedTime, instructions;
 import { onMount } from 'svelte';
 import basket from "../assets/images/basket.webp";
 

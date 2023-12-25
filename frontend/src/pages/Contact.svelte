@@ -4,7 +4,7 @@
   import map from "../assets/images/map.png";
   import endpoint from '../storage.js';
   
-  export let lastname, firstname, email, message;
+  let lastname, firstname, email, message;
   
   async function formSubmit() {
       try {

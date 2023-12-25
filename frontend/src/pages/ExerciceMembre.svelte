@@ -51,6 +51,8 @@
   level={exercice.level}
   time={exercice.time}
   instructions={exercice.instructions}
+  multimedia=""
+  id={exercice.id}
   />
 
   
