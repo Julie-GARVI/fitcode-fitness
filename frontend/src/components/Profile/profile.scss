@@ -1,0 +1,29 @@
+@use "../../style/utils/variables" as *;
+@use "../../style/utils/mixins" as *;
+
+.exercice-event {
+    display: none;
+    padding: 15px;
+    width: 400px;
+    text-align: center;
+    margin: 35px auto 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px 3px rgba(3, 25, 37, 0.120), 0 0 20px 5px rgba(4, 139, 250, 0.041);
+    
+}
+
+.line {
+    height: 1px; 
+    background-color: black;
+    width: 95%;
+    margin: auto;
+    margin: 75px auto 10px auto;
+ }
+
+.exercices-members-wrapper {
+padding-top: 25px;
+padding-inline: 1vw;
+background-color: $color-blue-light;
+    
+}    
+     

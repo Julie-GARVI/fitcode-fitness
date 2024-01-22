@@ -1,0 +1,49 @@
+@use "../../style/utils/variables" as *;
+
+.container-exercice {
+padding-top: 35px;
+margin-inline: auto;
+
+  
+    h1 {
+      font-size: 35px;
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+      font-size: 22px;
+
+      span {
+        color: $color-blue-dark;
+        font-weight: 700;
+      }
+    }
+
+            }
+
+            .exercice-challenge {
+              @media (min-width: 1150px) {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                grid-column-gap: 0px;
+                grid-row-gap: 0px;
+                padding-inline: 5vw;
+                margin-bottom: 50px;
+
+              }
+            }
+
+          
+            
+          
+        
+    
+
+
+            
+
+   
+  
+  

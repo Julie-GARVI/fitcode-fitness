@@ -1,0 +1,36 @@
+
+.teams-container {
+  gap: 2em;
+  height: 100%;
+  display: grid;
+  margin-inline: auto;
+  max-width: fit-content;
+  width: calc(100% - 10vw);
+
+      
+    i {
+      color: black;
+    }       
+}
+
+@media (min-width: 768px) {
+    .teams-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    }
+}
+          
+@media (min-width: 1300px) {
+    .teams-container {
+        display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+      padding: 0 2em; 
+          }
+
+    .teams-content {
+      width: 100%;   
+     
+      }
+    }   

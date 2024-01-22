@@ -1,0 +1,88 @@
+@use "../../style/utils/mixins" as *;
+
+.contact-form {
+  max-width: 1000px;
+  margin-inline: auto;
+
+    .wrapper-contact {
+        margin: 50px 0;
+
+        @include form;
+
+        textarea {
+          width: 100%;
+          height: 115px;
+          resize: none;
+        }
+
+        .btn-login {
+          margin-top: 10px;
+        }
+    }
+    .map-block{
+        position: relative;
+
+        &::after, 
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        &::after {   
+            background: linear-gradient(to right, white, transparent 5%);
+        }
+
+        &::before {      
+            background: linear-gradient(to left, white, transparent 5%);    
+        }
+
+            img {
+                -webkit-mask-image: linear-gradient(rgb(250, 244, 244) 10%, rgb(250, 244, 244)  95%, transparent);
+                mask-image: linear-gradient(rgb(250, 244, 244)  10%, rgb(250, 244, 244)  95%, transparent);
+                border-radius: 50%;   
+            
+            }
+
+    
+        }
+
+        @media (min-width: 768px) and (max-width: 1200px) {
+            .wrapper-contact {
+
+                .form-container {
+                  box-shadow: none;
+                  width: 400px;
+                }
+
+              } 
+          }
+
+        @media (min-width: 1200px) {
+            .wrapper-contact {
+              display: flex;
+              align-items: center;
+              gap: 70px;
+
+
+              .form-container {
+                box-shadow: none;
+                width: 400px;
+                flex: 65%;
+              }
+
+              .map-block {
+                width: 450px;
+              }
+            } 
+        }
+    }
+
+    

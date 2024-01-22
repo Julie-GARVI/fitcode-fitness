@@ -1,0 +1,44 @@
+@use "../../../style/utils/variables" as *;
+
+.profil-wrapper {
+    padding-top: 25px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 500ms ease-in;
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+        h1 {
+            text-align: center;
+            font-size: 30px;
+            .blue-title {
+            color: $color-blue-dark;
+            }
+        }
+    
+        .profil-container {
+          background-color: white;
+          padding: 20px;
+          margin: auto;
+          border-radius: 10px;
+          font-size: 18px;
+  
+
+        .profil-items {
+            position: relative;
+            margin-top: 100px;
+            display: block;
+            margin-inline: auto;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 160px 1em 0;
+            width: calc(100% - 5vw);
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px 3px rgba(3, 25, 37, 0.120) inset, 0 0 20px 5px rgba(4, 139, 250, 0.041) inset;
+        }
+      }
+    }

@@ -1,0 +1,46 @@
+.exercice-container {
+    @include exercice;
+
+    .btn-crud {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    align-items: end;
+
+        .btn-submit {
+
+        .btn-link {
+        width: 100%;
+        background-color: $color-blue-light;
+        box-shadow: 0 0 15px 2px #c3d3e2, 0 0 5px 1px #c3d3e2;
+        border-radius: 10px;
+
+            &:hover { 
+            background-color: #c3d3e2;  
+            }
+
+            a {
+              padding: 2em;
+            }
+        }
+
+        } 
+        .btn-items {
+            .btn-create {
+                cursor: pointer;
+                width: 50px;
+                height: 30px;
+                border: .5px solid rgb(0, 0, 0, .2);
+
+
+                    &:hover {
+                        background-color: $color-blue-light;
+                        }
+                    }
+
+                a {
+                    color: inherit;
+                }
+            }
+        }
+    }

@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   window.scrollTo(0, 0);
 
   import ExerciceData from '../data/ExerciceData.svelte';
@@ -65,4 +65,4 @@
     exerciceId={exerciceId}
     /> 
   </div>
-</section>
+</section> -->

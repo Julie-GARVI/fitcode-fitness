@@ -1,0 +1,46 @@
+@use "../../../style/utils/variables" as *;
+
+h2 {
+  text-decoration: underline;
+}
+
+.wrapper-comment {
+  gap: 2em;
+  margin-inline: 5vw;
+
+  .splide {
+    padding: .5em;
+
+  .splide__arrow {
+    background-color: $color-beige;
+  }
+
+  .splide__arrow:hover {
+    background-color: rgb(223, 212, 189);
+  }
+
+  .splide__track {
+    padding-block: 0.5em;
+    margin-bottom: 1.5em;
+
+    .splide__slide {
+      margin-left: .5em;
+    }
+  }
+
+    .comment-container {
+      box-sizing: border-box;
+      margin-inline: auto;
+      background-color: #f2f2f2;
+      padding: 2em;
+      box-shadow: 0 2px 5px 3px rgba(3, 25, 37, 0.120), 0 0 20px 5px rgba(3, 25, 37, 0.120);
+      width: 100%;
+      border-radius: 20px;
+      max-width: 500px;
+    }
+
+    .splide__pagination__page.is-active {
+        background-color: #e8d3a9;
+      }
+    } 
+  }
