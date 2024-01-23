@@ -2,13 +2,23 @@
     window.scrollTo(0, 0);
 
     import { onMount } from 'svelte';
+    import endpoint from "/src/storage.js";
     
     import { getIconsData } from "../../reusable/getIconData.js"
 
-    import exercices from "../../assets/images/exercices.webp";
-    //import Exercice from "../Exercice/Exercice.svelte";
+    import Filter from "./Filter/Filter.svelte";
+    import Exercices from '/src/reusable/Exercices/Exercices.svelte'
+
+    import './exercices.scss'
+
+    import background from "../../assets/images/exercices.webp";
+
+    //const dispatch = createEventDispatcher();
 
     let icons = [];
+    export let exercices = [];
+
+    let allExercices = [];
 
     onMount(async () => {
         try {
@@ -18,13 +28,66 @@
         console.error("An error occurred:", error);
         }
     });
-    
+
+        //Requête permettant la récupération des exercices des coachs
+	async function getExercicesData() {
+		try {
+//Requête API
+			const response = await fetch(`${endpoint}/exercices/coachs`, {
+				method: 'GET',
+				headers: {
+//Autorisation du token pour identifier la personne qui accède à l'éxercice
+					'Authorization' : `Bearer ${localStorage.getItem('accessToken')}`,  
+					'Content-Type': 'application/json'
+				},
+			});
+			console.log(response);
+			if (response.ok) {
+				allExercices = await response.json();
+//Utilisation d'un spread operator
+				exercices = [...allExercices]; 
+				console.log(exercices);
+			} else {
+				console.error('Erreur lors de la récupération des données de l\'équipe');
+			}
+		} catch (error) {
+			console.error('Une erreur s\'est produite:', error);
+		}
+	}
+	getExercicesData();
+
+    function handleFilterChange(event) {
+    const { filterCategory, filterLevel } = event.detail;
+    if (filterCategory !== undefined) {
+      filterCategoryExercices(filterCategory);
+    }
+    if (filterLevel !== undefined) {
+      filterLevelExercices(filterLevel);
+    }
+  }
+
+  function filterCategoryExercices(selectedCategory) {
+    if (selectedCategory === "") {
+      exercices = [...allExercices];
+    } else {
+      exercices = allExercices.filter(exercice => exercice.category_id === selectedCategory);
+    }
+  }
+
+  function filterLevelExercices(selectedLevel) {
+    if (selectedLevel === "Tous les niveaux") {
+      exercices = [...allExercices];
+    } else {
+      exercices = allExercices.filter(exercice => exercice.level === selectedLevel);
+    }
+  }
+
 </script>
     
     <div class="wrapper-exercices">
     
         <div class="background-exercice">
-            <img src="{exercices}" alt="Photo d'une adhérente">
+            <img src="{background}" alt="Photo d'une adhérente">
         </div>
     
         <section class="fitness-exercices">
@@ -68,17 +131,25 @@
                     </div> 
                 </div>   
         </section>
-    
-        <section class="exercices-list">
-    
-        <Exercice 
-        name = "name"
-        serie = "serie"
-        category = "category"
-        multimedia = "multimedia"
-        time = "time"
-        instructions = "instructions"
-        />
-            
-        </section>
+
+        <Filter 
+        on:filterCategoryChange={handleFilterChange}
+        on:filterLevelChange={handleFilterChange} />
     </div>
+
+            <!-- Affichage de tous les exercices à l'aide d'une boucle -->
+        <div class="exercice-container">
+            {#each exercices as exercice}
+                
+            <Exercices
+            name={exercice.name}
+            category={exercice.category}
+            level={exercice.level}
+            formatted_time={exercice.formatted_time}
+            instructions={exercice.instructions}
+            multimedia={exercice.multimedia.picture_path}
+            id={exercice.id}
+            />
+
+            {/each}
+        </div>
