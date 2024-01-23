@@ -1,4 +1,13 @@
 @use "../../style/utils/variables" as *;
+@use "../../style/utils/mixins" as *;
+
+.exercice-container {
+    @include exercice;
+}
+
+.--coach {
+    background-color: #fff;
+}
 
 .btn-crud {
     display: flex;

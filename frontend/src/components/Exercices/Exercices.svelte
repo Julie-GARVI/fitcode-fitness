@@ -135,10 +135,9 @@
         <Filter 
         on:filterCategoryChange={handleFilterChange}
         on:filterLevelChange={handleFilterChange} />
-    </div>
 
-            <!-- Affichage de tous les exercices à l'aide d'une boucle -->
-        <div class="exercice-container">
+          <!-- Affichage de tous les exercices à l'aide d'une boucle -->
+          <div class="exercice-container --coach">
             {#each exercices as exercice}
                 
             <Exercices
@@ -153,3 +152,6 @@
 
             {/each}
         </div>
+    </div>
+
+          
