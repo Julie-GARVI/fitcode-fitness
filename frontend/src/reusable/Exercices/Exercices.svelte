@@ -1,10 +1,11 @@
 <script>
+
     import { link } from "svelte-spa-router";
     import endpoint from '../../storage.js';
 
     import '../Exercices/exercices.scss'
 
-    import basket from "../assets/images/basket.webp";
+    import basket from "/src/assets/images/basket.webp";
 
     export let name, category, multimedia, level, formatted_time, instructions, id;
  

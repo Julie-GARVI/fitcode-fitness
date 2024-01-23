@@ -6,7 +6,7 @@
 
   import Users from "./Users/Users.svelte"
   import Modal from "./Modal/Modal.svelte"
-  import Exercice from '../../reusable/Exercice/Exercice.svelte';
+  import Exercices from '../../reusable/Exercices/Exercices.svelte';
 
   import './profile.scss'
   
@@ -53,20 +53,20 @@
   
   <section class="exercices-members-wrapper">
   
-      <h2>Mes exercices</h2>
-  
-        <div class="exercice-container">
-          {#each exercices as exercice}
-  
-          <Exercice 
-          name={exercice.name}
-          category={exercice.category}
-          level={exercice.level}
-          formatted_time={exercice.formatted_time}
-          instructions={exercice.instructions}
-          id={exercice.id}
-          />
-        
-      {/each}
-        </div>
-  </section>
+    <h2>Mes exercices</h2>
+
+      <div class="exercice-container">
+        {#each exercices as exercice}
+
+        <Exercices 
+        name={exercice.name}
+        category={exercice.category}
+        level={exercice.level}
+        formatted_time={exercice.formatted_time}
+        instructions={exercice.instructions}
+        id={exercice.id}
+        />
+      
+    {/each}
+      </div>
+</section>

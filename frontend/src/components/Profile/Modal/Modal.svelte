@@ -164,7 +164,7 @@ async function addExerciceUser() {
 <section class="modal-wrapper">
   
     <div class="exercice-crud">
-      <button class="btn-crud" aria-label="Ouvrir la modale" on:click={openModal}><i class="fa-solid fa-plus fa-xl"></i><br> Nouvel exercice</button>
+      <button class="btn-open" aria-label="Ouvrir la modale" on:click={openModal}><i class="fa-solid fa-plus fa-xl"></i><br> Nouvel exercice</button>
     </div>
   
       <form class="form-crud" on:submit|preventDefault={addExerciceUser}>

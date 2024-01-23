@@ -7,6 +7,8 @@
 
     import Comment from './Comment/Comment.svelte';
 
+    import '../Comments/comments.scss'
+
     let comments = [];
 
     async function getCommentData() {

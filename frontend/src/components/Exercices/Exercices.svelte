@@ -6,7 +6,7 @@
     import { getIconsData } from "../../reusable/getIconData.js"
 
     import exercices from "../../assets/images/exercices.webp";
-    import Exercice from "../Exercice/Exercice.svelte";
+    //import Exercice from "../Exercice/Exercice.svelte";
 
     let icons = [];
 

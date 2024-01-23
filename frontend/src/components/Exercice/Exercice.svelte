@@ -5,7 +5,7 @@
 
   import endpoint from '/src/storage.js';
   
-  import Exercice from '../../reusable/Exercice/Exercice.svelte';
+  import Exercice from '../../Exercice/Exercice.svelte';
   import Comments from "./Comments/Comments.svelte";
   import Chronometer from "../../lib/Chronometer.svelte";
 
