@@ -9,6 +9,21 @@
     background-color: #fff;
 }
 
+.button {
+    width: 75%;
+    margin-inline: auto;
+
+    .btn-link {
+      background-color: $color-beige;
+      box-shadow: 0 0 15px 2px rgba(218, 158, 124, 0.219), 0 0 5px 1px rgba(240, 191, 163, 0.519);
+        
+     &:hover { 
+      background-color: #e2d5c3;  
+        }
+    } 
+}
+               
+
 .btn-crud {
     display: flex;
     justify-content: center;
@@ -16,6 +31,11 @@
     align-items: end;
 
         .btn-submit {
+        width: 50%;
+
+           a {
+            width: 100%;
+           }
 
         .btn-link {
         width: 100%;

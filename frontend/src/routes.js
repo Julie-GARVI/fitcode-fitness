@@ -16,7 +16,6 @@ export default {
   "/profil": Profil,
   "/exercices/membre/edit/:id": Edit,
   "/exercices": Exercices,
-  // "/exercice/coach/:id": ExerciceCoach,
-  "/exercice/membre/:id": Exercice,
+  "/exercice/:id": Exercice,
     "*": NotFound,
 };

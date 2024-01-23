@@ -63,22 +63,17 @@
     </div>
 </div>
 
-{#if id >= 1 && id <= 12}
-    <div class="btn-submit">
-        <button class="btn-link" type="submit"><a use:link href="/exercice/coach/{id}">Démarrer</a></button>
-    </div>
-{:else}
 
-<div class="btn-crud">
+<div class={id > 12 ? "btn-crud" : "button"}>
     <div class="btn-submit">
-        <button class="btn-link" type="submit"><a use:link href="/exercice/membre/{id}">Démarrer</a></button>
+        <button class="btn-link" type="submit"><a use:link href="/exercice/{id}">Démarrer</a></button>
     </div>
-      
+    
+{#if id > 12}
     <div class="btn-items">
         <a href="/exercices/membre/edit/{id}" aria-label="Aller à la page exercice" use:link><button class="btn-create"id="buttonEdit"><i class="fa-solid fa-pen"></i></button></a>		 
-            <button on:click={deleteExercice(id)} class="btn-create"id="buttonDelete"><i class="fa-solid fa-trash"></i></button>
-        </div>
+        <button on:click={deleteExercice(id)} class="btn-create"id="buttonDelete"><i class="fa-solid fa-trash"></i></button>
     </div>
 {/if}
+    </div>
 </div>
-	

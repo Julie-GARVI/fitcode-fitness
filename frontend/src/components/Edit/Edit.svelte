@@ -8,6 +8,8 @@
 
   import { getIconsData } from "../../reusable/getIconData.js"
 
+  import './edit.scss'
+
   let icons = [];
   let exercice = [];
   let exerciceId = '';
