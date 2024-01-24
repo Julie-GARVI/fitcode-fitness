@@ -57,7 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/exercices/coach/{id}', [ExerciceController::class, 'show'])->name('exercice.coach');
 
-    Route::get('/exercices/member/{id}', [ExerciceController::class, 'show'])->name('exercice.member');
+    Route::get('exercices/member/{id}', [ExerciceController::class, 'show'])->name('exercice.member');
 
     Route::get('/exercices/coachs', [ExerciceController::class, 'list'])->name('exercices.coachs');
 

@@ -23,7 +23,8 @@ class ExerciceController extends Controller
         $user = Auth::user();
         $userId = $user->id;
         $exercices = Exercice::where('user_id', $userId)
-                              ->with('category', 'user')->findOrFail($id);
+                              ->with('category', 'multimedia', 'user')->findOrFail($id);
+
 
         return $exercices;
     }
@@ -126,6 +127,7 @@ class ExerciceController extends Controller
         $exercice->time = $request->input('time');
         $exercice->instructions = $request->input('instructions');
         $exercice->category_id = $request->input('category_id');
+        $exercice->multimedia_id = 9;
 
 
         $exercice->save();
