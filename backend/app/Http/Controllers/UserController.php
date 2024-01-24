@@ -106,7 +106,7 @@ public function createUser(Request $request)
 
 
 // -------------------CONNEXION UTILISATEUR--------------------------
-    public function loginUser(Request $request)
+protected function loginUsers(Request $request)
 {
     try {
         // Valide les données de l'utilisateur
@@ -148,6 +148,11 @@ public function createUser(Request $request)
                 'message' => $th->getMessage(),
             ], 500);
         }
+    }
+
+    public function loginUser(Request $request)
+    {
+        return $this->loginAllUsers($request);
     }
 
 
