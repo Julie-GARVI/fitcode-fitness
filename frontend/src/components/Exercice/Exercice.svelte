@@ -10,7 +10,11 @@
     import './exercice.scss'
     
     let exerciceId;
-    let exercice = ''; 
+    let exercice = '';
+
+    //const id = exercice.id;
+    let isCoachsPage = false;
+
     
 //Exercice d'un coach
     async function getExerciceCoach(id) {
@@ -26,6 +30,9 @@
             if (response.ok) {
                 exercice = await response.json();
                 console.log(exercice);
+                isCoachsPage = true;
+                console.log(coachsPage)
+
             } else {
                 console.error('Erreur lors de la récupération des données de l\'équipe');
             }
@@ -50,7 +57,7 @@
               console.log("exerciceId avant l'appel à getExerciceMember :", exerciceId);
               console.log("Réponse de la requête :", response);
               console.log("Données de l'exercice :", exercice);
-
+              isCoachsPage = false;
 
 
           } else {
@@ -80,20 +87,28 @@
         time={exercice.time}
         multimedia={exercice.multimedia.picture_path}
         instructions={exercice.instructions}
-        id={exercice.id} 
+        id={exercice.id}
+        isCoachsPage={exercice.id >= 1 && exercice.id <= 12}
+   
     />
 
     {/if}
 
     <section class="wrapper-comments">
-        <div class="exercice-challenge">
+
+        <div class={isCoachsPage === true ? 'exercice-challenge' : ""}>
       
           <Chronometer /> 
-            
+    
+        {#if isCoachsPage}
           <Comments
-          exerciceId={exerciceId}
-          /> 
+            exerciceId={exerciceId}
+
+          />
+        {/if}
+
         </div>
+
       </section>
 
 

@@ -148,6 +148,7 @@
             instructions={exercice.instructions}
             multimedia={exercice.multimedia.picture_path}
             id={exercice.id}
+      
             />
 
             {/each}

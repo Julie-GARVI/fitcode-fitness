@@ -1,5 +1,5 @@
 <script>
-    export let name, user, category, level, multimedia, time, instructions, id;
+   export let name, user, category, level, multimedia, time, instructions, id, isCoachsPage; 
 
     import './program.scss'
 
@@ -10,14 +10,14 @@
     <h1>{name}</h1>
     <p>Créé par <span>{user}</span>
         
-    {#if id >= 1 && id <= 12}
+    {#if isCoachsPage}
     , votre coach <span>{category}</span>
     {/if}</p>
      
     <div class="media-block">
       <i class="fa-regular fa-circle-play"></i>
 
-      {#if id >= 1 && id <= 12}
+      {#if isCoachsPage}
       <img src={`http://127.0.0.1:8000/exercices/${multimedia}`} class="exercice-picture image" alt={`Photo de ${name}`}>
       {:else}
       <img src={`http://127.0.0.1:8000/assets/${multimedia}`} class="shoes-picture" alt="baskets">
@@ -34,7 +34,7 @@
           <div class="programme-block">
             <div class="programme-content">
               <p>Catégorie :</p>
-              {#if id >= 1 && id <= 12}
+              {#if isCoachsPage}
               <p>Niveau :</p>
               {/if}
               <p>Temps :</p>  
@@ -42,7 +42,7 @@
             
             <div class="programme-items">
               <p>{category}</p>
-              {#if id >= 1 && id <= 12}
+              {#if isCoachsPage}
               <p>{level}</p>
               {/if}
               <p>{time}</p>

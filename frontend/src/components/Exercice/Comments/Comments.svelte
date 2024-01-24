@@ -7,7 +7,9 @@
     import '../Comments/comments.scss'
 
     export let date, user, exerciceId;
-        
+
+    console.log(exerciceId)
+
     let comments = [];
     let title = '';
     let content = '';
@@ -16,6 +18,7 @@
     let page = 1; 
     const commentsPerPage = 4;
     let resize = window.innerWidth <= 1150 ? true : false;
+
     
     async function getCommentExerciceId() {
             try {
