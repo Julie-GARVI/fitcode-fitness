@@ -180,9 +180,8 @@
   }
 }
     
-
-    
     </script>
+
 
 <div class="section-comments">
     <h2>Votre commentaires :</h2>
@@ -196,7 +195,7 @@
       {#each comments as comment}
           <div class="comments-wrapp">
             
-            <Comments
+            <Comment
             title={comment.title}
             rating={comment.rating}
             user={comment.user}
@@ -248,6 +247,6 @@
         </form>
     
     </div>
-    
+
 
     

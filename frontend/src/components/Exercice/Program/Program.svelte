@@ -22,12 +22,11 @@
       {:else}
       <img src={`http://127.0.0.1:8000/assets/${multimedia}`} class="shoes-picture" alt="baskets">
     {/if}
-      
-    </div>
 
       <div class="gradient-layer">
         <p>Votre exercice en vidéo</p>
       </div>
+    </div>
      
     <div class="container-content">
         <h2>Lancez le programme de l'exercice <span>{name}</span></h2>

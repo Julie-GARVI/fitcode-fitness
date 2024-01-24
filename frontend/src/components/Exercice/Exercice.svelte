@@ -4,6 +4,10 @@
     import endpoint from '../../storage.js';
 
     import Program from './Program/Program.svelte'
+    import Chronometer from './Chronometer/Chronometer.svelte';
+    import Comments from './Comments/Comments.svelte';
+
+    import './exercice.scss'
     
     let exerciceId;
     let exercice = ''; 
@@ -61,6 +65,7 @@
     exerciceId = numberId [numberId.length - 1];
         getExerciceCoach(exerciceId);
         getExerciceMember(exerciceId);
+
     
   </script>
   
@@ -79,5 +84,19 @@
     />
 
     {/if}
+
+    <section class="wrapper-comments">
+        <div class="exercice-challenge">
+      
+          <Chronometer /> 
+            
+          <Comments
+          exerciceId={exerciceId}
+          /> 
+        </div>
+      </section>
+
+
+  
   
  

@@ -1,4 +1,7 @@
 <script>
+
+  import '../Chronometer/chronometer.scss'
+
     let milliSeconds = 0;
     let timeout;
     let btn;
