@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+//-----------------------------Routes du backOffice-------------------------
 Route::get('/login', function () {
     return view('login');
 });
@@ -25,14 +27,15 @@ Route::get('/login', function () {
 Route::post('/login/admin', [AdminController::class, 'loginAdmin']);
 
 Route::middleware(['auth', 'role:Admin'])->group(function () {
+
     Route::get('exercices/admin', function () {
         //$exercices = [];
         return view('exercices');
     });
 
+    Route::get('/exercices/admin', [ExerciceController::class, 'list'])->name('exercices.admin');
 });
 
-Route::get('/exercices/admin', [ExerciceController::class, 'list'])->name('exercices.admin');
 
 
 

@@ -31,17 +31,16 @@
 
 <div class="profil-row2">
     <div class="profil exercice-number">
-      <div class="icon-block">
-        <i class="fa-solid fa-person-running fa-xl"></i>
+        <div class="icon-block">
+          <i class="fa-solid fa-person-running fa-xl"></i>
 
-      {#if exercice > 1}
-        <p><span class="counter">{exercice}</span> exercices</p>
-      {:else}
-      <p><span class="counter">{exercice}</span> exercice</p>
-      {/if}
-      </div>
-
+          {#if exercice > 1}
+              <p><span class="counter">{exercice}</span> exercices</p>
+          {:else}
+              <p><span class="counter">{exercice}</span> exercice</p>
+        {/if}
     </div>
+</div>
 
     <div class="profil level">
       <div class="icon-block">
