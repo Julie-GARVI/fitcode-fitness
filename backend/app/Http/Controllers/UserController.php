@@ -106,7 +106,7 @@ public function createUser(Request $request)
 
 
 // -------------------CONNEXION UTILISATEUR--------------------------
-protected function loginUsers(Request $request)
+protected function loginUser(Request $request)
 {
     try {
         // Valide les données de l'utilisateur
@@ -137,8 +137,6 @@ protected function loginUsers(Request $request)
                     'isAuthenticated' => 'true',
                 ], 200);
 
-                //$timestamp = time();
-                //return redirect("/profil?reload={$timestamp}");
             } else {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
@@ -149,12 +147,6 @@ protected function loginUsers(Request $request)
             ], 500);
         }
     }
-
-    public function loginUser(Request $request)
-    {
-        return $this->loginAllUsers($request);
-    }
-
 
 
 // -------------------DECONNECTION UTILISATEUR--------------------------

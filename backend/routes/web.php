@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ExerciceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,17 @@ Route::get('/login', function () {
 
 Route::post('/login/admin', [AdminController::class, 'loginAdmin']);
 
-Route::middleware('auth', 'role:Admin')->group(function () {
-    Route::get('/private', function () {
-        return 'Bonjour Admin';
+Route::middleware(['auth', 'role:Admin'])->group(function () {
+    Route::get('/admin/exercices', function () {
+        $exercices = [];
+        return view('exercices', ['exercices' => $exercices]);
     });
+
 });
+
+Route::get('/exercices/admin', [ExerciceController::class, 'list'])->name('exercices.admin');
+
+
+
+
+

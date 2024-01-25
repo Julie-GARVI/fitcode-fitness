@@ -10,13 +10,12 @@ class AdminController extends UserController
 {
     public function loginAdmin(Request $request)
     {
-        $response = $this->loginUsers($request);
+        $response = $this->loginUser($request);
 
         if ($response->getStatusCode() === 200) {
-            return redirect('/private');
+            return redirect('/admin/exercices');
         }
 
         return $response;
     }
 }
-

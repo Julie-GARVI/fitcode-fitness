@@ -3,7 +3,15 @@
     padding: 0;
     font-family: Tahoma, Luciole, sans-serif;
     box-sizing: border-box;
-  }
+
+}
+
+html {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
 
 .form-wrapper {
     text-align: center;
@@ -11,14 +19,14 @@
 
 h1 {
     font-size: 30px;
-    margin-block: 30px;
+    margin-bottom: 30px;
 }
 
 h2 {
     font-weight: bold;
     line-height: 1.4;
     font-size: 20px;
-    margin-block: 25px;
+    margin-bottom: 25px;
 }
 
 .form-block {
