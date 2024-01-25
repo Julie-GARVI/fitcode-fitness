@@ -25,9 +25,9 @@ Route::get('/login', function () {
 Route::post('/login/admin', [AdminController::class, 'loginAdmin']);
 
 Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('/admin/exercices', function () {
-        $exercices = [];
-        return view('exercices', ['exercices' => $exercices]);
+    Route::get('exercices/admin', function () {
+        //$exercices = [];
+        return view('exercices');
     });
 
 });

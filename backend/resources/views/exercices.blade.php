@@ -9,12 +9,10 @@
 
 <body>
 
-<h1>Test</h1>
-
-    @foreach ($exercices as $exercice)
+@foreach ($exercices as $exercice)
         {{-- Affichez les détails de chaque exercice --}}
         <h1>{{ $exercice->name }}</h1>
-    @endforeach
-    
+@endforeach
+
 </body>
 </html>

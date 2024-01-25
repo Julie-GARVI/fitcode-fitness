@@ -72,13 +72,11 @@ class ExerciceController extends Controller
 
 //-----------------------EXERCICES DES ADMINS------------------------
 
-if ($request->routeIs('exercices.admin')) {
-    $exercices = Exercice::all(); // Ou toute autre logique pour récupérer les exercices des admins
+    if ($request->routeIs('exercices.admin')) {
+        $exercices = Exercice::where('user_id', $userId)->get();
 
-    foreach ($exercices as $exercice) {
         return view('exercices', ['exercices' => $exercices]);
     }
-}
 
 // --------------------EXERCICE DES COACHS-------------------------
        //S'il s'agit des exercices des coachs
