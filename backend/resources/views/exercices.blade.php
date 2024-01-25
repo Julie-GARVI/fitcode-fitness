@@ -13,13 +13,13 @@
     <div class="profil-block">
         <img src="/assets/basket.webp" class="profil-picture" alt="">
     </div>
-
+    @foreach ($exercices as $exercice)
     <div class="profil-row1">
         <div class="profil name">
-            <h2>Julie Garvi, <span class="age-profil">25 ans</span></h2>
+            <h2>{{ $exercice->user->firstname }}  {{ $exercice->user->lastname }}, <span class="age-profil">{{ $exercice->user->age }} ans</span></h2>
         </div>
         <div class="profil email">
-            <p><i class="fa-solid fa-paper-plane pink"></i> julie.garvi@gmail.com</p>
+            <p><i class="fa-solid fa-paper-plane pink"></i>{{ $exercice->user->email}}</p>
         </div>
     </div>
 
@@ -40,7 +40,7 @@
 
 
 <!--------------------------------------EXERCICES------------------------------------------------------>
-@foreach ($exercices as $exercice)
+
 <div class="block-exercice">
     <div class="exercice-name">
         <h3>{{ $exercice->name }}</h3>

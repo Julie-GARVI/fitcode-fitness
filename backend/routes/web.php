@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ExerciceController;
+use App\Http\Controllers\AdminExerciceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
         return view('exercices');
     });
 
-    Route::get('/exercices/admin', [ExerciceController::class, 'list'])->name('exercices.admin');
+    Route::get('/exercices/admin', [AdminExerciceController::class, 'listExercices']);
 });
 
 

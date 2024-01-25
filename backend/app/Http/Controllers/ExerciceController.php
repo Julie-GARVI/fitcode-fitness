@@ -65,6 +65,7 @@ class ExerciceController extends Controller
             //associé l'exercie à sa catégorie et son image
             $exercice->category;
             $exercice->multimedia;
+
         }
 
         return $exercices;
@@ -72,11 +73,11 @@ class ExerciceController extends Controller
 
 //-----------------------EXERCICES DES ADMINS------------------------
 
-    if ($request->routeIs('exercices.admin')) {
-        $exercices = Exercice::where('user_id', $userId)->get();
+    //if ($request->routeIs('exercices.admin')) {
+      //  $exercices = Exercice::where('user_id', $userId)->get();
 
-        return view('exercices', ['exercices' => $exercices]);
-    }
+        //return view('exercices', ['exercices' => $exercices]);
+    //}
 
 // --------------------EXERCICE DES COACHS-------------------------
        //S'il s'agit des exercices des coachs
