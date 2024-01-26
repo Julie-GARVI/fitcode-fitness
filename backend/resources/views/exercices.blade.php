@@ -13,13 +13,15 @@
     <div class="profil-block">
         <img src="/assets/basket.webp" class="profil-picture" alt="">
     </div>
-    @foreach ($exercices as $exercice)
+
+    @php $firstExercice = $exercices->first(); @endphp
+
     <div class="profil-row1">
         <div class="profil name">
-            <h2>{{ $exercice->user->firstname }}  {{ $exercice->user->lastname }}, <span class="age-profil">{{ $exercice->user->age }} ans</span></h2>
+            <h2>{{ $firstExercice->user->firstname }}  {{ $firstExercice->user->lastname }}, <span class="age-profil">{{ $firstExercice->user->age }} ans</span></h2>
         </div>
         <div class="profil email">
-            <p><i class="fa-solid fa-paper-plane pink"></i>{{ $exercice->user->email}}</p>
+            <p><i class="fa-solid fa-paper-plane pink"></i>{{ $firstExercice->user->email}}</p>
         </div>
     </div>
 
@@ -41,6 +43,7 @@
 
 <!--------------------------------------EXERCICES------------------------------------------------------>
 
+@foreach ($exercices as $exercice)
 <div class="block-exercice">
     <div class="exercice-name">
         <h3>{{ $exercice->name }}</h3>

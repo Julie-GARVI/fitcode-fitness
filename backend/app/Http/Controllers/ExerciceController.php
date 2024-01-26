@@ -42,42 +42,43 @@ class ExerciceController extends Controller
 
 
 
-// --------------------EXERCICE DE TOUS LES UTILISATEURS------------------------
-    protected function list(Request $request)
+//Fonction a hérité dans un autre controller pour la réutiliser
+    protected function listAllExercices(Request $request)
     {
+        // On cible l'id de l'utilisateur connecté
+    $user = Auth::user();
+    $userId = $user->id;
 
-
-     //On cible l'id de l'utilisateur connecté
-     $user = Auth::user();
-     $userId = $user->id;
-
-// --------------------EXERCICE DES MEMBRES-------------------------
-     if ($request->routeIs('exercices.members')) {
+    // --------------------EXERCICE DES MEMBRES-------------------------
         $exercices = Exercice::where('user_id', $userId)->get();
 
         foreach ($exercices as $exercice) {
             $timeValue = $exercice->time;
-            //Scinde une chaîne de caractères en segments
+            // Scinde une chaîne de caractères en segments
             list($hours, $minutes, $seconds) = explode(':', $timeValue);
-            //retourne une chaine formatée
+            // Retourne une chaine formatée
             $formattedTime = sprintf('%d h, %d mins et %d s', $hours, $minutes, $seconds);
             $exercice->formatted_time = $formattedTime;
-            //associé l'exercie à sa catégorie et son image
+            // Associé l'exercice à sa catégorie et son image
             $exercice->category;
             $exercice->multimedia;
-
+            $exercice->user;
         }
 
         return $exercices;
-    }
+}
 
-//-----------------------EXERCICES DES ADMINS------------------------
 
-    //if ($request->routeIs('exercices.admin')) {
-      //  $exercices = Exercice::where('user_id', $userId)->get();
+// --------------------EXERCICE DE TOUS LES UTILISATEURS------------------------
+    public function list(Request $request)
+    {
+// --------------------EXERCICE DES MEMBRES-------------------------
+            // --------------------EXERCICE DES MEMBRES-------------------------
+        if ($request->routeIs('exercices.members')) {
 
-        //return view('exercices', ['exercices' => $exercices]);
-    //}
+            return $this->listAllExercices($request);
+        }
+
 
 // --------------------EXERCICE DES COACHS-------------------------
        //S'il s'agit des exercices des coachs
@@ -106,7 +107,6 @@ class ExerciceController extends Controller
                 return $exercices;
         }
     }
-
 
 
 // --------------------CREATION DES EXERCICES-------------------------
