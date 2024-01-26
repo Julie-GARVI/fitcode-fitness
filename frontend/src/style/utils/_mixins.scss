@@ -164,14 +164,15 @@
     }
 
     .exercice-content {
-      span {
-        text-transform: uppercase;
-        color: rgb(78, 78, 78);
-      }
       max-height: 100%;
       margin-bottom: auto;
       text-align: center;
 
+      span {
+        text-transform: uppercase;
+        color: rgb(78, 78, 78);
+      }
+    
       .exercice-instruction {
         p {
           height: 100px;

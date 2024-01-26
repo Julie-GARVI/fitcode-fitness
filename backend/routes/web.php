@@ -33,7 +33,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
         return view('exercices');
     });
 
-    Route::get('/exercices/admin', [AdminExerciceController::class, 'listExercices']);
+    Route::get('/exercices/admin', [AdminExerciceController::class, 'list']);
 });
 
 

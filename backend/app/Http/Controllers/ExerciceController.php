@@ -62,7 +62,6 @@ class ExerciceController extends Controller
             // Associé l'exercice à sa catégorie et son image
             $exercice->category;
             $exercice->multimedia;
-            $exercice->user;
         }
 
         return $exercices;
