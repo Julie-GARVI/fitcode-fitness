@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::post('/login/admin', [AdminController::class, 'loginAdmin']);
 
+
 Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::get('exercices/admin', function () {
@@ -29,9 +30,12 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
         return view('exercices');
     });
 
+    Route::get('/exercices/admin/add', function () {
+        return view('exercices-add');
+    });
+
     Route::get('/exercices/admin', [AdminExerciceController::class, 'list']);
 
-    Route::get('/exercices/admin/add', [AdminExerciceController::class, 'list']);
 });
 
 

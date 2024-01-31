@@ -1,0 +1,54 @@
+.modal-wrapper {
+    display: block;
+    margin-inline: auto;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.form-crud {
+    border-radius: 10px;
+    padding: 26px;
+}
+
+label {
+    margin-bottom: .4em;
+    font-size: 17px;
+  }
+
+.value {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 15px;
+}
+
+input {
+    height: 40px;
+  }
+
+textarea {
+    resize: none;
+    height: 150px;
+}
+
+.btn-block {
+    text-align: center;
+}
+
+.btn-submit {
+    border-radius: 10px;
+    background-color: rgb(165 188 228 / 32%);
+    box-shadow: 0 0 15px 2px #c3d3e2, 0 0 5px 1px #c3d3e2;
+    width: 100%;
+    max-width: 300px;
+    height: 32px;
+    margin-top: 15px;
+    font-weight: 800;
+    border: inherit;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #c3d3e2;
+}
+
+
