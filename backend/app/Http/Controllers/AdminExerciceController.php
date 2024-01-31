@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\ExerciceController;
 use Illuminate\Http\Request;
-use App\Models\Exercice;
-use Illuminate\Support\Facades\Auth;
 
 
 class AdminExerciceController extends ExerciceController

@@ -46,7 +46,15 @@
 </div>
 
 
-<!--------------------------------------EXERCICES------------------------------------------------------>
+<!--------------------------------NOUVEL EXERCICE--------------------------------------------------------->
+
+<div class="exercice-crud">
+    <a href="/exercices/admin/add" class="link-open" aria-label="Ajouter un exercice">
+    <i class="fa-solid fa-plus fa-xl"></i><br> Nouvel exercice
+    </a>
+</div>
+
+<!-------------------------------LISTE DES EXERCICES------------------------------------------------------>
 
 <div class="wrapper-admins-exercices">
     <h2>Exercices de {{ $firstExercice->category->name}}</h2>
@@ -60,7 +68,7 @@
                 </div>
 
                 <div class="img-block">
-                    <img src="/assets/basket.webp" class="exercice-picture" alt="">
+                    <img src="{{ asset('exercices/' . $exercice->multimedia->picture_path) }}" class="exercice-picture" alt="">
                 </div>
 
                 <div class="exercice-content">

@@ -14,13 +14,9 @@ use App\Http\Controllers\AdminExerciceController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
-
 
 //-----------------------------Routes du backOffice-------------------------
-Route::get('/login', function () {
+Route::get('/', function () {
     return view('login');
 });
 
@@ -34,6 +30,8 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     });
 
     Route::get('/exercices/admin', [AdminExerciceController::class, 'list']);
+
+    Route::get('/exercices/admin/add', [AdminExerciceController::class, 'list']);
 });
 
 

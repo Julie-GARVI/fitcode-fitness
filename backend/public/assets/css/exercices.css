@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('../../font/Lato-Regular.ttf') format('truetype');
+  }
+
+  *{
+    margin: 0;
+    padding: 0;
+
+    font-family:'Lato', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+
+}
+
 /* -------------------------------------PROFIL-------------------------------------- */
 h1 {
     text-align: center;
@@ -107,6 +121,32 @@ h1 {
 
 .icon-block > p {
     font-size: 20px;
+}
+
+/* --------------------------------------NOUVEL EXERCICE--------------------------------- */
+
+.exercice-crud {
+    display: block;
+    margin: 30px auto;
+}
+
+.link-open {
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    display: block;
+    margin-inline: auto;
+    background-color: rgb(165 188 228 / 32%);
+    border-radius: 5px;
+    border: .1px solid rgba(0, 0, 0, .4);
+    cursor: pointer;
+    font-weight: 600;
+    width: 200px;
+    padding: 10px;
+}
+
+.fa-xl{
+    margin-bottom: 1em;
 }
 
 /* --------------------------------------EXERCICES-------------------------------------- */
