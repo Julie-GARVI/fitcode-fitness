@@ -135,15 +135,11 @@ async function GetUser() {
                                     {/each}
                             </div>
                                 
-                            <select name="niveau" aria-label="Sélectionner votre niveau" bind:value={level}>
+                            <select name="level" aria-label="Sélectionner votre niveau" bind:value={level}>
                                 <option value="" disabled selected>Votre niveau</option>
                                 <option aria-label="niveau débutant" value="débutant">Débutant</option>
-    
-                                <option aria-label="niveau intermédiaire" value="intermédiaire"
-                                >Intermédiaire</option>
-    
-                                <option aria-label="niveau avancé" value="avancé"
-                                >Avancé</option>
+                                <option aria-label="niveau intermédiaire" value="intermédiaire">Intermédiaire</option>
+                                <option aria-label="niveau avancé" value="avancé">Avancé</option>
                             </select>
                         </div>
     

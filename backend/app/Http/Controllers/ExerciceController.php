@@ -29,7 +29,6 @@ class ExerciceController extends Controller
         return $exercices;
     }
 
-
 // --------------------EXERCICE D'UN COACH-------------------------
     // Ajouter cette requette dans la fonction show
     if ($request->routeIs('exercice.coach')) {
@@ -37,8 +36,8 @@ class ExerciceController extends Controller
         $exercices = Exercice::with('category', 'multimedia', 'user')->findOrFail($id);
 
         return $exercices;
-        }
     }
+}
 
 
 //--------------FONCTION AVEC HERITAGE-------------------------
@@ -119,8 +118,9 @@ class ExerciceController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'regex:' . $this->regex],
             'time' => 'required',
+            'level' => 'sometimes',
             'instructions' => ['required', 'regex:' . $this->regex],
-            'category_id' => 'required'
+            'category_id' => 'sometimes',
         ]);
 
 
@@ -134,11 +134,19 @@ class ExerciceController extends Controller
         $exercice->name = $request->input('name');
         $exercice->time = $request->input('time');
         $exercice->instructions = $request->input('instructions');
+
+    if ($userId > 4) {
         $exercice->category_id = $request->input('category_id');
-        $exercice->multimedia_id = $request->input('multimedia_id');
+        }
+
+    else {
+        $exercice->category_id = $user->category_id;
+        $exercice->level =  $request->input('level');
+        $exercice->multimedia_id =  $request->input('multimedia_id');
+    }
 
         if ($exercice->multimedia_id === null) {
-            $exercice->multimedia_id = 9;
+           $exercice->multimedia_id = 9;
         }
 
         $exercice->save();

@@ -20,26 +20,43 @@
         <form class="form-crud" method="POST" action="{{ url('/exercices/add') }}">
         @csrf
 
-            <div class="value categories">
-            <input type="hidden" name="category_id" value=2>
-            </div>
+        @php
+            $user_id = Auth::user()->id;
 
-            <div class="value multimedia">
-            <input type="hidden" name="multimedia_id" value=5>
-            </div>
+            $multimedia_id = [
+                1 => 5,
+                2 => 6,
+                3 => 7,
+                4 => 8,
+            ];
+
+            $user_multimedia_id = isset($multimedia_id[$user_id]) ? $multimedia_id[$user_id] : null;
+        @endphp
+
+            <input type="hidden" name="multimedia_id" value="{{ $user_multimedia_id }}">
 
             <div class="value name">
                 <label for="name">Nom de l'exercice :</label>
-                <input type="text" id="name" name="name" class="name create" placeholder="Développé militaire" bind:value={name}>
+                <input type="text" id="name" name="name" class="name create" placeholder="Développé militaire">
             </div>
+
             <div class="value time">
                 <label for="time">Durée de l'exercice (heure:minutes:secondes) :</label>
-                <input type="time" id="time" class="time create" name="time" pattern="[0-5][0-9]:[0-5][0-9]" placeholder="HH:MM:SS" step='1' bind:value={time}>
+                <input type="time" id="time" class="time create" name="time" pattern="[0-5][0-9]:[0-5][0-9]" placeholder="HH:MM:SS" step='1'>
+            </div>
+
+            <div class="value level">
+                <select name="level">
+                    <option disabled selected>Niveau de l'exercice</option>
+                    <option aria-label="niveau débutant" value="débutant">Débutant</option>
+                    <option aria-label="niveau intermédiaire" value="intermédiaire">Intermédiaire</option>
+                    <option aria-label="niveau avancé" value="avancé">Avancé</option>
+                </select>
             </div>
 
             <div class="value instructions">
                 <label for="instructions">Instructions :</label>
-                <textarea class="instructions create" id="instructions" name="instructions" placeholder="Soulever la barre des hanches aux épaules..." bind:value={instructions}></textarea>
+                <textarea class="instructions create" id="instructions" name="instructions" placeholder="Soulever la barre des hanches aux épaules..." ></textarea>
             </div>
 
             <div class="btn-block">
@@ -50,4 +67,3 @@
 </main>
 </body>
 </html>
-

@@ -23,7 +23,7 @@
             </div>
             <div class="profil-row1">
                 <div class="profil name">
-                    <h2>{{$firstExercice->user->firstname }}  {{ $firstExercice->user->lastname }}, <span class="age-profil">{{ $firstExercice->user->age }} ans</span></h2>
+                    <h2>{{$firstExercice->user->firstname}}  {{ $firstExercice->user->lastname }}, <span class="age-profil">{{ $firstExercice->user->age }} ans</span></h2>
                 </div>
                 <div class="profil email">
                     <p><i class="fa-solid fa-paper-plane pink"></i>{{ $firstExercice->user->email}}</p>

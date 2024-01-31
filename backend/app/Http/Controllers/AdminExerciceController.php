@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\ExerciceController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Models\Category;
 
 
 class AdminExerciceController extends ExerciceController
 {
-    public function list(Request $request)
+
+    public function listExercices(Request $request)
         {
             $exercices = $this->listAllExercices($request);
 
@@ -23,12 +22,15 @@ class AdminExerciceController extends ExerciceController
             return view('exercices', ['exercices' => $exercices]);
         }
 
-        public function createl(Request $request)
-        {
-            $exercice = $this->create($request);
+        protected function createExercices(Request $request)
+    {
 
-            return redirect('exercices/admin');
+        $exercice = $this->create($request);
 
-            return $exercice;
-        }
+        return redirect('exercices/admin');
+
+        return $exercice;
+
     }
+}
+

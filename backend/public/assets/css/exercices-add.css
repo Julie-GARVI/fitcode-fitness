@@ -21,9 +21,9 @@ label {
     margin: 20px 15px;
 }
 
-input {
+input, select {
     height: 40px;
-  }
+}
 
 textarea {
     resize: none;
@@ -50,5 +50,3 @@ textarea {
 .btn-submit:hover {
     background-color: #c3d3e2;
 }
-
-
