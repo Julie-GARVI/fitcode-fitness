@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-// La méthode list récupère la base de données categories
     public function list()
     {
         $categories = Category::all();

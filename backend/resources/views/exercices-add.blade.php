@@ -17,7 +17,17 @@
 
 <main class="new-exercice">
     <section class="modal-wrapper">
-        <form class="form-crud">
+        <form class="form-crud" method="POST" action="{{ url('/exercices/add') }}">
+        @csrf
+
+            <div class="value categories">
+            <input type="hidden" name="category_id" value=2>
+            </div>
+
+            <div class="value multimedia">
+            <input type="hidden" name="multimedia_id" value=5>
+            </div>
+
             <div class="value name">
                 <label for="name">Nom de l'exercice :</label>
                 <input type="text" id="name" name="name" class="name create" placeholder="Développé militaire" bind:value={name}>

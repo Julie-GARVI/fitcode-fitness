@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminExerciceController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +25,7 @@ Route::post('/login/admin', [AdminController::class, 'loginAdmin']);
 Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::get('exercices/admin', function () {
-        //$exercices = [];
+
         return view('exercices');
     });
 
@@ -36,7 +35,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::get('/exercices/admin', [AdminExerciceController::class, 'list']);
 
+    Route::post('/exercices/add', [AdminExerciceController::class, 'createl']);
+
 });
+
 
 
 

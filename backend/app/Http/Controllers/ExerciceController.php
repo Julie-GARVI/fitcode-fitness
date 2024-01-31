@@ -41,8 +41,8 @@ class ExerciceController extends Controller
     }
 
 
-
-//Fonction a hérité dans un autre controller pour la réutiliser
+//--------------FONCTION AVEC HERITAGE-------------------------
+//------------Récupération des exercices des coachs----------------------
     protected function listAllExercices(Request $request)
     {
         // On cible l'id de l'utilisateur connecté
@@ -66,6 +66,7 @@ class ExerciceController extends Controller
 
         return $exercices;
 }
+
 
 
 // --------------------EXERCICE DE TOUS LES UTILISATEURS------------------------
@@ -109,7 +110,7 @@ class ExerciceController extends Controller
 
 
 // --------------------CREATION DES EXERCICES-------------------------
-    public function create(Request $request)
+    protected function create(Request $request)
 {
     $user = Auth::user();
     $userId = $user->id;
@@ -128,15 +129,17 @@ class ExerciceController extends Controller
         return response()->json(['errors' => $error->errors()], 400);
     }
 
-
         $exercice = new Exercice();
         $exercice->user_id = $userId;
         $exercice->name = $request->input('name');
         $exercice->time = $request->input('time');
         $exercice->instructions = $request->input('instructions');
         $exercice->category_id = $request->input('category_id');
-        $exercice->multimedia_id = 9;
+        $exercice->multimedia_id = $request->input('multimedia_id');
 
+        if ($exercice->multimedia_id === null) {
+            $exercice->multimedia_id = 9;
+        }
 
         $exercice->save();
 
