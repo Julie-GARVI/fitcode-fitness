@@ -11,26 +11,34 @@
  
     //-----------------Supprimer un exercice------------------------ 
     async function deleteExercice(id) {
-  
-  try {
-      const dataresponse = await fetch(`${endpoint}/exercices/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json'
-      },
-    });
-    const message = await dataresponse.json();
-    console.log(message)
+        try {
+            const dataresponse = await fetch(`${endpoint}/exercices/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                'Content-Type': 'application/json'
+            },
+            });
 
-    const exerciceDelete = document.querySelector('#card-'+id);
-    console.log(exerciceDelete)
-    exerciceDelete.remove();
+            const message = await dataresponse.json();
+            console.log(message);
 
-    } catch (error) {
-    console.error('Une erreur s\'est produite:', error);
-  }
-}
+            if (dataresponse.ok) {
+            const confirmDelete = confirm('Voulez-vous vraiment supprimer cet exercice ?');
+
+            if (confirmDelete) {
+                const exerciceDelete = document.querySelector('#card-' + id);
+                console.log(exerciceDelete);
+                exerciceDelete.remove();
+            }
+            } else {
+            console.error('La suppression de l\'exercice a échoué.');
+            }
+
+        } catch (error) {
+            console.error('Une erreur s\'est produite:', error);
+        }
+    }
   
 </script>
 
