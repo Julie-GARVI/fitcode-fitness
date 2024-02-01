@@ -37,12 +37,14 @@
                         <p><span class="counter">3</span> exercices</p>
                     </div>
                 </div>
+
                 <div class="item category">
                     <div class="icon-block">
                         <i class="fa-solid fa-medal fa-lg"></i>
-                        <p>{{ $firstExercice->category->name}}</p>
+                        <p id="category">{{ $firstExercice->category->name}}</p>
                     </div>
                 </div>
+            </div>
         </div>
     </section>
 
@@ -83,8 +85,15 @@
                     <div class="exercice-instruction">
                             <p>{{ $exercice->instructions }}</p>
                     </div>
+
+                    <div class="btn-items">
+                        <a href="/exercices/membre/edit/{id}" aria-label="Aller à la page exercice" use:link><button class="btn-create"id="buttonEdit"><i class="fa-solid fa-pen"></i></button></a>
+                        <button on:click={deleteExercice(id)} class="btn-create"id="buttonDelete"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+
                 </div>
             @endforeach
+
     </section>
 </main>
 </body>
