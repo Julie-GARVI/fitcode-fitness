@@ -203,9 +203,10 @@ class ExerciceController extends Controller
 
 
 // --------------------SUPRESSION DES ECERCICES-------------------------
-    public function delete($id)
+    protected function delete($id)
     {
         $exercice = Exercice::find($id);
+
         $exercice->delete();
 
         return response()->json(['message' => 'Exercice deleted']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\ExerciceController;
 use Illuminate\Http\Request;
+use App\Models\Exercice;
 
 
 class AdminExerciceController extends ExerciceController
@@ -22,15 +23,24 @@ class AdminExerciceController extends ExerciceController
             return view('exercices', ['exercices' => $exercices]);
         }
 
-        protected function createExercices(Request $request)
-    {
 
+    public function createExercices(Request $request)
+    {
         $exercice = $this->create($request);
 
         return redirect('exercices/admin');
 
         return $exercice;
+    }
 
+
+    protected function deleteExercice($id)
+    {
+        $exercice = Exercice::find($id);
+
+        $exercice->delete();
+
+        return response()->json(['message' => 'Exercice deleted']);
     }
 }
 

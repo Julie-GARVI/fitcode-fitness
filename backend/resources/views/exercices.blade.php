@@ -87,9 +87,37 @@
                     </div>
 
                     <div class="btn-items">
-                        <a href="/exercices/membre/edit/{id}" aria-label="Aller à la page exercice" use:link><button class="btn-create"id="buttonEdit"><i class="fa-solid fa-pen"></i></button></a>
-                        <button on:click={deleteExercice(id)} class="btn-create"id="buttonDelete"><i class="fa-solid fa-trash"></i></button>
+                        <a href="" aria-label="Aller à la page exercice" use:link>
+                            <button class="btn-create" id="buttonEdit">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </a>
+                        <meta name="base-url" content="{{ url('/') }}">
+                        <button type="button" class="btn-create" id="buttonDelete" data-id="{{ $exercice->id }}" onclick="deleteExercice('{{ $exercice->id }}')">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
                     </div>
+
+                    <script>
+                    function deleteExercice(exerciceId) {
+                        if (confirm('Voulez-vous vraiment supprimer cet exercice ?')) {
+                            fetch('/exercices/' + exerciceId, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                },
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Redirigez ou effectuez d'autres actions après la suppression réussie
+                                window.location.reload();
+                            })
+                            .catch(error => {
+                                console.error('Erreur:', error);
+                            });
+                        }
+                    }
+                </script>
 
                 </div>
             @endforeach

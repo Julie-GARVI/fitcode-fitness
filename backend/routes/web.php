@@ -37,6 +37,8 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::post('/exercices/add', [AdminExerciceController::class, 'createExercices']);
 
+    Route::delete('/exercices/{id}', [AdminExerciceController::class, 'deleteExercice']);
+
 });
 
 
