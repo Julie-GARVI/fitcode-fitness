@@ -145,6 +145,10 @@ h1 {
     padding: 10px;
 }
 
+.link-open:hover {
+    background-color: rgba(159, 182, 223, 0.499);;
+}
+
 .fa-xl{
     margin-bottom: 1em;
 }

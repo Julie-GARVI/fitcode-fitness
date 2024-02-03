@@ -161,6 +161,9 @@ class ExerciceController extends Controller
 {
     try {
 
+    $user = Auth::user();
+    $userId = $user->id;
+
     $validator = Validator::make($request->all(), [
         'name' => ['sometimes', 'regex:' . $this->regex ],
         'time' => ['sometimes'],
@@ -176,6 +179,7 @@ class ExerciceController extends Controller
         'name' => ['sometimes'],
         'time' => ['sometimes'],
         'instructions' => ['sometimes'],
+        'level' => ['sometimes'],
         'category_id' => ['sometimes'],
     ]);
 
@@ -189,7 +193,12 @@ class ExerciceController extends Controller
         $exercice->name = $request->input('name');
         $exercice->time = $request->input('time');
         $exercice->instructions = $request->input('instructions');
+
+        if ($userId > 4) {
         $exercice->category_id = $request->input('category_id');
+        } else {
+        $exercice->level = $request->input('level');
+        }
         $exercice->save();
 
         return $exercice;

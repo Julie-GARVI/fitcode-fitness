@@ -15,7 +15,7 @@
 
 <main class="new-exercice">
             <section class="modal-wrapper">
-            <form class="form-crud" method="POST">
+            <form class="form-crud" method="POST" action="{{ url('/exercices/edit/' . $exercice->id) }}">
             @csrf
             @method('PUT')
 
@@ -23,6 +23,12 @@
                 <label for="name">Nom de l'exercice :</label>
                 <input type="text" id="name" name="name" class="name create" placeholder="Développé militaire" value="{{ $exercice->name }}">
             </div>
+
+            <div class="value time">
+                <label for="time">Durée de l'exercice (heure:minutes:secondes) :</label>
+                <input type="time" id="time" class="time create" name="time" pattern="[0-5][0-9]:[0-5][0-9]" placeholder="HH:MM:SS" step='1' value="{{ $exercice->time }}">
+            </div>
+
             <div class="value level">
                 <select name="level">
                     <option disabled selected>{{ $exercice->level }}</option>
