@@ -10,8 +10,6 @@
     <title>Nouvel exercice</title>
     <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/exercices-add.css">
-    <script type="module" crossorigin src="/assets/index-643029e4.js"></script>
-    <link rel="stylesheet" href="/assets/index-7d46831a.css">
   </head>
   <body>
 

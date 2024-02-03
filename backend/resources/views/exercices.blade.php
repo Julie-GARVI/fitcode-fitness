@@ -34,7 +34,7 @@
                 <div class="item number">
                     <div class="icon-block">
                         <i class="fa-solid fa-person-running fa-xl"></i>
-                        <p><span class="counter">3</span> exercices</p>
+                        <p><span class="counter">{{ count($exercices) }}</span> exercices</p>
                     </div>
                 </div>
 
@@ -87,9 +87,8 @@
                     </div>
 
                     <div class="btn-items">
-                        <a href="" aria-label="Aller à la page exercice" use:link>
+                        <a href="/exercices/admin/edit/{{ $exercice->id }}" aria-label="Aller à la page modifier un exercice" use:link>
                             <button class="btn-create" id="buttonEdit">
-                                <a href="/exercices/admin/edit">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                         </a>
