@@ -89,6 +89,7 @@
                     <div class="btn-items">
                         <a href="" aria-label="Aller à la page exercice" use:link>
                             <button class="btn-create" id="buttonEdit">
+                                <a href="/exercices/admin/edit">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                         </a>

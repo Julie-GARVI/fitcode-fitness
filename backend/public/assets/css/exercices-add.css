@@ -50,3 +50,10 @@ textarea {
 .btn-submit:hover {
     background-color: #c3d3e2;
 }
+
+/*__________________________ POUR LE UPDATE________________________ */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}

@@ -23,7 +23,6 @@ class AdminExerciceController extends ExerciceController
             return view('exercices', ['exercices' => $exercices]);
         }
 
-
     public function createExercices(Request $request)
     {
         $exercice = $this->create($request);
@@ -31,10 +30,19 @@ class AdminExerciceController extends ExerciceController
         return redirect('exercices/admin');
 
         return $exercice;
-    }
+     }
 
 
-    protected function deleteExercice($id)
+     public function updateExercices(Request $request)
+     {
+         $exercice = $this->update($request);
+
+         return redirect('exercices/admin');
+
+         return $exercice;
+     }
+
+    public function deleteExercice($id)
     {
         $exercice = Exercice::find($id);
 
@@ -42,5 +50,7 @@ class AdminExerciceController extends ExerciceController
 
         return response()->json(['message' => 'Exercice deleted']);
     }
+
+
 }
 

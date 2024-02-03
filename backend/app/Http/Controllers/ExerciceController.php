@@ -157,7 +157,7 @@ class ExerciceController extends Controller
 
 
 // --------------------MODIFICATION DES ECERCICES-------------------------
-    public function update(Request $request, int $id)
+    protected function update(Request $request, int $id)
 {
     try {
 

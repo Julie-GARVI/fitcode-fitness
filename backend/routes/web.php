@@ -33,9 +33,15 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
         return view('exercices-add');
     });
 
+    Route::get('/exercices/admin/edit', function () {
+        return view('exercices-edit');
+    });
+
     Route::get('/exercices/admin', [AdminExerciceController::class, 'listExercices']);
 
     Route::post('/exercices/add', [AdminExerciceController::class, 'createExercices']);
+
+    Route::put('/exercices/edit', [AdminExerciceController::class, 'updateExercices']);
 
     Route::delete('/exercices/{id}', [AdminExerciceController::class, 'deleteExercice']);
 
