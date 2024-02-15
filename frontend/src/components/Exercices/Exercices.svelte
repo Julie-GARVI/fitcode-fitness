@@ -69,6 +69,7 @@
   function filterCategoryExercices(selectedCategory) {
     if (selectedCategory === "") {
       exercices = [...allExercices];
+
     } else {
       exercices = allExercices.filter(exercice => exercice.category_id === selectedCategory);
     }
@@ -77,6 +78,7 @@
   function filterLevelExercices(selectedLevel) {
     if (selectedLevel === "Tous les niveaux") {
       exercices = [...allExercices];
+
     } else {
       exercices = allExercices.filter(exercice => exercice.level === selectedLevel);
     }
@@ -105,8 +107,8 @@
                     <div class="select-block">
                     {#each icons as icon}
                         <div class="category-item">
-                            <img src={'http://127.0.0.1:8000/icons/' + icon.icon_path} class="category-picture" alt={'Icone de ' + icon.category[0].name}>
-                            <p>{icon.category[0].name}</p>
+                            <img src={'http://127.0.0.1:8000/icons/' + icon.icon_path} class="category-picture" alt={'Icone de ' + icon.category.name}>
+                            <p>{icon.category.name}</p>
                         </div>
                     {/each}
                     </div>
