@@ -17,7 +17,7 @@ class CreateMultimediasTable extends Migration
         $table->increments('id')->unsigned();
         $table->string('picture_path', 42)->nullable();
         $table->string('icon_path', 42)->nullable();
-        $table->unsignedInteger('user_id')->nullable();
+        $table->unsignedInteger('category_id')->nullable();
         $table->timestamps();
     });
 }

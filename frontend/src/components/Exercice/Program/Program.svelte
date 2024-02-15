@@ -1,5 +1,5 @@
 <script>
-   export let name, user, category, level, multimedia, time, instructions, id, isCoachsPage; 
+   export let name, user, category, level, multimedia, time, instructions, isCoachsPage; 
 
     import './program.scss'
 

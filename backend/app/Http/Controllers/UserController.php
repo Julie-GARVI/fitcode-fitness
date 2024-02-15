@@ -33,7 +33,7 @@ class UserController extends Controller
 
             //foreach recupere les user et on rajoute dans les user les categorie et multimedia
              foreach ($users as $user) {
-                 $user->category;
+                 $user->categories;
                  $user->multimedia;
              }
             return $users;
@@ -149,30 +149,19 @@ protected function loginUser(Request $request)
     }
 
 
-// -------------------DECONNECTION UTILISATEUR--------------------------
-public function logout(Request $request)
-{
-    $user = $request->user();
-
-    if ($user) {
-        $user->tokens->each(function (PersonalAccessToken $token) {
-            $token->delete();
-        });
-    }
-
-    return response()->json(['message' => 'Déconnexion réussie']);
-}
-
-
-
-// -------------------CATEGORIES UTILISATEUR--------------------------
-public function listUserCategories(User $user)
+    // -------------------DECONNECTION UTILISATEUR--------------------------
+    public function logout(Request $request)
     {
-    $categories = $user->categories;
+        $user = $request->user();
 
-    return response()->json($categories);
+        if ($user) {
+            $user->tokens->each(function (PersonalAccessToken $token) {
+                $token->delete();
+            });
+        }
+
+        return response()->json(['message' => 'Déconnexion réussie']);
     }
+
 }
-
-
 

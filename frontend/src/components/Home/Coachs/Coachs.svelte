@@ -36,7 +36,7 @@ getTeamData()
         lastname={team.lastname}
         firstname={team.firstname}
         age={team.age}
-        category={team.category}
+        categories={team.categories}
         description={team.description}
         multimedia={team.multimedia}
       />

@@ -16,7 +16,6 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name', 42);
-            $table->unsignedInteger('multimedia_id');
             $table->timestamps();
         });
     }

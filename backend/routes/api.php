@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/categories', [CategoryController::class, 'list']);
 
-    Route::get('/users/{user}/categories', [UserController::class, 'listUserCategories']);
+    Route::get('/users/{user}/categories', [CategoryController::class, 'listUserCategories']);
 
 // ----------------------------------------Routes privées--------------------------------__
 
