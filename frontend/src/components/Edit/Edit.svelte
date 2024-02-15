@@ -138,11 +138,11 @@
                   type="button"
                   class="category-item"
                   on:click={() => clickCategory(icon.category[0].id)}
-                  data-category-id={icon.category[0].id}
-                  class:active={icon.category[0].id === exercice.category_id}
+                  data-category-id={icon.category.id}
+                  class:active={icon.category.id === exercice.category_id}
                 >
-                  <img src={'http://127.0.0.1:8000/icons/' + icon.icon_path} class="category-picture" alt={'Icone de ' + icon.category[0].name}>
-                  <p>{icon.category[0].name}</p>
+                  <img src={'http://127.0.0.1:8000/icons/' + icon.icon_path} class="category-picture" alt={'Icone de ' + icon.category.name}>
+                  <p>{icon.category.name}</p>
                 </button>
               {/each}
             </div>

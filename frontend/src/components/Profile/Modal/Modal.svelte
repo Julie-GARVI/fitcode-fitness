@@ -176,8 +176,8 @@ async function addExerciceUser() {
           <div class="select-block">
               {#each icons as icon}
               <button type="button" class="category-item" on:click={() => clickCategory(icon.category[0].id)}>
-                      <img src={'http://127.0.0.1:8000/icons/' + icon.icon_path} class="category-picture" alt={'Icone de ' + icon.category[0].name}>
-                      <p>{icon.category[0].name}</p>
+                      <img src={'http://127.0.0.1:8000/icons/' + icon.icon_path} class="category-picture" alt={'Icone de ' + icon.category.name}>
+                      <p>{icon.category.name}</p>
                   </button>
               {/each}
           </div>

@@ -13,11 +13,6 @@ class MultimediaController extends Controller
 {
     $multimedias = Multimedia::with('category')->take(4)->get();
 
-    foreach ($multimedias as $multimedia) {
-        $multimedia->category;
-        $multimedia->multimedia;
-    }
-
     return $multimedias;
 }
 
