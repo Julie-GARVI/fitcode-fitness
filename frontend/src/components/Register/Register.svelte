@@ -11,6 +11,11 @@
 
     export let gender, lastname, firstname, age, level, email, password, category_id;
 
+    let errorMessage = ''; // Définir comme une chaîne
+    let errorMessages = {}; // Définir comme un objet
+    let displayError = false;
+    let displayDuration = 4000; 
+
     const categoriesData = [
             { id: 1, name: "Musculation" },
             { id: 2, name: "Yoga" },
@@ -31,11 +36,25 @@ async function GetUser() {
             body: JSON.stringify({ gender, lastname, firstname, age, level, email, password, category_id})
         });
 
-        if (!registerResponse.ok) {
-            throw new Error("Échec de la requête d'inscription");
-        } else {
-            const responseData = await registerResponse.json();
+        const responseData = await registerResponse.json(); // Définir responseData ici
 
+        if (!registerResponse.ok) {
+            
+            errorMessages = responseData.errors;
+
+            errorMessage = errorMessages['gender.required'] || 
+                           errorMessages['lastname.required'] || 
+                           errorMessages['firstname.required'] || 
+                           errorMessages['age.required'] || 
+                           errorMessages['email.required'] || 
+                           errorMessages['password.required'] 
+
+            displayError = true;
+            setTimeout(() => { 
+                displayError = false;
+            }, displayDuration);
+
+        } else {
             const accessToken = responseData.token;
             const number = responseData.number;
             const id = responseData.id;
@@ -53,9 +72,14 @@ async function GetUser() {
 
             push("/profil");
         }
-    } catch (error) {
 
+    } catch (error) {
+        // Gérez l'erreur
         console.error("Erreur lors de l'inscription :", error);
+        displayError = true;
+        setTimeout(() => { 
+            displayError = false;
+        }, displayDuration);
     }
 }
 
@@ -80,9 +104,6 @@ async function GetUser() {
                         <form class="form-container" on:submit|preventDefault={GetUser}>
     
                         <h3>Formulaire d'inscription</h3>
-    
-                        <span class="empty-alert alert">Erreur, un champ est vide</span>
-                        <span class="wrong-alert alert">Erreur, mot de passe ou email incorrect</span>
 
                         <div class="form gender">
                             {#each genderOptions as option (option)}
@@ -93,31 +114,26 @@ async function GetUser() {
                             {/each}
                         </div>
     
-                        <span class="lastname alert">Erreur ! Votre nom ne doit pas contenir de caractères particuliers</span>
                             <div class="form lastname">
                                 <label for="lastname">Nom : </label>
                                 <input class="lastname register" id="lastname" type="text" name="lastname" max="25" placeholder="Nom"  bind:value={lastname}>
                         </div>
                         
-                        <span class="firstname alert">Erreur ! Votre prénom ne doit pas contenir de caractères particuliers</span>
                             <div class="form firstname">
                                 <label for="firstname">Prénom :</label>
                                 <input class="firstname register" id="firstname" type="text" name="firstname" max="25" placeholder="Prénom" bind:value={firstname}>
                              </div>
                             
-                        <span class="alert-age alert">Erreur ! Vous devez avoir entre 12 et 90 ans</span>
                             <div class="form age">
                                 <label for="age">Age :</label>
                                 <input class="age register" id="age" type="number" name="age" placeholder="Age"  bind:value={age}>
                             </div>
-                            
-                        <span class="alert-mail alert">Erreur ! L'adresse email est déjà prise</span>                            
-                        <div class="form email">
-                            <label for="email">Email :</label>
-                            <input class="form email" id="email"  type="email" name="email" placeholder="Email" bind:value={email}>
-                        </div>
+                                            
+                            <div class="form email">
+                                <label for="email">Email :</label>
+                                <input class="form email" id="email"  type="email" name="email" placeholder="Email" bind:value={email}>
+                            </div>
     
-                        <span class="alert-password alert">Erreur ! Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère particulier</span>
                             <div class="form password">
                                 <label for="password">Mot de passe :</label>
                                 <input class="password register" id="password" type="password" name="password" placeholder="Mot de passe" bind:value={password}>
@@ -142,7 +158,13 @@ async function GetUser() {
                                 <option aria-label="niveau avancé" value="avancé">Avancé</option>
                             </select>
                         </div>
-    
+
+                        <span class="error-alert" style="display: {displayError ? 'block' : 'none'}">
+                            {#each Object.values(errorMessages) as errorMessage}
+                                <div>{"Erreur ! " + errorMessage}</div>
+                            {/each}
+                        </span>
+
                         <button aria-label="bouton de connexion" class="btn-login" type="submit">S'inscrire</button>
     
                     </form>

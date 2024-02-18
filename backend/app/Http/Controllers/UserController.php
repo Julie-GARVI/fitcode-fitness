@@ -59,12 +59,20 @@ public function createUser(Request $request)
             'level' => 'sometimes',
         ]);
 
+         // Récupération des messages d'erreur personnalisés
+         $customMessages = customErrorMessages();
+
+         // Application des messages d'erreur personnalisés
+         $validateUser->setCustomMessages($customMessages);
+
         if ($validateUser->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation error',
-                'errors' => $validateUser->errors(),
-            ], 401);
+
+            $errors = $validateUser->errors();
+
+            // Construction du tableau des erreurs personnalisées
+            $responseErrors = $errors->messages();
+
+            return response()->json(['errors' => $responseErrors], 401);
         }
 
         $number = null;
@@ -119,12 +127,16 @@ protected function loginUser(Request $request)
             'password' => ['required', 'min:8', 'regex:' . $this->passwordRegex],
         ]);
 
-            if ($validateUser->fails()) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Validation error',
-                    'errors' => $validateUser->errors(),
-                ], 401);
+            $validateUser->setMessages(customErrorMessages());
+
+            if ($validator->fails()) {
+                // Construction de la réponse JSON avec les erreurs et la durée d'affichage
+                $response = [
+                    'errors' => $validator->errors(),
+                    'displayDuration' => 5000 // 5 secondes
+                ];
+    
+                return response()->json($response, 401);
             }
 
             // Tente de connecter l'utilisateur
@@ -172,3 +184,16 @@ protected function loginUser(Request $request)
 
 }
 
+
+//----------------------------------------EURREURS---------------------------------
+
+function customErrorMessages() {
+    return [
+        'gender.required' => 'Erreur ! Le genre est obligatoire.',
+        'lastname.required' => 'Erreur ! Le nom de famille est obligatoire.',
+        'firstname.required' => 'Erreur ! Le prénom est obligatoire.',
+        'age.required' => 'Erreur ! L\'âge est obligatoire.',
+        'email.required' => 'Erreur ! L\'email est obligatoire.',
+        'password.required' => 'Erreur ! Le mot de passe est obligatoire.',
+    ];
+}
