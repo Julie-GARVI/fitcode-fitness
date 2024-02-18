@@ -41,7 +41,7 @@ class ExerciceController extends Controller
 
 
 //--------------FONCTION AVEC HERITAGE-------------------------
-//------------Récupération des exercices des coachs----------------------
+//------------Récupération des exercices des membres----------------------
     protected function listAllExercices(Request $request)
     {
         // On cible l'id de l'utilisateur connecté

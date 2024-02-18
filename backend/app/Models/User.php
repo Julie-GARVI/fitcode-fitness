@@ -58,7 +58,7 @@ class User extends Authenticatable
         'number',
         'updated_at',
         'created_at',
-        'is_admin'
+        'multimedia_id'
     ];
 
 // Les champs suivants sont non visibles pour des raisons de confidentialités

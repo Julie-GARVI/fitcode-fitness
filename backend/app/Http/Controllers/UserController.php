@@ -42,6 +42,7 @@ class UserController extends Controller
 
 
 // -------------------CREATION UTILISATEUR--------------------------
+
 public function createUser(Request $request)
 {
     try {
@@ -72,25 +73,28 @@ public function createUser(Request $request)
         }while (User::where('number', $number)->exists());
 
 
-    //Création de l'utilisateur sans le catégory_id
+    //Création de l'utilisateur
         $userData = $request->except('category_id');
+    //Rôle par défaut
         $userData['role'] = 'Membre';
     //Hachage du mot de passe
         $userData['password'] = Hash::make($userData['password']);
+    //Attribution du n° d'adhérent
         $userData['number'] = $number;
 
         $user = User::create($userData);
         $category_id = $request->input('category_id');
-    // Création de la relation many-to-many avec la table users
+    // Création de la relation many-to-many avec la table catégorie
         $user->categories()->attach($category_id);
 
-        // Réponse en JSON
+        $token = $this->createToken($user, 'token');
+
+    // Réponse en JSON
         return response()->json([
-            'status' => true,
-            'message' => 'User Created Successfully',
+            'isAuthenticate' => true,
             'number' => $user->number,
-            'token' => $user->createToken('API TOKEN')->plainTextToken,
-            'expiration' => 300,
+            'token' =>  $token['token'], 
+            'expiration' => $token['expiration'], 
             'id' => $user->id,
         ], 200);
 
@@ -130,10 +134,13 @@ protected function loginUser(Request $request)
 
                 Session::put('user', $user);
 
+                $token = $this->createToken($user, 'token');
+
                 return response()->json([
                     'message' => 'Connection successful',
                     'id' => $user->id,
-                    'token' => $user->createToken('API TOKEN')->plainTextToken,
+                    'token' =>  $token['token'], 
+                    'expiration' => $token['expiration'], 
                     'isAuthenticated' => 'true',
                 ], 200);
 

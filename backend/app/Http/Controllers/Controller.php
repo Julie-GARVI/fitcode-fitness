@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -19,6 +20,18 @@ class Controller extends BaseController
         $this->regex = '/^[^#$%^&*\|{}<>~]+$/';
         ;
         $this->passwordRegex = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
+    }
+
+    public function createToken(User $user, string $tokenName)
+    {
+        $expiration = now()->addHours(1);
+    
+        $token = $user->createToken($tokenName, ['*'], $expiration);
+    
+        return [
+            'token' => $token->plainTextToken,
+            'expiration' => $expiration,
+        ];
     }
 
 }

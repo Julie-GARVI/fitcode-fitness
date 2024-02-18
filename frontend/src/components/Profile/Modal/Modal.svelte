@@ -175,7 +175,7 @@ async function addExerciceUser() {
           <label for="categories">Selectionner votre catégorie :</label>
           <div class="select-block">
               {#each icons as icon}
-              <button type="button" class="category-item" on:click={() => clickCategory(icon.category[0].id)}>
+              <button type="button" class="category-item" on:click={() => clickCategory(icon.category.id)}>
                       <img src={'http://127.0.0.1:8000/icons/' + icon.icon_path} class="category-picture" alt={'Icone de ' + icon.category.name}>
                       <p>{icon.category.name}</p>
                   </button>

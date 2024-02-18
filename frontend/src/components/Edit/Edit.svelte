@@ -137,7 +137,7 @@
                 <button
                   type="button"
                   class="category-item"
-                  on:click={() => clickCategory(icon.category[0].id)}
+                  on:click={() => clickCategory(icon.category.id)}
                   data-category-id={icon.category.id}
                   class:active={icon.category.id === exercice.category_id}
                 >
