@@ -4,26 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
     use HasFactory;
 
+    // ONE TO ONE
+    public function multimedia(): HasOne
+    {
+        return $this->hasOne(Multimedia::class);
+    }
 
+    // ONE TO MANY
     public function exercice() : HasMany
     {
         return $this->hasMany(Exercice::class);
     }
 
-    public function user(): HasMany
+     // MANY TO MANY
+     public function user()
     {
-     return $this->hasMany(User::class);
-    }
-
-    public function multimedia(): HasOne
-    {
-     return $this->hasOne(Multimedia::class);
+        return $this->belongsToMany(User::class);
     }
 }

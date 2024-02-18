@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMultimediasTable extends Migration
+class CreateMultimediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateMultimediasTable extends Migration
      */
     public function up()
 {
-    Schema::create('multimedias', function (Blueprint $table) {
+    Schema::create('multimedia', function (Blueprint $table) {
         $table->increments('id')->unsigned();
-        $table->string('picture_path', 42)->nullable();
-        $table->string('icon_path', 42)->nullable();
-        $table->unsignedInteger('category_id')->nullable();
+        $table->string('picture_path', 50)->nullable();
+        $table->string('icon_path', 50)->nullable();
         $table->timestamps();
+        $table->unsignedInteger('category_id')->nullable();
     });
 }
 
@@ -29,6 +29,6 @@ class CreateMultimediasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('multimedias');
+        Schema::dropIfExists('multimedia');
     }
 }

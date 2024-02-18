@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 class User extends Authenticatable
@@ -14,24 +16,28 @@ class User extends Authenticatable
 
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function categories()
-{
-    return $this->belongsToMany(Category::class);
-}
-
-    public function category() {
-
-        return $this->belongsTo(Category::class);
-        }
-
+    // ONE TO ONE
     public function multimedia() {
 
         return $this->belongsTo (Multimedia::class);
-        }
+    }
 
+    // ONE TO MANY
     public function exercice(): HasMany
     {
         return $this->hasMany(Exercice::class);
+    }
+
+    // ONE TO MANY
+    public function comment(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    // MANY TO MANY
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 
 // Les champs suivants sont renvoyés en base de données

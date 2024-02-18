@@ -15,14 +15,14 @@ class CreateExercicesTable extends Migration
     {
         Schema::create('exercices', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('name', 42);
-            $table->string('level', 42);
+            $table->string('name', 50);
+            $table->string('level', 50);
             $table->time('time');
             $table->text('instructions');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('category_id');
-            $table->unsignedInteger('multimedia_id');
             $table->timestamps();
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('multimedia_id');
+            $table->unsignedInteger('category_id');
         });
     }
 
