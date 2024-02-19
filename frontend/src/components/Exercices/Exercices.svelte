@@ -89,7 +89,7 @@
     <div class="wrapper-exercices">
     
         <div class="background-exercice">
-            <img src="{background}" alt="Photo d'une adhérente">
+            <img src="{background}" alt="Adhérente">
         </div>
     
         <section class="fitness-exercices">

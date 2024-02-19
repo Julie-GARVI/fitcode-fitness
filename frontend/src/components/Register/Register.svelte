@@ -5,9 +5,12 @@
     import endpoint from "/src/storage.js";
     import { push } from "svelte-spa-router";
 
+    import errorsMessage from '../../reusable/errorsMessage.svelte';
+
     import '../Register/register.scss'
 
     import poidsremove from "/src/assets/images/poidsremove.png";
+    import ErrorsMessage from "../../reusable/errorsMessage.svelte";
 
     export let gender, lastname, firstname, age, level, email, password, category_id;
 
@@ -41,23 +44,6 @@ async function GetUser() {
         if (!registerResponse.ok) {
             
             errorMessages = responseData.errors;
-
-            errorMessage = errorMessages['gender.required'] || 
-                           errorMessages['lastname.required'] || 
-                           errorMessages['firstname.required'] || 
-                           errorMessages['age.required'] || 
-                           errorMessages['email.required'] || 
-                           errorMessages['password.required'] ||
-                           errorMessages['lastname.max'] ||
-                           errorMessages['firstname.max'] ||
-                           errorMessages['age.min'] ||
-                           errorMessages['age.max'] ||
-                           errorMessages['email.email'] ||
-                           errorMessages['email.unique'] ||
-                           errorMessages['regex'] ||
-                           errorMessages['password.min'] ||
-                           errorMessages['passwordRegex'] ||
-                           errorMessages['string']
 
             displayError = true;
             setTimeout(() => { 
@@ -157,14 +143,13 @@ async function GetUser() {
                                 <option aria-label="niveau débutant" value="débutant">Débutant</option>
                                 <option aria-label="niveau intermédiaire" value="intermédiaire">Intermédiaire</option>
                                 <option aria-label="niveau avancé" value="avancé">Avancé</option>
-                        </select>
-                 
+                        </select>         
 
-                        <div class="alert" style="display: {displayError ? 'block' : 'none'}">
-                            {#each Object.values(errorMessages) as errorMessage}
-                                <div>{"Erreur ! " + errorMessage}</div>
-                            {/each}
-                        </div>
+                        <ErrorsMessage 
+                        error= {errorMessage}
+                        errorMessages= {errorMessages}
+                        displayError= {displayError}
+                        />
 
                         <button aria-label="bouton de connexion" class="btn-login" type="submit">S'inscrire</button>
             </form>
