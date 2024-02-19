@@ -115,16 +115,43 @@ class ExerciceController extends Controller
     $userId = $user->id;
 
     try {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'name' => ['required', 'regex:' . $this->regex],
             'time' => 'required',
             'level' => 'sometimes',
             'instructions' => ['required', 'regex:' . $this->regex],
-            'category_id' => 'sometimes',
-        ]);
+        ];
+        
+        if ($userId > 4) {
+            $rules['category_id'] = ['required', 'int'];
+            $rules['level'] = 'sometimes';
+        } else {
+            $rules['category_id'] = 'sometimes';
+            $rules['level'] = 'required';
+        }
+        
+        $validator = Validator::make($request->all(), $rules);
+        
 
+        $requiredMessages = requiredErrorMessages();
+        $charactersMessages = $this->specialCharactersErrors();
 
-        $validator->validate();
+        $validator->setCustomMessages(array_merge(
+            $requiredMessages, 
+            ['regex' => $charactersMessages['regex']],
+        ));
+
+        if (!$validator->fails()) {
+
+            $exerciceData = $validator->validate();
+
+        } else {
+            
+            $errors = $validator->errors()->messages();
+        
+            return response()->json(['errors' => $errors], 422);
+        }
+
     } catch (ValidationException $error) {
         return response()->json(['errors' => $error->errors()], 400);
     }
@@ -220,4 +247,14 @@ class ExerciceController extends Controller
 
         return response()->json(['message' => 'Exercice deleted']);
     }
+}
+
+//-------------------------------------------ERREURS--------------------------------------
+function requiredErrorMessages() {
+    return [
+        'name.required' => 'Veuillez indiquer le nom de votre exercice',
+        'time.required' => 'Veuillez indiquer le temps de votre exercice en heure(s), minute(s) et secondes',
+        'instructions.required' => 'Veuillez indiquer les instructions de votre exercice',
+        'category_id.required' => 'Veuillez indiquer la catégorie de votre exercice',
+    ];
 }

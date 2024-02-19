@@ -3,13 +3,19 @@
 import endpoint from '../../../storage.js';
 import { onMount } from 'svelte';
 
-import { getIconsData } from "../../../reusable/getIconData.js"
+import { getIconsData } from "../../../reusable/getIconData.js";
+import ErrorsMessages from "../../../reusable/ErrorsMessages.svelte";
 
 import '../Modal/modal.scss'
 
 import basket from "/src/assets/images/basket.webp";
 
 let name, category_id, time, formattedTime, instructions;
+
+let exerciceErrorMessage = '';
+let errorMessages = []; 
+let displayError = false;
+let displayDuration = 5000;
 
 let icons = [];
 
@@ -74,8 +80,10 @@ async function addExerciceUser() {
       }
     );
 
+    const responseData = await exerciceResponse.json();
+
     if (exerciceResponse.ok) {
-      const responseData = await exerciceResponse.json();
+
       console.log(responseData);
 
       const addExerciceInDom = document.querySelector(".exercice-event");
@@ -149,10 +157,17 @@ async function addExerciceUser() {
    
       form.reset();
      
-
     } else {
-      console.log("Échec de la requête.", exerciceResponse.status);
+      
+    errorMessages = responseData.errors;
+
+    displayError = true;
+
+    setTimeout(() => { 
+         displayError = false;
+      }, displayDuration);
     }
+
   } catch (error) {
     console.log("Une erreur s'est produite : " + error.message);
   }
@@ -183,10 +198,6 @@ async function addExerciceUser() {
           </div>
         </div>
 
-        <span class="empty-alert alert">Erreur, un champ est vide</span>
-
-        <span class="name alert">Erreur ! Le nom de l'exercice ne doit pas contenir de caractères particuliers</span>
-
           <div class="value name">
             <label for="name">Nom de l'exercice :</label>
             <input type="text" id="name" name="name" class="name create" placeholder="Développé militaire" bind:value={name}>
@@ -197,11 +208,16 @@ async function addExerciceUser() {
             <input type="time" id="time" class="time create" name="time" pattern="[0-5][0-9]:[0-5][0-9]" placeholder="HH:MM:SS" step='1' bind:value={time}>
           </div>
           
-          <span class="instructions alert">Erreur ! Les instructions de l'exercice ne doivent pas contenir de caractères particuliers</span>
           <div class="value instructions">
               <label for="instructions">Vos instructions :</label>
               <textarea class="instructions create" id="instructions" name="instructions" placeholder="Soulever la barre des hanches aux épaules..." bind:value={instructions}></textarea>
           </div>
+
+          <ErrorsMessages 
+          error= {exerciceErrorMessage}
+          errorMessages= {errorMessages}
+          displayError= {displayError}
+          />
   
           <div class="btn-block">
               <span class="alert-success success">Votre exercice a bien été ajouté</span>

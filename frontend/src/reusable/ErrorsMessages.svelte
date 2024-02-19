@@ -1,5 +1,5 @@
 <script>
-    export let userErrorMessage, errorMessages, displayError;
+    export let userErrorMessage, exerciceErrorMessage, errorMessages, displayError;
   
     userErrorMessage = [
         errorMessages['gender.required'] || 
@@ -19,6 +19,14 @@
         errorMessages['passwordRegex'] ||
         errorMessages && (errorMessages.email || errorMessages.password)
     ]
+
+    exerciceErrorMessage = [
+        errorMessages['name.required'] || 
+        errorMessages['time.required'] || 
+        errorMessages['instruction.required'] || 
+        errorMessages['category_id.required'] 
+    ]
+
 </script>
 
     <div class="alert" style="display: {displayError ? 'block' : 'none'}">
