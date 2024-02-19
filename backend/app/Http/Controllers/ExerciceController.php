@@ -194,12 +194,19 @@ class ExerciceController extends Controller
     $validator = Validator::make($request->all(), [
         'name' => ['sometimes', 'regex:' . $this->regex ],
         'time' => ['sometimes'],
-        'instructions' => 'sometimes',
+        'instructions' => ['sometimes', 'regex:' . $this->regex ],
         'category_id' => ['sometimes'],
     ]);
 
+    $charactersMessages = $this->specialCharactersErrors();
+    $validator->setCustomMessages(array_merge(
+        ['regex' => $charactersMessages['regex']],
+    ));
+
     if ($validator->fails()) {
-        return response()->json(['errors' => $validator->errors()], 400);
+        $errors = $validator->errors()->messages();
+        
+        return response()->json(['errors' => $errors], 422);
     }
 
     $request->validate([

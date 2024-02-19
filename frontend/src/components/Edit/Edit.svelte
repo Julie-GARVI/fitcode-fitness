@@ -7,6 +7,7 @@
   import endpoint from '../../storage.js';
 
   import { getIconsData } from "../../reusable/getIconData.js"
+  import ErrorsMessages from "../../reusable/ErrorsMessages.svelte";
 
   import './edit.scss'
 
@@ -15,6 +16,11 @@
   let exerciceId = '';
   
   export let name, time, instructions, category_id;
+
+  let exerciceErrorMessage = '';
+  let errorMessages = []; 
+  let displayError = false;
+  let displayDuration = 5000;
 
   onMount(async () => {
         try {
@@ -102,27 +108,27 @@
             body: JSON.stringify(dataObjectForm)
         });
 
+        const responseData = await response.json();
+
         if (response.ok) {
-
-            const showSuccess = document.querySelector(".success")
-            showSuccess.style.display = "block";
-            setTimeout(() => {
-                showSuccess.style.display = "none";
-            }, 3000);
-
+          
             formElement.reset()
             push("/profil");
 
         } else {
-            console.error('Erreur lors de la mise à jour de l\'exercice');
+          errorMessages = responseData.errors;
 
-        }
+          displayError = true;
+
+          setTimeout(() => { 
+              displayError = false;
+            }, displayDuration);
+          }
     } catch (error) {
         console.error('Une erreur s\'est produite:', error);
     }
   }
-  
-    </script>
+  </script>
   
     <section class="edit-exercices">
   
@@ -166,7 +172,13 @@
                 <label for="instructions">Modifier vos instructions :</label>
                 <textarea class="instructions edit" id="instructions"  name="instructions" value={exercice.instructions}></textarea>
             </div>
-            <span class="alert-success success">Votre exercice a bien été modifié</span>
+
+            <ErrorsMessages 
+            error= {exerciceErrorMessage}
+            errorMessages= {errorMessages}
+            displayError= {displayError}
+            />
+
             <div class="btn-block">
                 <button type="submit" class="btn-submit" aria-label="Modifier mon exercice">Modifier</button>
             </div>

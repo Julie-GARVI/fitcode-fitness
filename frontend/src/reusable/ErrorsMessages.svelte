@@ -17,7 +17,9 @@
         errorMessages['regex'] ||
         errorMessages['password.min'] ||
         errorMessages['passwordRegex'] ||
-        errorMessages && (errorMessages.email || errorMessages.password)
+        errorMessages && (errorMessages.email || errorMessages.password) ||
+        errorMessages['message.required'] ||
+        errorMessages['message.min'] 
     ]
 
     exerciceErrorMessage = [

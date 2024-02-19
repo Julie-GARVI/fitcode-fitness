@@ -11,18 +11,27 @@ class ContactController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'lastname' => ['required', 'max:25', 'regex:' . $this->regex],
-            'firstname' => ['required', 'max:25', 'regex:' . $this->regex],
+            'lastname' => ['required', 'max:50', 'regex:' . $this->regex],
+            'firstname' => ['required', 'max:50', 'regex:' . $this->regex],
             'email' => ['required', 'email', 'regex:' . $this->regex],
-            'message' => ['required', 'regex:' . $this->regex]
+            'message' => ['required', 'min:15', 'regex:' . $this->regex]
         ]);
 
+        $requiredMessages = requiredErrorMessages();
+        $validateMessages = validateErrorMessages();
+        $charactersMessages = $this->specialCharactersErrors();
+
+        $validator->setCustomMessages(array_merge(
+            $requiredMessages, 
+            $validateMessages,
+            ['regex' => $charactersMessages['regex']],
+        ));
+
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation error',
-                'errors' => $validator->errors()
-            ], 422);
+
+            $errors = $validator->errors()->messages();
+        
+            return response()->json(['errors' => $errors], 422);
         }
 
         $contact = Contact::create([
@@ -38,3 +47,24 @@ class ContactController extends Controller
         ]);
     }
 }
+
+//----------------------------------------ERREURS---------------------------------
+
+function requiredErrorMessages() {
+    return [
+        'lastname.required' => 'Veuillez indiquer votre nom de famille',
+        'firstname.required' => 'Veuillez indiquer votre prénom',
+        'email.required' => 'Veuillez indiquer votre adresse email',
+        'message.required' => 'Veuillez indiquer votre message',
+    ];
+}
+
+function validateErrorMessages() {
+    return [
+        'lastname.max' => 'Votre nom de famille est trop long',
+        'firstname.max' => 'Votre prénom est trop long',
+        'email.email' => 'L\'adresse email doit inclure "@"',
+        'message.min' => 'Votre message est trop court',
+    ];
+}
+
