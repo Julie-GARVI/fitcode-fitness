@@ -17,7 +17,6 @@
   
   export let name, time, instructions, category_id;
 
-  let exerciceErrorMessage = '';
   let errorMessages = []; 
   let displayError = false;
   let displayDuration = 5000;
@@ -174,7 +173,6 @@
             </div>
 
             <ErrorsMessages 
-            error= {exerciceErrorMessage}
             errorMessages= {errorMessages}
             displayError= {displayError}
             />

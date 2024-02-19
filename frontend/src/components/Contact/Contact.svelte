@@ -11,7 +11,6 @@
   
   let lastname, firstname, email, message;
 
-  let userErrorMessage = '';
   let errorMessages = []; 
   let displayError = false;
   let displayDuration = 5000;
@@ -61,8 +60,6 @@
       resetForm.reset();
     }
 
-  
-  
   </script>
   
       <section class="contact-form">
@@ -94,7 +91,6 @@
                   </div>
 
                   <ErrorsMessages 
-                  error= {userErrorMessage}
                   errorMessages= {errorMessages}
                   displayError= {displayError}
                   />

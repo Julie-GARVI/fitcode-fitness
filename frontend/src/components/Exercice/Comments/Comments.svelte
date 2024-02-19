@@ -4,6 +4,8 @@
     import Star from '/src/lib/Star.svelte'
     import Comment from './Comment/Comment.svelte';
 
+    import ErrorsMessages from "../../../reusable/ErrorsMessages.svelte";
+
     import '../Comments/comments.scss'
 
     export let date, user, exerciceId;
@@ -19,6 +21,9 @@
     const commentsPerPage = 4;
     let resize = window.innerWidth <= 1150 ? true : false;
 
+    let errorMessages = []; 
+    let displayError = false;
+    let displayDuration = 5000;
     
     async function getCommentExerciceId() {
             try {
@@ -52,7 +57,6 @@
             }
     }
 
-    
     getCommentExerciceId();
    
 
@@ -69,10 +73,11 @@
             
         });
 
+        const responseData = await commentResponse.json();
+
 
         if (commentResponse.ok)  {
             
-        const responseData = await commentResponse.json();
         console.log(commentResponse);
         console.log(responseData);
 
@@ -137,9 +142,15 @@
   
         } else {
 
-            console.log("Échec de la requête.", commentResponse.status);
-      
+            errorMessages = responseData.errors;
+
+            displayError = true;
+
+            setTimeout(() => { 
+                displayError = false;
+            }, displayDuration);
         }
+    
     } catch (error) {
 
         console.error("Erreur lors de lors de l'envoi du commentaire :", error);
@@ -231,19 +242,22 @@
         <form class="form-crud" on:submit|preventDefault={addCommentsExercice}>
     
             <div class="value title">
-            <span class="empty-alert alert">Erreur, un champs est vide</span>
-
-            <span class="title alert">Erreur ! Votre titre ne doit pas contenir de caractères particuliers</span>
+  
                 <label for="title">Titre du commentaire :</label>
                 <input type="text" id="title" class="title create" name="title" placeholder="Très satisfait de l'entraînement en intervalles" bind:value={title}>
             </div>
                 <input type="hidden" id="rating" name="rating" value="0"> 
             <div class="value content">
 
-            <span class="content alert">Erreur ! Votre commentaire ne doit pas contenir de caractères particuliers</span>
                 <label for="content">Vos commentaires :</label>
                 <textarea type="text" id="content" class="content create" name="content" placeholder="L'entrainement en intervalles m'a permis d'améliorer ma force physique..." bind:value={content}></textarea>
             </div>
+
+            <ErrorsMessages 
+            errorMessages= {errorMessages}
+            displayError= {displayError}
+            />
+
             <div class="btn-block">
                 <button type="submit" class="btn-submit" aria-label="Ajouter un commentaire">Ajouter</button>
             </div>

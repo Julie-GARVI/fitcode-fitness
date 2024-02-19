@@ -12,7 +12,6 @@ import basket from "/src/assets/images/basket.webp";
 
 let name, category_id, time, formattedTime, instructions;
 
-let exerciceErrorMessage = '';
 let errorMessages = []; 
 let displayError = false;
 let displayDuration = 5000;
@@ -214,7 +213,6 @@ async function addExerciceUser() {
           </div>
 
           <ErrorsMessages 
-          error= {exerciceErrorMessage}
           errorMessages= {errorMessages}
           displayError= {displayError}
           />

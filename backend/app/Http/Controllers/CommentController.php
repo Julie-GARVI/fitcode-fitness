@@ -57,7 +57,25 @@ public function create(Request $request, $exerciceId)
             'rating' => ['required', 'min:1', 'integer'],
             'content' => ['required', 'regex:' . $this->regex]
         ]);
-        $validator->validate();
+
+        $requiredMessages = requiredErrorMessages();
+        $charactersMessages = $this->specialCharactersErrors();
+
+        $validator->setCustomMessages(array_merge(
+            $requiredMessages, 
+            ['regex' => $charactersMessages['regex']],
+        ));
+
+        if (!$validator->fails()) {
+
+            $validator->validate();
+
+        } else {
+            $errors = $validator->errors()->messages();
+        
+            return response()->json(['errors' => $errors], 422);
+        }
+
     } catch (ValidationException $error) {
         return response()->json(['errors' => $error->errors()], 400);
     }
@@ -92,6 +110,17 @@ public function create(Request $request, $exerciceId)
 
       return response()->json(['message' => 'Comment deleted']);
   }
+}
+
+//----------------------------------------ERREURS---------------------------------
+
+function requiredErrorMessages() {
+    return [
+        'title.required' => 'Veuillez indiquer le titre de votre commentaire',
+        'rating.required' => 'Veuillez indiquer la note de votre commentaire',
+        'rating.min' => 'Vous devez attribuer une étoile au minimum',
+        'content.required' => 'Veuillez indiquer le contenu de votre commentaire',
+    ];
 }
 
 

@@ -11,8 +11,8 @@ class ContactController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'lastname' => ['required', 'max:50', 'regex:' . $this->regex],
-            'firstname' => ['required', 'max:50', 'regex:' . $this->regex],
+            'lastname' => ['required', 'max:50', 'string', 'regex:' . $this->regex],
+            'firstname' => ['required', 'max:50', 'string', 'regex:' . $this->regex],
             'email' => ['required', 'email', 'regex:' . $this->regex],
             'message' => ['required', 'min:15', 'regex:' . $this->regex]
         ]);

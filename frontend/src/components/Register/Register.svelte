@@ -13,7 +13,6 @@
 
     export let gender, lastname, firstname, age, level, email, password, category_id;
 
-    let userErrorMessage = '';
     let errorMessages = []; 
     let displayError = false;
     let displayDuration = 5000; 
@@ -145,7 +144,6 @@ async function GetUser() {
                         </select>         
 
                         <ErrorsMessages 
-                        error= {userErrorMessage}
                         errorMessages= {errorMessages}
                         displayError= {displayError}
                         />
