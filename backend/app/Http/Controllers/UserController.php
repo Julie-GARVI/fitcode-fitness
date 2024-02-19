@@ -24,7 +24,6 @@ class UserController extends Controller
 
         }
 
-
 // --------------------EQUIPE DE COACH--------------------------
         public function list()
         {
@@ -56,64 +55,72 @@ public function createUser(Request $request)
             'email' => ['required', 'email', 'unique:users', 'regex:' . $this->regex],
             'password' => ['required', 'min:8', 'regex:' . $this->passwordRegex],
             'category_id' => 'sometimes',
-            'level' => 'sometimes',
+            'level' => 'required',
         ]);
 
-         // Récupération des messages d'erreur personnalisés
-         $customMessages = customErrorMessages();
+        $requiredMessages = requiredErrorMessages();
+        $validateMessages = validateErrorMessages();
+        $charactersMessages = $this->specialCharactersErrors();
 
-         // Application des messages d'erreur personnalisés
-         $validateUser->setCustomMessages($customMessages);
+        $validateUser->setCustomMessages(array_merge(
+            $requiredMessages, 
+            $validateMessages,
+            ['regex' => $charactersMessages['regex']],
+            ['password.regex' => $charactersMessages['passwordRegex']]
+        ));
 
         if ($validateUser->fails()) {
 
-            $errors = $validateUser->errors();
-
-            // Construction du tableau des erreurs personnalisées
-            $responseErrors = $errors->messages();
-
-            return response()->json(['errors' => $responseErrors], 401);
+            $errors = $validateUser->errors()->messages();
+        
+            return response()->json(['errors' => $errors], 422);
         }
 
-        $number = null;
-        do {
-            $number = mt_rand(10000, 99999);
-        }while (User::where('number', $number)->exists());
+        else {
 
+            $number = null;
+            do {
+                $number = mt_rand(10000, 99999);
+            }while (User::where('number', $number)->exists());
+    
+    
+        //Création de l'utilisateur
+            $userData = $request->except('category_id');
+        //Rôle par défaut
+            $userData['role'] = 'Membre';
+        //Hachage du mot de passe
+            $userData['password'] = Hash::make($userData['password']);
+        //Attribution du n° d'adhérent
+            $userData['number'] = $number;
+    
+            $user = User::create($userData);
+            $category_id = $request->input('category_id');
+        // Création de la relation many-to-many avec la table catégorie
+            $user->categories()->attach($category_id);
+    
+            $token = $this->createToken($user, 'token');
 
-    //Création de l'utilisateur
-        $userData = $request->except('category_id');
-    //Rôle par défaut
-        $userData['role'] = 'Membre';
-    //Hachage du mot de passe
-        $userData['password'] = Hash::make($userData['password']);
-    //Attribution du n° d'adhérent
-        $userData['number'] = $number;
+            Session::put('user', $user);
+    
+        // Réponse en JSON
+            return response()->json([
+                'isAuthenticate' => true,
+                'number' => $user->number,
+                'token' =>  $token['token'], 
+                'expiration' => $token['expiration'], 
+                'id' => $user->id,
+            ], 200);    
 
-        $user = User::create($userData);
-        $category_id = $request->input('category_id');
-    // Création de la relation many-to-many avec la table catégorie
-        $user->categories()->attach($category_id);
+        }
 
-        $token = $this->createToken($user, 'token');
-
-    // Réponse en JSON
-        return response()->json([
-            'isAuthenticate' => true,
-            'number' => $user->number,
-            'token' =>  $token['token'], 
-            'expiration' => $token['expiration'], 
-            'id' => $user->id,
-        ], 200);
-
-    // Retour en cas d'erreur
-    } catch (\Throwable $th) {
-        return response()->json([
-            'status' => false,
-            'message' => $th->getMessage(),
-        ], 500);
+        // Retour en cas d'erreur
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+            ], 500);
+        }
     }
-}
 
 
 
@@ -123,49 +130,56 @@ protected function loginUser(Request $request)
     try {
         // Valide les données de l'utilisateur
         $validateUser = Validator::make($request->all(), [
-            'email' => ['required', 'email', 'regex:' . $this->regex],
-            'password' => ['required', 'min:8', 'regex:' . $this->passwordRegex],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
         ]);
+        
+        // Tente de connecter l'utilisateur
+        $credentials = $request->only('email', 'password');
 
-            $validateUser->setMessages(customErrorMessages());
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
 
-            if ($validator->fails()) {
-                // Construction de la réponse JSON avec les erreurs et la durée d'affichage
-                $response = [
-                    'errors' => $validator->errors(),
-                    'displayDuration' => 5000 // 5 secondes
-                ];
-    
-                return response()->json($response, 401);
-            }
+            Session::put('user', $user);
 
-            // Tente de connecter l'utilisateur
-            $credentials = $request->only('email', 'password');
-            if (Auth::attempt($credentials)) {
-                $user = Auth::user();
+            $token = $this->createToken($user, 'token');
 
-                Session::put('user', $user);
-
-                $token = $this->createToken($user, 'token');
-
-                return response()->json([
-                    'message' => 'Connection successful',
-                    'id' => $user->id,
-                    'token' =>  $token['token'], 
-                    'expiration' => $token['expiration'], 
-                    'isAuthenticated' => 'true',
-                ], 200);
-
-            } else {
-                return response()->json(['error' => 'Unauthorized'], 401);
-            }
-        } catch (\Throwable $th) {
             return response()->json([
-                'status' => false,
-                'message' => $th->getMessage(),
-            ], 500);
+                'message' => 'Connection successful',
+                'id' => $user->id,
+                'token' =>  $token['token'],
+                'expiration' => $token['expiration'],
+                'isAuthenticated' => 'true',
+            ], 200);
         }
+
+        else if (!User::where('email', $credentials['email'])->exists()) {
+          
+            $errors = ['email' => 'L\'adresse email est incorrecte'];
+
+            return response()->json([
+                'errors' => $errors,
+            ], 401);
+    
+
+        } else if (!User::where('password', $credentials['password'])->exists())  {
+         
+            $errors = ['password' => 'Le mot de passe est incorrect'];
+
+            return response()->json([
+                'errors' => $errors,
+            ], 401);
+    
+        }
+
+    } catch (\Throwable $th) {
+        return response()->json([
+            'status' => false,
+            'message' => $th->getMessage(),
+        ], 500);
     }
+}
+
 
 
     // -------------------DECONNECTION UTILISATEUR--------------------------
@@ -185,15 +199,30 @@ protected function loginUser(Request $request)
 }
 
 
-//----------------------------------------EURREURS---------------------------------
+//----------------------------------------ERREURS---------------------------------
 
-function customErrorMessages() {
+function requiredErrorMessages() {
     return [
-        'gender.required' => 'Erreur ! Le genre est obligatoire.',
-        'lastname.required' => 'Erreur ! Le nom de famille est obligatoire.',
-        'firstname.required' => 'Erreur ! Le prénom est obligatoire.',
-        'age.required' => 'Erreur ! L\'âge est obligatoire.',
-        'email.required' => 'Erreur ! L\'email est obligatoire.',
-        'password.required' => 'Erreur ! Le mot de passe est obligatoire.',
+        'gender.required' => 'Veuillez indiquer votre genre',
+        'lastname.required' => 'Veuillez indiquer votre nom de famille',
+        'firstname.required' => 'Veuillez indiquer votre prénom',
+        'age.required' => 'Veuillez indiquer votre âge',
+        'email.required' => 'Veuillez indiquer votre adresse email',
+        'password.required' => 'Veuillez indiquer votre mot de passe',
+        'level.required' => 'Veuillez indiquer votre niveau',
     ];
 }
+
+function validateErrorMessages() {
+    return [
+        'lastname.max' => 'Votre nom de famille est trop long',
+        'firstname.max' => 'Votre prénom est trop long',
+        'age.min' => 'Vous devez avoir au minimum 12 ans',
+        'age.max' => 'Vous devez avoir au maximum 90 ans',
+        'email.email' => 'L\'adresse email doit inclure "@"',
+        'email.unique' => 'L\'adresse email est déjà prise',
+        'password.min' => 'Votre mot de passe doit avoir au minimum 8 caractères',
+    ];
+}
+
+

@@ -34,4 +34,17 @@ class Controller extends BaseController
         ];
     }
 
+    public function specialCharactersErrors() {
+
+        $regexErrorMessage = "Les caractères / ^ # $ % ^ & * \ | { } < > ~ $ ne sont pas autorisés";
+
+        $passwordRegexErrorMessage = "Votre mot de passe doit contenir une majuscule, une minuscule, un caractère particulier et un chiffre";
+
+        return [
+            'regex' => $regexErrorMessage,
+            'passwordRegex' => $passwordRegexErrorMessage,
+        ];
+    
+    }
+
 }
