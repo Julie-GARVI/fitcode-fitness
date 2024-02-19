@@ -8,13 +8,15 @@
   import Coachs from "./Coachs/Coachs.svelte";
   import Comments from "./Comments/Comments.svelte";
 
+  import ErrorsMessages from "../../reusable/ErrorsMessages.svelte";
+
   import '../Home/home.scss'
 
   import poids from "/src/assets/images/poids.jpg";
   
   export let email, password;
 
-  let errorMessage = '';
+  let userErrorMessage = '';
   let errorMessages = []; 
   let displayError = false;
   let displayDuration = 5000; 
@@ -111,11 +113,11 @@
             <input class="password login" id="password" type="password" name="password" placeholder="energ!F13tCode" bind:value={password}>
           </div>
 
-          <div class="alert" style="display: {displayError ? 'block' : 'none'}">
-            {#each Object.values(errorMessages) as errorMessage}
-                <div>{"Erreur ! " + errorMessage}</div>
-            {/each}
-          </div>
+          <ErrorsMessages 
+          error= {userErrorMessage}
+          errorMessages= {errorMessages}
+          displayError= {displayError}
+          />
 
           <button aria-label="bouton de connexion" class="btn-login" type="submit">Se connecter</button>
           <button class="btn-register"><a use:link href="/inscription" aria-label="Créez-vous un compte" type="submit">Rejoignez-nous</a></button>
@@ -125,12 +127,12 @@
   </section>
   
   <!-- -----------------------------------Team------------------------------------------- -->
-  <section class="team-coachs">
-    <Coachs />
-  </section>
+    <section class="team-coachs">
+      <Coachs />
+    </section>
 
   <!-----------------------------------Comment------------------------------------------------->
-  <article class="comments-users">
-    <Comments />
-  </article>
-</div>
+    <article class="comments-users">
+      <Comments />
+    </article>
+  </div>

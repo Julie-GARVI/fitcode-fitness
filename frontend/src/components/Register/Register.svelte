@@ -5,16 +5,15 @@
     import endpoint from "/src/storage.js";
     import { push } from "svelte-spa-router";
 
-    import errorsMessage from '../../reusable/errorsMessage.svelte';
+    import ErrorsMessages from "../../reusable/ErrorsMessages.svelte";
 
     import '../Register/register.scss'
 
     import poidsremove from "/src/assets/images/poidsremove.png";
-    import ErrorsMessage from "../../reusable/errorsMessage.svelte";
 
     export let gender, lastname, firstname, age, level, email, password, category_id;
 
-    let errorMessage = '';
+    let userErrorMessage = '';
     let errorMessages = []; 
     let displayError = false;
     let displayDuration = 5000; 
@@ -145,8 +144,8 @@ async function GetUser() {
                                 <option aria-label="niveau avancé" value="avancé">Avancé</option>
                         </select>         
 
-                        <ErrorsMessage 
-                        error= {errorMessage}
+                        <ErrorsMessages 
+                        error= {userErrorMessage}
                         errorMessages= {errorMessages}
                         displayError= {displayError}
                         />
@@ -154,4 +153,3 @@ async function GetUser() {
                         <button aria-label="bouton de connexion" class="btn-login" type="submit">S'inscrire</button>
             </form>
     </section>
-    

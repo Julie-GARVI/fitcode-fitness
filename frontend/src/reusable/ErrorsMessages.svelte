@@ -1,9 +1,7 @@
 <script>
-    export let errorMessage;
-    export let errorMessages; 
-    export let displayError;
+    export let userErrorMessage, errorMessages, displayError;
   
-    errorMessage = [
+    userErrorMessage = [
         errorMessages['gender.required'] || 
         errorMessages['lastname.required'] || 
         errorMessages['firstname.required'] || 
@@ -19,7 +17,7 @@
         errorMessages['regex'] ||
         errorMessages['password.min'] ||
         errorMessages['passwordRegex'] ||
-        errorMessages['string']
+        errorMessages && (errorMessages.email || errorMessages.password)
     ]
 </script>
 
