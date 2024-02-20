@@ -65,7 +65,8 @@ min-width: 100%;
                 font-size: 25px;
             }
             .img-block {
-              width: 80%;
+              width: 60%;
+              max-width: 250px;
               padding: 2px;
               margin: auto;
               overflow: hidden;
@@ -86,6 +87,7 @@ min-width: 100%;
 
         .btn-register  {
           margin-top: .5em;
+          height: 2.2em;
           color: white;
           background-color: rgb(168, 164, 164);
          
@@ -125,21 +127,20 @@ min-width: 100%;
     }
     
     
-    @media (min-width: 1300px) {
+    @media (min-width: 800px) {
       .login-users{
        
       .form-container {
-        box-shadow: none;
+        width: 500px;
       }
     
-      .img-block { 
-        width: 100%;
+      .img-block {
         height: 120px;
         border-radius: 25px;
-        margin: auto;
     
        img {
-          height: 120px!important;
+        margin: auto;
+        height: 120px!important;
         }
       }  
     }

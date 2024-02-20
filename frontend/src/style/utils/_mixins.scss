@@ -284,7 +284,7 @@
     background-color: $color-beige;
     padding: 3px;
     font-weight: 600;
-    height: 2em;
+    height: 2.2em;
 
     &:hover {
       background-color: #e2d5c3;
@@ -296,14 +296,13 @@
   .alert {
     display: none;
     font-size: 14px;
-    color: #ff0000;
-    /* Couleur rouge pour l'erreur */
-    background-color: #fff0f0;
-    /* Couleur de fond pour l'erreur */
-    border: 1px solid #ff0000;
+    color: rgb(78, 78, 78);
+    background-color: #f8f8f8;
+    border: 1px solid rgb(78, 78, 78);
+    font-weight: bolder;
     padding: 10px;
     border-radius: 5px;
-    margin: 10px 0;
+    margin: 10px 0 20px;
     line-height: 2;
   }
 

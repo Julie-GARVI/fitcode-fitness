@@ -131,11 +131,17 @@ protected function loginUser(Request $request)
         // Valide les données de l'utilisateur
         $validateUser = Validator::make($request->all(), [
             'email' => ['required', 'email'],
-            'password' => ['required', 'min:8'],
+            'password' => ['required'],
         ]);
         
         // Tente de connecter l'utilisateur
         $credentials = $request->only('email', 'password');
+
+        $requiredMessages = requiredErrorMessages();
+
+        $validateUser->setCustomMessages(array_merge(
+            $requiredMessages
+        ));
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
@@ -151,6 +157,13 @@ protected function loginUser(Request $request)
                 'expiration' => $token['expiration'],
                 'isAuthenticated' => 'true',
             ], 200);
+        }
+
+        else if ($validateUser->fails()) {
+
+            $errors = $validateUser->errors()->messages();
+        
+            return response()->json(['errors' => $errors], 422);
         }
 
         else if (!User::where('email', $credentials['email'])->exists()) {
@@ -169,8 +182,9 @@ protected function loginUser(Request $request)
             return response()->json([
                 'errors' => $errors,
             ], 401);
-    
         }
+        
+
 
     } catch (\Throwable $th) {
         return response()->json([

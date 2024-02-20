@@ -2,13 +2,13 @@
   window.scrollTo(0, 0);
 
   import { link, push } from "svelte-spa-router";
-  import { isAuthenticated } from "/src/storage.js";
-  import endpoint from "/src/storage.js";
+  import endpoint, { isAuthenticated } from "/src/storage.js";
     
   import Coachs from "./Coachs/Coachs.svelte";
   import Comments from "./Comments/Comments.svelte";
 
   import ErrorsMessages from "../../reusable/ErrorsMessages.svelte";
+  import {togglePasswordVisibility} from "../../reusable/passwordVisibility"
 
   import '../Home/home.scss'
 
@@ -111,6 +111,7 @@
           <div class="form__password">
             <label for="password">Mot de passe :</label>
             <input class="password login" id="password" type="password" name="password" placeholder="energ!F13tCode" bind:value={password}>
+            <i id="eye-icon" class="fa fa-eye" on:click={() => {togglePasswordVisibility}} aria-hidden="true"></i>
           </div>
 
           <ErrorsMessages 
