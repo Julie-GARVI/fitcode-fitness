@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminExerciceController;
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +48,11 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::delete('/exercices/{id}', [AdminExerciceController::class, 'deleteExercice']);
 
+    Route::get('/contact', function () {
+        return view('contact');
+    });
+    
+    Route::get('/contact', [ContactController::class, 'list']);
 });
 
 

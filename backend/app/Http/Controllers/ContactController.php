@@ -8,6 +8,18 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {
+
+    public function list()
+    {
+   
+         $contacts = Contact::all();
+
+         //return $contacts;
+
+         return view('contact', ['contacts' => $contacts]);
+
+    }
+    
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [

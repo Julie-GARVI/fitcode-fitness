@@ -14,8 +14,9 @@ class AdminController extends UserController
 
         if ($response->getStatusCode() === 200) {
             return redirect('exercices/admin');
-        }
 
-        return $response;
+        }  else {
+            return view('login');
+        }
     }
 }

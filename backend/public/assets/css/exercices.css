@@ -1,16 +1,4 @@
-@font-face {
-    font-family: 'Lato';
-    src: url('../../font/Lato-Regular.ttf') format('truetype');
-  }
 
-  *{
-    margin: 0;
-    padding: 0;
-
-    font-family:'Lato', Tahoma, Geneva, Verdana, sans-serif;
-    box-sizing: border-box;
-
-}
 
 /* -------------------------------------PROFIL-------------------------------------- */
 h1 {

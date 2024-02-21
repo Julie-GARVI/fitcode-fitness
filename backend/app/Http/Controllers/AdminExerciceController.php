@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\ExerciceController;
 use Illuminate\Http\Request;
 use App\Models\Exercice;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 
 
 class AdminExerciceController extends ExerciceController
@@ -21,17 +18,17 @@ class AdminExerciceController extends ExerciceController
     }
 
     public function listExercices(Request $request)
-        {
-            $exercices = $this->listAllExercices($request);
+    {
+        $exercices = $this->listAllExercices($request);
 
-            foreach ($exercices as $exercice) {
-                $exercice->user->multimedia;
-            }
-
-            //return $exercices;
-
-            return view('exercices', ['exercices' => $exercices]);
+        foreach ($exercices as $exercice) {
+            $exercice->user->multimedia;
         }
+
+        //return $exercices;
+
+        return view('exercices', ['exercices' => $exercices]);
+    }
 
     public function createExercices(Request $request)
     {

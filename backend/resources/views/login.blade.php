@@ -24,6 +24,17 @@
                             <label for="password">Mot de passe:</label>
                             <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
                         </div>
+
+                        <div class="alert" style="display: {{ $errors->any() ? 'block' : 'none' }}">
+                        @if ($errors->any())
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>Erreur : {{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                        
+                        </div>
                             <button type="submit">Se connecter</button>
                     </div>
                 </form>
