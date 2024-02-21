@@ -7,7 +7,7 @@
 
     <section class="container-contact">
 
-     <h2>.. Résultats</h2>
+    <h2 class="counter-contact">@php echo count($contacts); @endphp Résultats :</h2>
 
      @foreach ($contacts as $contact)
      <div class="contact-block">

@@ -13,7 +13,7 @@
 }
 
 body {
-    margin-top: 180px;
+    margin-top: 150px;
 }
 
 
@@ -39,6 +39,7 @@ body {
 }
 
 .main-menu {
+    display: flex;
     line-height: 1.8;
     padding-top: 2em;
     list-style-type: none;
