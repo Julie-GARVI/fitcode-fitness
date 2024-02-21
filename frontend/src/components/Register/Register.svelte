@@ -6,6 +6,7 @@
     import { push } from "svelte-spa-router";
 
     import ErrorsMessages from "../../reusable/ErrorsMessages.svelte";
+    import {togglePasswordVisibility} from "../../reusable/passwordVisibility"
 
     import '../Register/register.scss'
 
@@ -72,6 +73,7 @@ async function GetUser() {
         console.error("Erreur lors de l'inscription :", error);
     }
 }
+
 </script>
 
     <section class="register-users">
@@ -122,6 +124,7 @@ async function GetUser() {
                     <div class="form password">
                             <label for="password">Mot de passe :</label>
                             <input class="password register" id="password" type="password" name="password" placeholder="Mot de passe" bind:value={password}>
+                            <i class="fa-solid fa-sm fa-eye"  on:click={togglePasswordVisibility} aria-hidden="true"></i>
                     <div>
 
                     <div class="form categories">

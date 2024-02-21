@@ -111,7 +111,7 @@
           <div class="form__password">
             <label for="password">Mot de passe :</label>
             <input class="password login" id="password" type="password" name="password" placeholder="energ!F13tCode" bind:value={password}>
-            <i id="eye-icon" class="fa fa-eye" on:click={() => {togglePasswordVisibility}} aria-hidden="true"></i>
+            <i class="fa-solid fa-sm fa-eye"  on:click={togglePasswordVisibility} aria-hidden="true"></i>
           </div>
 
           <ErrorsMessages 
