@@ -12,7 +12,7 @@
             const alertErrors = document.querySelector(".alert");
             console.log(alertErrors);
             alertErrors.style.display = "none";
-        }, 4000);         
+        }, 5000);         
     </script>
 </head>
 
@@ -33,15 +33,15 @@
                             <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
                         </div>
 
-                        <div class="alert" style="display: {{ $errors ? 'block' : 'none' }}">
-                        @if ($errors)
+                        <div class="alert" style="display: {{ $errors->any() ? 'block' : 'none' }}">
+                        @if ($errors->any())
                             <ul>
-                                @foreach ($errors as $error)
+                                @foreach ($errors->all() as $error)
                                     <li>Erreur ! {{ $error }}</li>
                                 @endforeach
                             </ul>
-                        @endif     
-                        </div>
+                        @endif
+                    </div>
 
                             <button type="submit">Se connecter</button>
                     </div>
