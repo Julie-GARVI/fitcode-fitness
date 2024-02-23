@@ -24,7 +24,7 @@ class Controller extends BaseController
 
     public function createToken(User $user, string $tokenName)
     {
-        $expiration = now()->addHours(1);
+        $expiration = now()->addHours(5);
     
         $token = $user->createToken($tokenName, ['*'], $expiration);
     

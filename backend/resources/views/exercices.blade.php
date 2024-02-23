@@ -1,5 +1,36 @@
 
-@php require_once("../resources/views/header.blade.php"); @endphp
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/a3ee4a04c9.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back-Office</title>
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="/assets/css/exercices.css">
+    <link rel="stylesheet" href="/assets/css/contact.css">
+</head>
+
+<body>
+    
+<header class="wrapper-menu">
+    <nav class="nav-menu">
+        <ul class="main-menu">
+            <li class="menuitem"><a href="/exercices/admin" class="nav-menu__link" aria-label="Liens vers la page d'accueil">Exercice</a></li>
+            <li class="menuitem"><a href="/contact" class="nav-menu__link" aria-label="Liens vers la page d'accueil">Contact</a></li>
+            <li role="menuitem">
+                    <button type="submit" form="logout-form" id="deconnexion" class="nav-menu__link" aria-label="Se déconnecter" title="Déconnexion">
+                        <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                    </button>
+
+                <form id="logout-form" action="{{ route('logout.admin') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
+        </ul>
+    </nav>
+</header>
 
     <h1>Votre espace administrateur</h1>
 <!--------------------------------------ADMIN------------------------------------------------------>

@@ -12,7 +12,8 @@
             const alertErrors = document.querySelector(".alert");
             console.log(alertErrors);
             alertErrors.style.display = "none";
-        }, 5000);         
+        }, 5000); 
+        
     </script>
 </head>
 

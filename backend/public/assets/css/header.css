@@ -53,3 +53,24 @@ body {
     padding: .5em;
     width: 120px;
 }
+
+.nav-menu__link:hover {
+    background-color: rgb(165 188 228 / 32%);
+    border-radius: 10px;
+}
+
+#deconnexion {
+    margin: 0;
+    padding: 8px;
+    width: 80px;
+    background: none;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s; 
+}
+
+ #deconnexion:hover {
+    color: #07337e;
+    transform: scale(1.1);
+ }

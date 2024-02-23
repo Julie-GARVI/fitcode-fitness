@@ -51,8 +51,12 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('/contact', function () {
         return view('contact');
     });
-    
+
     Route::get('/contact', [ContactController::class, 'list']);
+
+    Route::post('/logout', [AdminController::class, 'logoutAdmin'])->name('logout.admin');
+
+
 });
 
 

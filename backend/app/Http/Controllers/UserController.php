@@ -197,7 +197,7 @@ protected function loginUser(Request $request)
 
 
     // -------------------DECONNECTION UTILISATEUR--------------------------
-    public function logout(Request $request)
+    protected function logout(Request $request)
     {
         $user = $request->user();
 
