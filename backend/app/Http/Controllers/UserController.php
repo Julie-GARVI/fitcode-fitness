@@ -182,9 +182,7 @@ protected function loginUser(Request $request)
             return response()->json([
                 'errors' => $errors,
             ], 401);
-        }
-        
-
+        }     
 
     } catch (\Throwable $th) {
         return response()->json([

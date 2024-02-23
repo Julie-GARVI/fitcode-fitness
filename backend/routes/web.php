@@ -25,7 +25,7 @@ Route::post('/login/admin', [AdminController::class, 'loginAdmin']);
 
 Route::middleware(['auth', 'role:Admin'])->group(function () {
 
-    Route::get('exercices/admin', function () {
+    Route::get('/exercices/admin', function () {
 
         return view('exercices');
     });

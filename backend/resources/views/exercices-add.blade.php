@@ -28,10 +28,21 @@
                 4 => 8,
             ];
 
+            $category_id = [
+                1 => 1,
+                2 => 2,
+                3 => 3,
+                4 => 4,
+            ];
+
             $user_multimedia_id = isset($multimedia_id[$user_id]) ? $multimedia_id[$user_id] : null;
+            $user_category_id = isset($category_id[$user_id]) ? $category_id[$user_id] : null;
+
         @endphp
 
             <input type="hidden" name="multimedia_id" value="{{ $user_multimedia_id }}">
+
+            <input type="hidden" name="category_id" value="{{ $user_category_id  }}">
 
             <div class="value name">
                 <label for="name">Nom de l'exercice :</label>

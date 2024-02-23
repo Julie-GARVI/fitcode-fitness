@@ -23,6 +23,7 @@ class AdminExerciceController extends ExerciceController
 
         foreach ($exercices as $exercice) {
             $exercice->user->multimedia;
+            $exercice->user->category;
         }
 
         //return $exercices;

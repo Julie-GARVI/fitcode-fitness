@@ -161,13 +161,9 @@ class ExerciceController extends Controller
         $exercice->name = $request->input('name');
         $exercice->time = $request->input('time');
         $exercice->instructions = $request->input('instructions');
-
-    if ($userId > 4) {
         $exercice->category_id = $request->input('category_id');
-        }
 
-    else {
-        $exercice->category_id = $user->category_id;
+    if ($userId <= 4) {
         $exercice->level =  $request->input('level');
         $exercice->multimedia_id =  $request->input('multimedia_id');
     }
