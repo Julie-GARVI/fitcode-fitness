@@ -65,6 +65,7 @@
         formatted_time={exercice.formatted_time}
         instructions={exercice.instructions}
         id={exercice.id}
+        user={exercice.user.role}
         />
       
     {/each}

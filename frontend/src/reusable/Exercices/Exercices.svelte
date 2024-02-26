@@ -7,7 +7,7 @@
 
     import basket from "/src/assets/images/basket.webp";
 
-    export let name, category, multimedia, level, formatted_time, instructions, id;
+    export let name, category, multimedia, level, formatted_time, instructions, id, user;
  
     //-----------------Supprimer un exercice------------------------ 
     async function deleteExercice(id) {
@@ -47,13 +47,13 @@
         <h3>{name}</h3>
 </div>
     
-{#if id >= 1 && id <= 12}
+{#if user === "Admin"}
  <div class="img-block">
     <img src={'http://127.0.0.1:8000/exercices/' + multimedia} class="exercice-picture" alt={'Photo de ' + name}>
 </div>
 {:else}
 <div class="img-block">
-    <img src={basket} class="shoes-picture" alt="Image de baskets">
+    <img src={basket} class="shoes-picture" alt="baskets">
 </div>
 {/if}
       
@@ -62,7 +62,7 @@
 </div>
 
 <div class="exercice-content">
-    {#if id >= 1 && id <= 12}
+    {#if user === "Admin"}
         <span><p>{level}</p></span>
     {/if}
     <p>Durée : {formatted_time}</p>
@@ -72,12 +72,12 @@
 </div>
 
 
-<div class={id > 12 ? "btn-crud" : "button"}>
+<div class={user === "Admin" ? "button" : "btn-crud"}>
     <div class="btn-submit">
         <button class="btn-link" type="submit"><a use:link href="/exercice/{id}">Démarrer</a></button>
     </div>
     
-{#if id > 12}
+{#if user === "Membre"}
     <div class="btn-items">
         <a href="/exercices/membre/edit/{id}" aria-label="Aller à la page exercice" use:link><button class="btn-create"id="buttonEdit"><i class="fa-solid fa-pen"></i></button></a>		 
         <button on:click={deleteExercice(id)} class="btn-create"id="buttonDelete"><i class="fa-solid fa-trash"></i></button>

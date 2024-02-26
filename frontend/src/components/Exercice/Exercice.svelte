@@ -96,7 +96,7 @@
 
     <section class="wrapper-comments">
 
-        <div class={isCoachsPage === true ? 'exercice-challenge' : ""}>
+        <div class={isCoachsPage ? 'exercice-challenge' : ""}>
       
           <Chronometer /> 
     

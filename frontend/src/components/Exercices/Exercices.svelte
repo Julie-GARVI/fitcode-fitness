@@ -150,6 +150,7 @@
             instructions={exercice.instructions}
             multimedia={exercice.multimedia.picture_path}
             id={exercice.id}
+            user={exercice.user.role}
       
             />
 
