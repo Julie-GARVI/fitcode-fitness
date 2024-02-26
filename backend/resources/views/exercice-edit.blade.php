@@ -26,21 +26,22 @@
 
             <div class="value time">
                 <label for="time">Durée de l'exercice (heure:minutes:secondes) :</label>
-                <input type="time" id="time" class="time create" name="time" pattern="[0-5][0-9]:[0-5][0-9]" placeholder="HH:MM:SS" step='1' value="{{ $exercice->time }}">
+                <input type="time" id="time" class="time update" name="time" pattern="[0-5][0-9]:[0-5][0-9]" placeholder="HH:MM:SS" step='1' value="{{ $exercice->time }}">
             </div>
 
             <div class="value level">
-                <select name="level">
-                    <option disabled selected>{{ $exercice->level }}</option>
-                    <option aria-label="niveau débutant" value="débutant">Débutant</option>
-                    <option aria-label="niveau intermédiaire" value="intermédiaire">Intermédiaire</option>
-                    <option aria-label="niveau avancé" value="avancé">Avancé</option>
-                </select>
+            <select name="level">
+                <option disabled>Select Level</option>
+                <option value="facile" @if($exercice->level == "facile") selected @endif>Facile</option>
+                <option value="intermédiaire" @if($exercice->level == "intermédiaire") selected @endif>Intermédiaire</option>
+                <option value="avancé" @if($exercice->level == "avancé") selected @endif>Avancé</option>
+            </select>
             </div>
+
 
             <div class="value instructions">
                 <label for="instructions">Instructions :</label>
-                <textarea class="instructions create" id="instructions" name="instructions" placeholder="Soulever la barre des hanches aux épaules...">{{ $exercice->instructions }}</textarea>
+                <textarea class="instructions update" id="instructions" name="instructions" placeholder="Soulever la barre des hanches aux épaules...">{{ $exercice->instructions }}</textarea>
             </div>
 
             <div class="btn-block">

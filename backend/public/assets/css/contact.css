@@ -1,7 +1,7 @@
 .counter-contact {
     text-align: center;
     font-size: 20px;
-    margin: 45px 100px 20px 0;
+    margin: 45px auto 20px auto;
 }
 
 .contact-block {
@@ -49,4 +49,30 @@ p {
     padding: 5px;
     float: right;
 }
+
+.pagination {
+    text-align: center;
+    margin-bottom: 15px;
+    transition: transform 0.2s; 
+}
+
+.fa-backward {
+    margin-right: 10px;
+}
+
+.fa-forward {
+    margin-left: 10px;
+}
+
+.arrows  {
+    transition: transform 0.2s;
+}
+
+.arrows:hover {
+    transform: scale(1.1);
+    color: #07337e;
+}
+
+
+
 

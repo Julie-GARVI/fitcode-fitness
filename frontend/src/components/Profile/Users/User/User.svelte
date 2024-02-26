@@ -2,21 +2,12 @@
 
     import '../User/user.scss'
 
-    import woman from "/src/assets/images/woman.webp";
-    import man from "/src/assets/images/man.webp";
-
-    export let gender, firstname, lastname, age, email, exercice, level, number;
+    export let  multimedia, firstname, lastname, age, email, exercice, level, number;
     
 </script>
 
 <div class="profil-block">
-    {#if gender === 'Femme'} 
-        <img src={woman} class="profil-picture" alt="femme">
-    {/if}
-
-    {#if gender === 'Homme'} 
-        <img src={man} class="profil-picture" alt="homme">
-    {/if}
+        <img src={`http://127.0.0.1:8000/users/${multimedia}`} class="profil-picture" alt="femme">
 </div>
 
 <div class="profil-row1">

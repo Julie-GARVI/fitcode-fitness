@@ -9,17 +9,15 @@ use Illuminate\Support\Facades\Validator;
 class ContactController extends Controller
 {
 
-    public function list()
+        public function list()
     {
-   
-         $contacts = Contact::all();
 
-         //return $contacts;
+        $contacts = Contact::orderBy('id', 'desc')
+            ->paginate(5);
 
-         return view('contact', ['contacts' => $contacts]);
-
+        return view('contact', ['contacts' => $contacts]);
     }
-    
+
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [

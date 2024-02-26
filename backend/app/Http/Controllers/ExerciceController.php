@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
-
 class ExerciceController extends Controller
 {
 
@@ -168,9 +167,9 @@ class ExerciceController extends Controller
         $exercice->multimedia_id =  $request->input('multimedia_id');
     }
 
-        if ($exercice->multimedia_id === null) {
-           $exercice->multimedia_id = 9;
-        }
+    if ($exercice->multimedia_id === null) {
+        $exercice->multimedia_id = 9;
+    }
 
         $exercice->save();
 
@@ -190,6 +189,7 @@ class ExerciceController extends Controller
     $validator = Validator::make($request->all(), [
         'name' => ['sometimes', 'regex:' . $this->regex ],
         'time' => ['sometimes'],
+        'level' => ['sometimes'],
         'instructions' => ['sometimes', 'regex:' . $this->regex ],
         'category_id' => ['sometimes'],
     ]);

@@ -55,7 +55,7 @@ async function getMemberData(id) {
         <div class="profil-items">
 
           <User
-          gender={member.gender}
+          multimedia={member.multimedia.picture_path}
           firstname={member.firstname}
           lastname={member.lastname}
           age={member.age}

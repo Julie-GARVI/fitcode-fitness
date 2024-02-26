@@ -17,7 +17,7 @@
 <header class="wrapper-menu">
     <nav class="nav-menu">
         <ul class="main-menu">
-            <li class="menuitem"><a href="/exercices/admin" class="nav-menu__link" aria-label="Liens vers la page d'accueil">Exercice</a></li>
+            <li class="menuitem"><a href="/exercices/admin" class="nav-menu__link" aria-label="Liens vers la page d'accueil">Exercices</a></li>
             <li class="menuitem"><a href="/contact" class="nav-menu__link" aria-label="Liens vers la page d'accueil">Contact</a></li>
             <li role="menuitem">
                     <button type="submit" form="logout-form" id="deconnexion" class="nav-menu__link" aria-label="Se déconnecter" title="Déconnexion">
@@ -41,7 +41,7 @@
         @php $firstExercice = $exercices->first(); @endphp
 
             <div class="profil-block">
-                <img src="{{ asset('coachs/' . $firstExercice->user->multimedia->picture_path) }}"  class="profil-picture" alt="Photo de l'admin">
+                <img src="{{ asset('users/' . $firstExercice->user->multimedia->picture_path) }}"  class="profil-picture" alt="Photo de l'admin">
             </div>
             <div class="profil-row1">
                 <div class="profil name">
@@ -100,6 +100,7 @@
                         <div class="exercice-category">
                             <p>{{ $exercice->category->name}}</p>
                         </div>
+                    
                         <span><p>{{ $exercice->level }}</p></span>
                         <p>{{ $exercice->formatted_time }}</p>
                     </div>

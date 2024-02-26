@@ -17,7 +17,7 @@
 <header class="wrapper-menu">
     <nav class="nav-menu">
         <ul class="main-menu">
-            <li class="menuitem"><a href="/exercices/admin" class="nav-menu__link" aria-label="Liens vers la page d'accueil">Exercice</a></li>
+            <li class="menuitem"><a href="/exercices/admin" class="nav-menu__link" aria-label="Liens vers la page d'accueil">Exercices</a></li>
             <li class="menuitem"><a href="/contact" class="nav-menu__link" aria-label="Liens vers la page d'accueil">Contact</a></li>
             <li role="menuitem">
                     <button type="submit" form="logout-form" id="deconnexion" class="nav-menu__link" aria-label="Se déconnecter" title="Déconnexion">
@@ -38,7 +38,17 @@
 
     <section class="container-contact">
 
-    <h2 class="counter-contact">@php echo count($contacts); @endphp Résultats :</h2>
+    <h2 class="counter-contact">{{ $contacts->total() }} Résultats :</h2>
+
+    <div class="pagination">
+        @if ($contacts->previousPageUrl())
+        <a href="{{ $contacts->previousPageUrl() }}" class="btn btn-primary"><i class="fa-solid arrows fa-backward fa-lg"></i></a>
+        @endif
+
+        @if ($contacts->nextPageUrl())
+        <a href="{{ $contacts->nextPageUrl() }}" class="btn btn-primary"><i class="fa-solid arrows fa-forward fa-lg"></i></a>
+        @endif
+    </div>
 
      @foreach ($contacts as $contact)
      <div class="contact-block">
@@ -48,14 +58,13 @@
             </div>
             <p><i class="fa-solid fa-paper-plane pink"></i>{{$contact->email}}</p>
         </div>
-        <div class="message">
-            <p>{{$contact->message}}<p>
-        <div class="icon">
-            <i class="fa-solid fa-user"></i>
-        </div>
+            <div class="message">
+                <p>{{$contact->message}}<p>
+            <div class="icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
         </div>
      </div>
-
      @endforeach
     </section>
 

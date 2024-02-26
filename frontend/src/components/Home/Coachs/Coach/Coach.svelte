@@ -8,7 +8,7 @@
   
 <div class="teams-content">
     <div class="teams-img">
-        <img src={`http://127.0.0.1:8000/coachs/${multimedia.picture_path}`} class="coachs-picture" alt={`Photo de ${firstname} ${lastname}`}>
+        <img src={`http://127.0.0.1:8000/users/${multimedia.picture_path}`} class="coachs-picture" alt={`Photo de ${firstname} ${lastname}`}>
     </div>
   
     <div class="teams-name">
