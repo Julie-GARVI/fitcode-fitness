@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Session;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
@@ -41,100 +40,78 @@ class UserController extends Controller
         
 // -------------------CREATION UTILISATEUR--------------------------
 
-        public function createUser(Request $request)
-        {
-            try {
-        
-                // Validation des données
-                $validateUser = Validator::make($request->all(), [
-                    'gender' => 'required',
-                    'lastname' => ['required', 'max:50', 'string', 'regex:' . $this->regex ],
-                    'firstname' => ['required', 'max:50', 'string', 'regex:' . $this->regex],
-                    'age' => ['required', 'min:12', 'max:90', 'integer'],
-                    'email' => ['required', 'email', 'unique:users', 'regex:' . $this->regex],
-                    'password' => ['required', 'min:8', 'regex:' . $this->passwordRegex],
-                    'category_id' => 'sometimes',
-                    'level' => 'required',
-                ]);
-        
-                $requiredMessages = requiredErrorMessages();
-                $validateMessages = validateErrorMessages();
-                $charactersMessages = $this->specialCharactersErrors();
-        
-                $validateUser->setCustomMessages(array_merge(
-                    $requiredMessages, 
-                    $validateMessages,
-                    ['regex' => $charactersMessages['regex']],
-                    ['password.regex' => $charactersMessages['passwordRegex']]
-                ));
-        
-                if ($validateUser->fails()) {
-        
-                    $errors = $validateUser->errors()->messages();
-                
-                    return response()->json(['errors' => $errors], 422);
-                }
-        
-                else {
-        
-                    $number = null;
-                    do {
-                        $number = mt_rand(10000, 99999);
-                    }while (User::where('number', $number)->exists());
-            
-            
-                //Validation requête
-                    $userData = $request->except('category_id');
+    public function createUser(Request $request)
+{
+    try {
 
-                //Rôle par défaut
-                    $userData['role'] = 'Membre';
+        // Validation des données
+        $validateUser = Validator::make($request->all(), [
+            'gender' => 'required',
+            'lastname' => ['required', 'max:50', 'string', 'regex:' . $this->regex ],
+            'firstname' => ['required', 'max:50', 'string', 'regex:' . $this->regex],
+            'age' => ['required', 'min:12', 'max:90', 'integer'],
+            'email' => ['required', 'email', 'unique:users', 'regex:' . $this->regex],
+            'password' => ['required', 'min:8', 'confirmed', 'regex:' . $this->passwordRegex],
+            'category_id' => 'sometimes',
+            'level' => 'required',
+        ]);
 
-                //Attribution du n° d'adhérent
-                     $userData['number'] = $number;
+        // Gestion des messages d'erreur
+        $requiredMessages = requiredErrorMessages();
+        $validateMessages = validateErrorMessages();
+        $charactersMessages = $this->specialCharactersErrors();
 
-                //Attribution de la photo du user
-                     if ($userData['gender'] === "Femme") {
-                        $userData['multimedia_id'] = 10;
-                    } else if ($userData['gender'] === "Homme") {
-                        $userData['multimedia_id'] = 11;
-                    }
-     
-                //Hachage du mot de passe
-                    $userData['password'] = Hash::make($userData['password']);
+        $validateUser->setCustomMessages(array_merge(
+            $requiredMessages, 
+            $validateMessages,
+            ['regex' => $charactersMessages['regex']],
+            ['password.regex' => $charactersMessages['passwordRegex']]
+        ));
 
-                //Création de l'utilisateur
-                    $user = User::create($userData);
-
-                    $category_id = $request->input('category_id');
-
-                //Envoie vers la table catégorie
-                    $user->categories()->attach($category_id);
-            
-                //Attribution du token
-                    $token = $this->createToken($user, 'token');
-        
-                    Session::put('user', $user);
-            
-                // Réponse en JSON
-                    return response()->json([
-                        'isAuthenticate' => true,
-                        'number' => $user->number,
-                        'token' =>  $token['token'], 
-                        'expiration' => $token['expiration'], 
-                        'id' => $user->id,
-                    ], 200);    
-        
-                }
-        
-                // Retour en cas d'erreur
-                } catch (\Throwable $th) {
-                    return response()->json([
-                        'status' => false,
-                        'message' => $th->getMessage(),
-                    ], 500);
-                }
+            if ($validateUser->fails()) {
+                $errors = $validateUser->errors()->messages();
+                return response()->json(['errors' => $errors], 422);
             }
-        
+
+            else {
+                   // Génération d'un numéro d'adhérent unique
+            $number = null;
+            do {
+                $number = mt_rand(10000, 99999);
+            } while (User::where('number', $number)->exists());
+
+            // Création de l'utilisateur
+            $userData = $request->except('category_id');
+            $userData['role'] = 'Membre';
+            $userData['number'] = $number;
+            $userData['multimedia_id'] = ($userData['gender'] === "Femme") ? 10 : 11;
+            $userData['password'] = Hash::make($userData['password']);
+            $user = User::create($userData);
+
+            // Enregistrement de la catégorie
+            $category_id = $request->input('category_id');
+            $user->categories()->attach($category_id);
+
+            // Génération du token
+            $token = $this->createToken($user, 'token');
+
+            // Réponse en JSON
+            return response()->json([
+                'isAuthenticate' => true,
+                'number' => $user->number,
+                'token' =>  $token['token'], 
+                'expiration' => $token['expiration'], 
+                'id' => $user->id,
+            ], 200);    
+        }
+
+    } catch (\Throwable $th) {
+        return response()->json([
+            'status' => false,
+            'message' => $th->getMessage(),
+        ], 500);
+    }
+}
 
 
 
@@ -248,6 +225,7 @@ function validateErrorMessages() {
         'email.email' => 'L\'adresse email doit inclure "@"',
         'email.unique' => 'L\'adresse email est déjà prise',
         'password.min' => 'Votre mot de passe doit avoir au minimum 8 caractères',
+        'password.confirmed' => 'Les mots de passe ne correspondent pas',
     ];
 }
 

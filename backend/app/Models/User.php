@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
-class User extends Authenticatable
+class User extends Authenticatable 
 {
 
     use HasApiTokens, HasFactory, Notifiable;
@@ -40,7 +40,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Category::class);
     }
 
-// Les champs suivants sont renvoyés en base de données
     /**
      * The attributes that are mass assignable.
      *
@@ -61,7 +60,6 @@ class User extends Authenticatable
         'multimedia_id'
     ];
 
-// Les champs suivants sont non visibles pour des raisons de confidentialités
     /**
      * The attributes that should be hidden for serialization.
      *
