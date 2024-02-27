@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -95,6 +97,8 @@ class UserController extends Controller
             // Génération du token
             $token = $this->createToken($user, 'token');
 
+            Mail::to($user->email)->send(new SendMail($user));
+
             // Réponse en JSON
             return response()->json([
                 'isAuthenticate' => true,
@@ -112,7 +116,6 @@ class UserController extends Controller
         ], 500);
     }
 }
-
 
 
 // -------------------CONNEXION UTILISATEUR--------------------------
