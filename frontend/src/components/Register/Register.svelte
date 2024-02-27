@@ -12,7 +12,7 @@
 
     import poidsremove from "/src/assets/images/poidsremove.png";
 
-    export let gender, lastname, firstname, age, level, email, password, category_id;
+    let gender, lastname, firstname, age, level, email, password, password_confirmation, category_id;
 
     let errorMessages = []; 
     let displayError = false;
@@ -35,7 +35,7 @@ async function GetUser() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ gender, lastname, firstname, age, level, email, password, category_id})
+            body: JSON.stringify({ gender, lastname, firstname, age, level, email, password, password_confirmation, category_id})
         });
 
         const responseData = await registerResponse.json(); 
@@ -125,6 +125,12 @@ async function GetUser() {
                             <label for="password">Mot de passe :</label>
                             <input class="password register" id="password" type="password" name="password" placeholder="Mot de passe" bind:value={password}>
                             <i class="fa-solid fa-sm fa-eye"  on:click={togglePasswordVisibility} aria-hidden="true"></i>
+                    <div>
+
+                    <div class="form password">
+                        <label for="password">Mot de passe :</label>
+                        <input class="password register" id="password_confirmation" type="password" name="password_confirmation" placeholder="Mot de passe" bind:value={password_confirmation}>
+                        <i class="fa-solid fa-sm fa-eye"  on:click={togglePasswordVisibility} aria-hidden="true"></i>
                     <div>
 
                     <div class="form categories">

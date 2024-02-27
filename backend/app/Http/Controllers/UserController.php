@@ -231,5 +231,3 @@ function validateErrorMessages() {
         'password.confirmed' => 'Les mots de passe ne correspondent pas',
     ];
 }
-
-

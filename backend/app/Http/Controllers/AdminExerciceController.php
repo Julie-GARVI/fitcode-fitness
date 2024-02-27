@@ -26,8 +26,6 @@ class AdminExerciceController extends ExerciceController
             $exercice->user->category;
         }
 
-        //return $exercices;
-
         return view('exercices', ['exercices' => $exercices]);
     }
 
@@ -54,7 +52,7 @@ class AdminExerciceController extends ExerciceController
 
         $exercice->delete();
 
-        return response()->json(['message' => 'Exercice deleted']);
+       // return response()->json(['message' => 'Exercice deleted']);
     }
 
 

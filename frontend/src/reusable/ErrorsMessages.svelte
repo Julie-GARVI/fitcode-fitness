@@ -1,5 +1,8 @@
 <script>
     export let errorMessages, displayError;
+    
+    console.log('errorMessages:', errorMessages);
+    console.log('displayError:', displayError);
 
 </script>
 
