@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+//use App\Mail\SendMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+//use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Session;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
@@ -52,7 +53,7 @@ class UserController extends Controller
                     'firstname' => ['required', 'max:50', 'string', 'regex:' . $this->regex],
                     'age' => ['required', 'min:12', 'max:90', 'integer'],
                     'email' => ['required', 'email', 'unique:users', 'regex:' . $this->regex],
-                    'password' => ['required', 'min:8', 'regex:' . $this->passwordRegex],
+                    'password' => ['required', 'min:8', 'confirmed', 'regex:' . $this->passwordRegex],
                     'category_id' => 'sometimes',
                     'level' => 'required',
                 ]);
@@ -135,7 +136,7 @@ class UserController extends Controller
                 }
             }
         
-
+    //Mail::to($user->email)->send(new SendMail($user));
 
 
 // -------------------CONNEXION UTILISATEUR--------------------------
@@ -248,6 +249,7 @@ function validateErrorMessages() {
         'email.email' => 'L\'adresse email doit inclure "@"',
         'email.unique' => 'L\'adresse email est déjà prise',
         'password.min' => 'Votre mot de passe doit avoir au minimum 8 caractères',
+        'password.confirmed' => 'Les mots de passe ne correspondent pas',
     ];
 }
 
