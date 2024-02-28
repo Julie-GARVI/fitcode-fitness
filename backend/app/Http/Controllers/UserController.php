@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 //use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\PersonalAccessToken;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -113,9 +114,7 @@ class UserController extends Controller
             
                 //Attribution du token
                     $token = $this->createToken($user, 'token');
-        
-                    Session::put('user', $user);
-            
+              
                 // Réponse en JSON
                     return response()->json([
                         'isAuthenticate' => true,
@@ -197,7 +196,7 @@ protected function loginUser(Request $request)
             return response()->json([
                 'errors' => $errors,
             ], 401);
-        }     
+        }
 
     } catch (\Throwable $th) {
         return response()->json([
@@ -206,7 +205,6 @@ protected function loginUser(Request $request)
         ], 500);
     }
 }
-
 
 
     // -------------------DECONNECTION UTILISATEUR--------------------------

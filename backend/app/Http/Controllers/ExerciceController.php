@@ -85,7 +85,7 @@ class ExerciceController extends Controller
 
         //Création d'une jointure entre les tables exercices et users
         //on lie user_id de la table exercices avec l'id de la table users
-            $exercices = Exercice::leftJoin('users', 'users.id', '=', 'exercices.user_id')
+            $exercices = Exercice::join('users', 'users.id', '=', 'exercices.user_id')
         //Le rôle doit être coach
                 ->where('users.role', 'ADMIN')
                 ->select('exercices.*')

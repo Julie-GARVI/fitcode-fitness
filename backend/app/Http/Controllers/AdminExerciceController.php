@@ -26,8 +26,6 @@ class AdminExerciceController extends ExerciceController
             $exercice->user->category;
         }
 
-        //return $exercices;
-
         return view('exercices', ['exercices' => $exercices]);
     }
 

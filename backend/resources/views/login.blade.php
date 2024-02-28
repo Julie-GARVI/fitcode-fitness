@@ -13,7 +13,7 @@
             const alertErrors = document.querySelector(".alert");
             console.log(alertErrors);
             alertErrors.style.display = "none";
-        }, 5000); 
+        }, 3500); 
         
     </script>
 </head>
@@ -24,7 +24,7 @@
                 
                 <h1>Bienvenue sur l'espace administrateur</h1>
                 <h2>Connectez-vous à votre compte</h2>
-                <form method="POST" action="{{ url('/login/admin') }}">
+                <form method="POST" class="loginForm" action="{{ url('/login/admin') }}">
                     @csrf
                     <div class="form-block">
                         <div class="form-value">
