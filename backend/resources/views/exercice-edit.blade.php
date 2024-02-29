@@ -10,6 +10,16 @@
     <title>Nouvel exercice</title>
     <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/exercices-add.css">
+
+    <script>
+        setTimeout(function() {
+            const alertErrors = document.querySelector(".alert");
+            console.log(alertErrors);
+            alertErrors.style.display = "none";
+        }, 3500); 
+        
+    </script>
+
   </head>
   <body>
 
@@ -34,7 +44,7 @@
                 <option disabled>Select Level</option>
                 <option value="facile" @if($exercice->level == "facile") selected @endif>Facile</option>
                 <option value="intermédiaire" @if($exercice->level == "intermédiaire") selected @endif>Intermédiaire</option>
-                <option value="avancé" @if($exercice->level == "avancé") selected @endif>Avancé</option>
+                <option value="difficile" @if($exercice->level == "difficile") selected @endif>Difficile</option>
             </select>
             </div>
 
@@ -42,6 +52,16 @@
             <div class="value instructions">
                 <label for="instructions">Instructions :</label>
                 <textarea class="instructions update" id="instructions" name="instructions" placeholder="Soulever la barre des hanches aux épaules...">{{ $exercice->instructions }}</textarea>
+            </div>
+
+            <div class="alert" style="display: {{ $errors->any() ? 'block' : 'none' }}">
+                        @if ($errors->any())
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>Erreur ! {{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
             </div>
 
             <div class="btn-block">

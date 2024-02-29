@@ -30,6 +30,20 @@ textarea {
     height: 150px;
 }
 
+.alert {
+    display: none;
+    font-size: 14px;
+    color: rgb(78, 78, 78);
+    background-color: #f8f8f8;
+    border: 1px solid rgb(78, 78, 78);
+    font-weight: bolder;
+    padding: 4px;
+    border-radius: 5px;
+    margin: 10px 0;
+    line-height: 2;
+}
+
+
 .btn-block {
     text-align: center;
 }

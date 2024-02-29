@@ -43,7 +43,8 @@ class Exercice extends Model
         'serie',
         'difficulty',
         'instructions',
-        'time'
+        'time',
+        'level'
     ];
 
 

@@ -6,12 +6,12 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminController extends UserController
+class AdminController extends AuthController
 {
 
     public function loginAdmin(Request $request)
     {
-        $response = $this->loginUser($request);
+        $response = $this->login($request);
 
         if ($response->getStatusCode() === 200) {
 

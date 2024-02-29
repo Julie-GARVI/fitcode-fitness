@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExerciceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MultimediaController;
@@ -37,9 +38,9 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/comments', [CommentController::class, 'list'])->name('comments.home');
 
-    Route::post('/auth/register', [UserController::class, 'createUser']);
+    Route::post('/auth/register', [AuthController::class, 'create']);
 
-    Route::post('/auth/login', [UserController::class, 'loginUser'])->name('login');
+    Route::post('/auth/login', [AuthController::class, 'login']);
 
     Route::post('/contact', [ContactController::class, 'create']);
 
@@ -70,7 +71,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/exercices', [ExerciceController::class, 'create']);
 
-    Route::post('/auth/logout', [UserController::class, 'logout'])->name('logout');
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
 
     Route::post('/exercice/{id}/comments', [CommentController::class, 'create']);
 

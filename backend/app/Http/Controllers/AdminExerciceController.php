@@ -19,21 +19,23 @@ class AdminExerciceController extends ExerciceController
 
     public function listExercices(Request $request)
     {
-        $exercices = $this->listAllExercices($request);
-
-        foreach ($exercices as $exercice) {
-            $exercice->user->multimedia;
-            $exercice->user->category;
-        }
+        $exercices = $this->list($request);
 
         return view('exercices', ['exercices' => $exercices]);
     }
 
     public function createExercices(Request $request)
     {
-        $exercice = $this->create($request);
+        $response = $this->create($request);
+   
+        if ($response->getStatusCode() === 201) {
 
-        return redirect('exercices/admin');
+            return redirect('exercices/admin');
+            
+        } else {
+      
+            return redirect()->back()->withErrors($response->getData()->errors);
+        }
 
         return $exercice;
      }
@@ -41,9 +43,16 @@ class AdminExerciceController extends ExerciceController
 
      public function updateExercices(Request $request, int $id)
      {
-        $exercice = $this->update($request, $id);
+        $response = $this->update($request, $id);
+        
+        if ($response->getStatusCode() === 200) {
 
-        return redirect('exercices/admin');
+            return redirect('exercices/admin');
+            
+        } else {
+      
+            return redirect()->back()->withErrors($response->getData()->errors);
+        }
      }
 
     public function deleteExercice($id)

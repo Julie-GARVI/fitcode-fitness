@@ -40,7 +40,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::get('/exercices/admin/edit/{id}', [AdminExerciceController::class, 'showExerciceId']);
 
-    Route::get('/exercices/admin', [AdminExerciceController::class, 'listExercices']);
+    Route::get('/exercices/admin', [AdminExerciceController::class, 'listExercices'])->name('exercices.members');
 
     Route::post('/exercices/add', [AdminExerciceController::class, 'createExercices']);
 

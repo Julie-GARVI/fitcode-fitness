@@ -15,7 +15,7 @@
   let exercice = [];
   let exerciceId = '';
   
-  export let name, time, instructions, category_id;
+  let category_id;
 
   let errorMessages = []; 
   let displayError = false;

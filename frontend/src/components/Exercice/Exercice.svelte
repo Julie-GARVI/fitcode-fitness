@@ -11,7 +11,6 @@
     
     let exerciceId;
     let exercice = '';
-
     //const id = exercice.id;
     let isCoachsPage = false;
 
@@ -31,7 +30,7 @@
                 exercice = await response.json();
                 console.log(exercice);
                 isCoachsPage = true;
-                console.log(coachsPage)
+                console.log(isCoachsPage)
 
             } else {
                 console.error('Erreur lors de la récupération des données de l\'équipe');

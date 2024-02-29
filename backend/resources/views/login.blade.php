@@ -54,11 +54,11 @@
         </main>
 
         <script>
-        function togglePasswordVisibility() { // Ajout de parenthèses après le nom de la fonction
+        function togglePasswordVisibility() { 
             const eye = document.querySelector(".fa-eye");
             eye.addEventListener("click", () => { 
                 console.log(eye);
-                const passwordFields = document.querySelector("#password"); // Utilisation de querySelectorAll
+                const passwordFields = document.querySelector("#password"); 
                 
                     if (password.type === "password") {
                         password.type = "text";

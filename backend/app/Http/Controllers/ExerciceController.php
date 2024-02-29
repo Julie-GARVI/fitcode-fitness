@@ -13,107 +13,65 @@ class ExerciceController extends Controller
 {
 
    // --------------------RECUPERATION D'UN EXERCICE-------------------------
-    public function show(int $id, Request $request)
+        public function show(int $id, Request $request)
     {
-
-// --------------------EXERCICE D'UN MEMBRE-------------------------
-    if ($request->routeIs('exercice.member')) {
-         //On cible l'id de l'utilisateur connecté
-        $user = Auth::user();
-        $userId = $user->id;
-        $exercices = Exercice::where('user_id', $userId)
-                              ->with('category', 'multimedia', 'user')->findOrFail($id);
-
+        if ($request->routeIs('exercice.member')) {
+            $user = Auth::user();
+            $userId = $user->id;
+            $exercices = Exercice::where('user_id', $userId)->findOrFail($id);
+            
+        } else {
+            $exercices = Exercice::with('category', 'multimedia', 'user')->findOrFail($id);
+        }
 
         return $exercices;
     }
 
-// --------------------EXERCICE D'UN COACH-------------------------
-    // Ajouter cette requette dans la fonction show
-    if ($request->routeIs('exercice.coach')) {
 
-        $exercices = Exercice::with('category', 'multimedia', 'user')->findOrFail($id);
-
-        return $exercices;
-    }
-}
-
-
-//--------------FONCTION AVEC HERITAGE-------------------------
-//------------Récupération des exercices des membres----------------------
-    protected function listAllExercices(Request $request)
+// --------------------EXERCICE DE TOUS LES UTILISATEURS------------------------
+    protected function list(Request $request)
     {
-        // On cible l'id de l'utilisateur connecté
-    $user = Auth::user();
-    $userId = $user->id;
+// --------------------EXERCICE DES MEMBRES-------------------------
+        if ($request->routeIs('exercices.members')) {
 
-    // --------------------EXERCICE DES MEMBRES-------------------------
-        $exercices = Exercice::where('user_id', $userId)->get();
+            $user = Auth::user();
+            $userId = $user->id;
+            $exercices = Exercice::where('user_id', $userId)->get();
+        }
+
+// --------------------EXERCICE DES COACHS-------------------------
+        else if (($request->routeIs('exercices.coachs')) ) {
+
+            $exercices = Exercice::join('users', 'users.id', '=', 'exercices.user_id')
+                ->where('users.role', 'ADMIN')
+                ->select('exercices.*')
+                ->get();
+            }
 
         foreach ($exercices as $exercice) {
             $timeValue = $exercice->time;
-            // Scinde une chaîne de caractères en segments
+        //Scinde une chaîne de caractères en segments
             list($hours, $minutes, $seconds) = explode(':', $timeValue);
-            // Retourne une chaine formatée
+        //retourne une chaine formatée
             $formattedTime = sprintf('%d h, %d mins et %d s', $hours, $minutes, $seconds);
             $exercice->formatted_time = $formattedTime;
-            // Associé l'exercice à sa catégorie et son image
+            //associé l'exercie à sa catégorie et son image
             $exercice->category;
             $exercice->multimedia;
             $exercice->user;
         }
 
         return $exercices;
-}
-
-
-
-// --------------------EXERCICE DE TOUS LES UTILISATEURS------------------------
-    public function list(Request $request)
-    {
-// --------------------EXERCICE DES MEMBRES-------------------------
-            // --------------------EXERCICE DES MEMBRES-------------------------
-        if ($request->routeIs('exercices.members')) {
-
-            return $this->listAllExercices($request);
-        }
-
-
-// --------------------EXERCICE DES COACHS-------------------------
-       //S'il s'agit des exercices des coachs
-        if ($request->routeIs('exercices.coachs')) {
-
-        //Création d'une jointure entre les tables exercices et users
-        //on lie user_id de la table exercices avec l'id de la table users
-            $exercices = Exercice::join('users', 'users.id', '=', 'exercices.user_id')
-        //Le rôle doit être coach
-                ->where('users.role', 'ADMIN')
-                ->select('exercices.*')
-                ->get();
-
-                foreach ($exercices as $exercice) {
-                    $timeValue = $exercice->time;
-                //Scinde une chaîne de caractères en segments
-                    list($hours, $minutes, $seconds) = explode(':', $timeValue);
-                //retourne une chaine formatée
-                    $formattedTime = sprintf('%d h, %d mins et %d s', $hours, $minutes, $seconds);
-                    $exercice->formatted_time = $formattedTime;
-                    //associé l'exercie à sa catégorie et son image
-                    $exercice->category;
-                    $exercice->multimedia;
-                    $exercice->user;
-                }
-
-                return $exercices;
-        }
     }
 
 
+
 // --------------------CREATION DES EXERCICES-------------------------
-    protected function create(Request $request)
+protected function create(Request $request)
 {
     $user = Auth::user();
     $userId = $user->id;
+    $userRole = $user->role;
 
     try {
         $rules = [
@@ -123,17 +81,16 @@ class ExerciceController extends Controller
             'instructions' => ['required', 'regex:' . $this->regex],
         ];
         
-        if ($userId > 4) {
+        if ($userRole === "Membre") {
             $rules['category_id'] = ['required', 'int'];
-            $rules['level'] = 'sometimes';
-        } else {
-            $rules['category_id'] = 'sometimes';
+
+        } else if ($userRole === "Admin") {
+ 
             $rules['level'] = 'required';
         }
         
         $validator = Validator::make($request->all(), $rules);
         
-
         $requiredMessages = requiredErrorMessages();
         $charactersMessages = $this->specialCharactersErrors();
 
@@ -146,6 +103,29 @@ class ExerciceController extends Controller
 
             $exerciceData = $validator->validate();
 
+            $exercice = new Exercice();
+            $exercice->user_id = $userId;
+            $exercice->name = $request->input('name');
+            $exercice->time = $request->input('time');
+            $exercice->instructions = $request->input('instructions');
+            $exercice->category_id = $request->input('category_id');
+
+            if ($userRole === "Admin") {
+                $exercice->level =  $request->input('level');
+                $exercice->multimedia_id =  $request->input('multimedia_id');
+            }
+        
+            if ($exercice->multimedia_id === null) {
+                $exercice->multimedia_id = 9;
+            }
+
+            $exercice->save();
+
+            return response()->json([
+                'message' => 'Exercice créé avec succès',
+                'exercice' => $exercice,
+            ], 201);
+
         } else {
             
             $errors = $validator->errors()->messages();
@@ -153,102 +133,92 @@ class ExerciceController extends Controller
             return response()->json(['errors' => $errors], 422);
         }
 
-    } catch (ValidationException $error) {
-        return response()->json(['errors' => $error->errors()], 400);
+    return $exercice;
+
+    } catch (\Throwable $th) {
+        return response()->json([
+            'status' => false,
+            'message' => $th->getMessage(),
+        ], 500);
     }
-
-        $exercice = new Exercice();
-        $exercice->user_id = $userId;
-        $exercice->name = $request->input('name');
-        $exercice->time = $request->input('time');
-        $exercice->instructions = $request->input('instructions');
-        $exercice->category_id = $request->input('category_id');
-
-    if ($userId <= 4) {
-        $exercice->level =  $request->input('level');
-        $exercice->multimedia_id =  $request->input('multimedia_id');
-    }
-
-    if ($exercice->multimedia_id === null) {
-        $exercice->multimedia_id = 9;
-    }
-
-        $exercice->save();
-
-        return $exercice;
-    }
-
-
+}
 
 // --------------------MODIFICATION DES ECERCICES-------------------------
-    protected function update(Request $request, int $id)
+protected function update(Request $request, int $id)
 {
     try {
+        $user = Auth::user();
+        $userId = $user->id;
+        $userRole = $user->role;
 
-    $user = Auth::user();
-    $userId = $user->id;
+        $validator = Validator::make($request->all(), [
+            'name' => ['sometimes', 'regex:' . $this->regex],
+            'time' => ['sometimes'],
+            'level' => ['sometimes'],
+            'instructions' => ['sometimes', 'regex:' . $this->regex],
+            'category_id' => ['sometimes'],
+        ]);
 
-    $validator = Validator::make($request->all(), [
-        'name' => ['sometimes', 'regex:' . $this->regex ],
-        'time' => ['sometimes'],
-        'level' => ['sometimes'],
-        'instructions' => ['sometimes', 'regex:' . $this->regex ],
-        'category_id' => ['sometimes'],
-    ]);
+        $charactersMessages = $this->specialCharactersErrors();
+        $validator->setCustomMessages(array_merge(
+            ['regex' => $charactersMessages['regex']],
+        ));
 
-    $charactersMessages = $this->specialCharactersErrors();
-    $validator->setCustomMessages(array_merge(
-        ['regex' => $charactersMessages['regex']],
-    ));
+        $exercice = Exercice::find($id);
 
-    if ($validator->fails()) {
-        $errors = $validator->errors()->messages();
-        
-        return response()->json(['errors' => $errors], 422);
-    }
+        if (!$validator->fails() && $exercice->user_id === Auth::id()) {
+            $request->validate([
+                'name' => ['sometimes'],
+                'time' => ['sometimes'],
+                'instructions' => ['sometimes'],
+                'level' => ['sometimes'],
+                'category_id' => ['sometimes'],
+            ]);
+    
+            $exercice->name = $request->input('name');
+            $exercice->time = $request->input('time');
+            $exercice->instructions = $request->input('instructions');
+    
+            if ($userRole === "Membre") {
+                $exercice->category_id = $request->input('category_id');
+            } else if ($userRole === "Admin") {
+                $exercice->level = $request->input('level');
+            }
 
-    $request->validate([
-        'name' => ['sometimes'],
-        'time' => ['sometimes'],
-        'instructions' => ['sometimes'],
-        'level' => ['sometimes'],
-        'category_id' => ['sometimes'],
-    ]);
-
-    } catch (ValidationException $error) {
-    return $error;
-    }
-
-    $exercice = Exercice::find($id);
-
-    if ($exercice && $exercice->user_id === Auth::id()) {
-        $exercice->name = $request->input('name');
-        $exercice->time = $request->input('time');
-        $exercice->instructions = $request->input('instructions');
-
-        if ($userId > 4) {
-        $exercice->category_id = $request->input('category_id');
-        } else {
-        $exercice->level = $request->input('level');
+            $exercice->save();
+                
+            return response()->json([
+                'message' => 'Exercice modifié avec succès',
+                'exercice' => $exercice,
+            ], 200);
         }
-        $exercice->save();
 
-        return $exercice;
-    } else {
+        else {
+            $errors = $validator->errors()->messages();
+            return response()->json(['errors' => $errors], 422);
+        }
+
+            return $exercice;
+
+        } catch (\Throwable $th) {
+            
         return response()->json([
-            'message' => 'Access not authorized'
-        ], 401);
+            'status' => false,
+            'message' => $th->getMessage(),
+        ], 500);
     }
 }
 
 
-
-// --------------------SUPRESSION DES ECERCICES-------------------------
+// --------------------SUPRESSION DES EXERCICES-------------------------
     protected function delete($id)
     {
         $exercice = Exercice::find($id);
 
-        $exercice->delete();
+        if ($exercice->user_id === Auth::id()) {
+
+            $exercice->delete();
+        }
 
         return response()->json(['message' => 'Exercice deleted']);
     }
@@ -261,5 +231,6 @@ function requiredErrorMessages() {
         'time.required' => 'Veuillez indiquer le temps de votre exercice en heure(s), minute(s) et secondes',
         'instructions.required' => 'Veuillez indiquer les instructions de votre exercice',
         'category_id.required' => 'Veuillez indiquer la catégorie de votre exercice',
+        'level.required' => 'Veuillez indiquer votre niveau',
     ];
 }
