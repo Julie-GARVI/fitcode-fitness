@@ -33,6 +33,7 @@
       });
 
       const responseData = await loginResponse.json();
+      console.log(responseData)
 
       if (loginResponse.ok) {
         const accessToken = responseData.token;
@@ -52,6 +53,7 @@
         ];
 
         console.log(localStorageData);
+        console.log(responseData)
 
         isAuthenticated.set(true);
         push("/profil");
