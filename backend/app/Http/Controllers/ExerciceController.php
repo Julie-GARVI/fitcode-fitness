@@ -27,7 +27,6 @@ class ExerciceController extends Controller
         return $exercices;
     }
 
-
 // --------------------EXERCICE DE TOUS LES UTILISATEURS------------------------
     protected function list(Request $request)
     {
@@ -143,7 +142,7 @@ protected function create(Request $request)
     }
 }
 
-// --------------------MODIFICATION DES ECERCICES-------------------------
+// --------------------MODIFICATION DES EXERCICES-------------------------
 protected function update(Request $request, int $id)
 {
     try {

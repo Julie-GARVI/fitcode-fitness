@@ -25,12 +25,10 @@ use Illuminate\Support\Facades\Route;
 // Création des routes avec la méthode appropriée :
 // - Get pour récupérer des données
 // - Post pour ajouter des données
-// - Put pour modifier des donnéesController::class, 'list']);
+// - Put pour modifier des données
 // - Delete pour supprimer des données
 
 // Les controlleurs et les méthodes sont nommés dans les routes
-
-
 
 // -----------------------------------------Routes publiques--------------------------------__
 
@@ -44,9 +42,9 @@ use Illuminate\Support\Facades\Route;
 
     Route::post('/contact', [ContactController::class, 'create']);
 
-    Route::get('/categories', [CategoryController::class, 'list']);
+    Route::get('/categories', [CategoryController::class, 'list'])->name('category.coachs');
 
-    Route::get('/users/{user}/categories', [CategoryController::class, 'listUserCategories']);
+    Route::get('/users/{user}/categories', [CategoryController::class, 'listUserCategories'])->name('category.users');
 
 
 // ----------------------------------------Routes privées--------------------------------__

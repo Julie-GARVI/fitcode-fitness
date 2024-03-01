@@ -54,7 +54,9 @@
 			console.error('Une erreur s\'est produite:', error);
 		}
 	}
-	getExercicesData();
+  onMount(() => {
+    getExercicesData();
+  });
 
     function handleFilterChange(event) {
     const { filterCategory, filterLevel } = event.detail;

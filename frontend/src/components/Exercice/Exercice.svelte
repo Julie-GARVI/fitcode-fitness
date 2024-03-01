@@ -9,36 +9,39 @@
 
     import './exercice.scss'
     
-    let exerciceId;
+
     let exercice = '';
     //const id = exercice.id;
-    let isCoachsPage = false;
+    let role = "";
 
-    
-//Exercice d'un coach
+    export let params = {};
+
+
+    //Exercice d'un coach
     async function getExerciceCoach(id) {
-        try {
-            const response = await fetch(`${endpoint}/exercices/coach/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                    'Content-Type': 'application/json'
-                },
-            });
-            console.log(response);
-            if (response.ok) {
-                exercice = await response.json();
-                console.log(exercice);
-                isCoachsPage = true;
-                console.log(isCoachsPage)
+    try {
+        const response = await fetch(`${endpoint}/exercices/coach/${id}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                'Content-Type': 'application/json'
+            },
+        });
+        //console.log(response);
 
-            } else {
-                console.error('Erreur lors de la récupération des données de l\'équipe');
-            }
-        } catch (error) {
-            console.error('Une erreur s\'est produite:', error);
-        }
+        exercice = await response.json();
+        //console.log(exercice);
+
+        if (response.ok) {
+            console.log(exercice.user.role);
+            role = exercice.user.role; 
+            
+        } 
+
+    } catch (error) {
+        console.error('Une erreur s\'est produite:', error);
     }
+}
 
     //Exercice d'un membre
     async function getExerciceMember(id) {
@@ -51,30 +54,22 @@
               },
           });
           console.log(response);
+
+          exercice = await response.json();
+          
           if (response.ok) {
-              exercice = await response.json();
-              console.log("exerciceId avant l'appel à getExerciceMember :", exerciceId);
               console.log("Réponse de la requête :", response);
               console.log("Données de l'exercice :", exercice);
-              isCoachsPage = false;
-
-
-          } else {
-              console.error('Erreur lors de la récupération des données de du membre');
           }
-      } catch (error) {
-          console.error('Une erreur s\'est produite:', error);
+
+        } catch (error) {
+            console.error('Une erreur s\'est produite:', error);
       }
   }
-    
-    const numberId = window.location.hash.split('/');
-    exerciceId = numberId [numberId.length - 1];
-        getExerciceCoach(exerciceId);
-        getExerciceMember(exerciceId);
+        getExerciceCoach(params.id);
+        getExerciceMember(params.id);
 
-    
-  </script>
-  
+</script>
   
     {#if exercice !== ""}
 
@@ -87,7 +82,7 @@
         multimedia={exercice.multimedia.picture_path}
         instructions={exercice.instructions}
         id={exercice.id}
-        isCoachsPage={exercice.id >= 1 && exercice.id <= 12}
+        isCoachsPage={exercice.user.role === "Admin"}
    
     />
 
@@ -95,20 +90,20 @@
 
     <section class="wrapper-comments">
 
-        <div class={isCoachsPage ? 'exercice-challenge' : ""}>
+        <div class={role === "Admin" ? 'exercice-challenge' : ""}>
       
           <Chronometer /> 
     
-        {#if isCoachsPage}
+        {#if role === "Admin"}
           <Comments
-            exerciceId={exerciceId}
+            exerciceId={params.id}
 
           />
         {/if}
 
         </div>
 
-      </section>
+    </section>
 
 
   

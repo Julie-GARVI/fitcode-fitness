@@ -9,22 +9,25 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-    public function list()
+    public function list(Request $request)
     {
-        $categories = Category::all();
+        if ($request->routeIs('category.coachs')) {
 
-        return $categories;
-    }
+            $categories = Category::all();
 
+            return $categories;
 
-    // -------------------CATEGORIES UTILISATEUR--------------------------
-    public function listUserCategories(User $user)
-    {
-        $categories = $user->categories;
+        } else if ($request->routeIs('category.users')) {
 
-        return response()->json($categories);
-    }
+            // -------------------CATEGORIES UTILISATEUR--------------------------
+            $categories = $user->categories;
+
+            return response()->json($categories);
+        }
+    }     
 }
+
+
 
 
 

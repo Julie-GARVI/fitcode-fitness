@@ -8,13 +8,12 @@
 
     import '../Comments/comments.scss'
 
-    export let date, user, exerciceId;
+    export let exerciceId;
 
     console.log(exerciceId)
 
     let comments = [];
-    let title = '';
-    let content = '';
+    let title, user, content;
     let isCommented = false;
     let rating = 0;
     let page = 1; 
