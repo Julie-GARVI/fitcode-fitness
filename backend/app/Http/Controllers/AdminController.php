@@ -33,6 +33,6 @@ class AdminController extends AuthController
      
         $request->session()->regenerateToken();
      
-        return redirect('/');
+        return redirect('/login');
     }
 }
