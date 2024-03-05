@@ -29,15 +29,12 @@
 
 //-----------------------------Création d'un utilisateur-------------------------
 
-const csrfToken = document.cookie.match(/XSRF-TOKEN=([\w-]+)/)[1];
-
 async function GetUser() {
     try {
         const registerResponse = await fetch(`${endpoint}/auth/register`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ gender, lastname, firstname, age, level, email, password, password_confirmation, category_id})
         });
