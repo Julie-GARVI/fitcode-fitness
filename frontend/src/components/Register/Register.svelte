@@ -33,7 +33,8 @@ async function GetUser() {
         const registerResponse = await fetch(`${endpoint}/auth/register`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
             },
             body: JSON.stringify({ gender, lastname, firstname, age, level, email, password, password_confirmation, category_id})
         });
