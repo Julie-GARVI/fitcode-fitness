@@ -14,7 +14,7 @@
 
   import poids from "/src/assets/images/poids.jpg";
   
-  export let email, password;
+  let email, password;
 
   let userErrorMessage = '';
   let errorMessages = []; 

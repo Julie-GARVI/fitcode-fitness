@@ -8,7 +8,6 @@
     <title>Back-Office</title>
     <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/header.css">
-    <link rel="stylesheet" href="/assets/css/exercices.css">
     <link rel="stylesheet" href="/assets/css/contact.css">
 </head>
 
