@@ -22,13 +22,16 @@
   let displayDuration = 5000; 
   
   //--------------------------CONNEXION-----------------------------
+
+  const csrfToken = document.cookie.match(/XSRF-TOKEN=([\w-]+)/)[1];
+
   async function LoginUser() {
     try {
       const loginResponse = await fetch(`${endpoint}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          'X-CSRF-TOKEN': csrfToken
         },
         body: JSON.stringify({ email, password })
       });
