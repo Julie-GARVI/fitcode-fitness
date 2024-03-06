@@ -75,7 +75,7 @@
 
             <div class="value instructions">
                 <label for="instructions">Instructions :</label>
-                <textarea class="instructions create" id="instructions" name="instructions" placeholder="Soulever la barre des hanches aux épaules..." ></textarea>
+                <textarea class="instructions create" id="instructions" name="instructions" placeholder="Soulever la barre des hanches aux épaules..."></textarea>
             </div>
 
             <div class="alert" style="display: {{ $errors->any() ? 'block' : 'none' }}">

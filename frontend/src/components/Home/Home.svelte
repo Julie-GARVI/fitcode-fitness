@@ -23,12 +23,14 @@
   
   //--------------------------CONNEXION-----------------------------
 
+
   async function LoginUser() {
     try {
-      const loginResponse = await fetch(`${endpoint}/auth/login`, {
+        const loginResponse = await fetch(`${endpoint}/auth/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': csrf_token,
         },
         body: JSON.stringify({ email, password })
       });

@@ -132,6 +132,7 @@ class AuthController extends Controller
             Session::put('user', $user);
 
             $token = $this->createToken($user, 'token');
+            $csrfToken = csrf_token();
 
             return response()->json([
                 'message' => 'Connection successful',
@@ -146,7 +147,8 @@ class AuthController extends Controller
 
             $errors = $validateUser->errors()->messages();
         
-            return response()->json(['errors' => $errors], 422);
+            return response()->json([
+                'errors' => $errors], 422);
         }
 
         else if (!User::where('email', $credentials['email'])->exists()) {

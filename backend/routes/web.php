@@ -16,7 +16,7 @@ use App\Http\Controllers\ContactController;
 */
 
 //-----------------------------Routes du backOffice-------------------------
-Route::get('/login', function () {
+Route::get('/', function () {
     return view('login');
 });
 

@@ -1,0 +1,72 @@
+.modal-wrapper {
+    display: block;
+    margin-inline: auto;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.form-crud {
+    border-radius: 10px;
+    padding: 26px;
+}
+
+label {
+    margin-bottom: .4em;
+    font-size: 17px;
+  }
+
+.value {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 15px;
+}
+
+input, select {
+    height: 40px;
+}
+
+textarea {
+    resize: none;
+    height: 150px;
+}
+
+.btn-block {
+    text-align: center;
+}
+
+.alert {
+    display: none;
+    font-size: 14px;
+    color: rgb(78, 78, 78);
+    background-color: #f8f8f8;
+    border: 1px solid rgb(78, 78, 78);
+    font-weight: bolder;
+    padding: 4px;
+    border-radius: 5px;
+    margin: 10px 0;
+    line-height: 2;
+  }
+
+.btn-submit {
+    border-radius: 10px;
+    background-color: rgb(165 188 228 / 32%);
+    box-shadow: 0 0 15px 2px #c3d3e2, 0 0 5px 1px #c3d3e2;
+    width: 100%;
+    max-width: 300px;
+    height: 32px;
+    margin-top: 15px;
+    font-weight: 800;
+    border: inherit;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #c3d3e2;
+}
+
+/*__________________________ POUR LE UPDATE________________________ */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
